@@ -1,0 +1,130 @@
+.sidebar-navigation {
+    align-items: flex-start;
+    background-color: #004de1;
+    display: flex;
+    position: relative;
+    width: 82px;
+  }
+  
+  .sidebar-navigation .content {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    width: 81px;
+  }
+  
+  .sidebar-navigation .nav {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 0px 0px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .sidebar-navigation .layer {
+    height: 32px;
+    position: relative;
+    width: 30.96px;
+  }
+  
+  .sidebar-navigation .navigation {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0px 16px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .sidebar-navigation .nav-item-button {
+    align-items: flex-start;
+    background-color: #2970f9;
+    border-radius: 6px;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 105px;
+    overflow: hidden;
+    padding: 12px;
+    position: relative;
+  }
+  
+  .sidebar-navigation .icon-instance-node {
+    height: 24px !important;
+    position: relative !important;
+    width: 24px !important;
+  }
+  
+  .sidebar-navigation .div {
+    align-items: flex-start;
+    background-color: #004de1;
+    border-radius: 6px;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 105px;
+    overflow: hidden;
+    padding: 12px;
+    position: relative;
+  }
+  
+  .sidebar-navigation .bar-chart-wrapper {
+    align-items: flex-start;
+    border-radius: 6px;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 105px;
+    overflow: hidden;
+    padding: 12px;
+    position: relative;
+  }
+  
+  .sidebar-navigation .footer {
+    align-items: flex-start;
+    align-self: stretch;
+    background-color: transparent;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 24px;
+    padding: 0px 16px 24px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .sidebar-navigation .nav-item-button-wrapper {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .sidebar-navigation .divider {
+    align-self: stretch;
+    height: 1px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .sidebar-navigation .avatar {
+    background-image: url(./avatar.svg);
+    background-position: 50% 50%;
+    background-size: cover;
+    border-radius: 200px;
+    height: 48px;
+    position: relative;
+    width: 48px;
+  }
+  
