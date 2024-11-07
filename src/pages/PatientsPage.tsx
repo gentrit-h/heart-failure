@@ -1,4 +1,3 @@
-import { Button } from "antd";
 import DashboardTable from "../components/Dashboard/DashboardTable";
 
 const PatientsPage = () => {
