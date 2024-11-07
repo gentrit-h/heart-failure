@@ -7,10 +7,10 @@ import { Link, useLocation } from "react-router-dom";
 interface NavItemProps {
   src: string;
   active: boolean;
-  pageName: string;
+  pageName?: string;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ src, active, pageName }) => {
+const NavItem: React.FC<NavItemProps> = ({ src, pageName }) => {
   const location = useLocation();
   return (
     <div

@@ -6,7 +6,7 @@ import PatientsPage from './pages/PatientsPage';
 import ConnectivityPage from './pages/connectivityPage';
 import { useAuth } from './context/AuthContext';
 import Dashboard from './components/Dashboard/Dashboard';
-import PatientSummary from './components/PatientSummary/PatientSummary';
+// import PatientSummary from './components/PatientSummary/PatientSummary';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
