@@ -1,16 +1,16 @@
-import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { Outlet } from 'react-router-dom';
+// import { useAuth } from '../../context/AuthContext';
 import Header from '../Header/Header';
 import Sidebar from '../Dashboard/Sidebar';
 
 const MainLayout = () => {
-  const { logout } = useAuth();
-  const navigate = useNavigate();
+  // const { logout } = useAuth();
+  // const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+  // const handleLogout = () => {
+  //   logout();
+  //   navigate('/login');
+  // };
 
   return (
 <div className="min-h-screen flex">

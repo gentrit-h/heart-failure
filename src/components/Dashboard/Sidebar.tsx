@@ -3,7 +3,6 @@
  */
 import React from "react";
 import NavItem from "./NavItem";
-import { useLocation } from 'react-router-dom';
 
 interface SidebarProps {}
 
