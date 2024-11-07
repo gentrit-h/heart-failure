@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import { DownOutlined } from '@ant-design/icons';
 import type { GetProp, TableProps } from 'antd';
@@ -81,15 +82,17 @@ const data = Array.from({ length: 10 }).map<DataType>((_, i) => ({
   description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
 }));
 const DashboardTable: React.FC = () => {
-  // const [size, setSize] = useState<SizeType>('middle');
-  // const [rowSelection, setRowSelection] = useState<TableRowSelection<DataType> | undefined>({});
+  const [size, setSize] = useState<SizeType>('middle');
+  const [rowSelection, setRowSelection] = useState<TableRowSelection<DataType> | undefined>({});
+  setRowSelection({});
+  setSize('middle')
 
   const tableColumns = columns.map((item) => ({ ...item }));
 
-  const tableProps: TableProps<DataType> = {
+  const tableProps: any = {
     bordered: false,
-    size: 'middle',
-    rowSelection: {}
+    size,
+    rowSelection
   };
 
   return (
