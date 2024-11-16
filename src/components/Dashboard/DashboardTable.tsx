@@ -20,14 +20,31 @@ interface DataType {
 const StyledTable = styled(Table)`
   .ant-table-header {
     height: 44px;
-    border-color: #EAECF0;
-    background: #F9FAFB;
+    border: 1px solid #EAECF0;
   }
 
-  .ant-table-cell ant-table-column-has-sorters {
-  &before {
-    display: none;
+  .ant-table-cell {
+    &::before {
+      display: none;
+    }
   }
+
+  .ant-table-thead{
+    .ant-table-cell {
+      background: #F9FAFB;
+    }
+  }
+
+  .ant-table-tbody > tr > td:first-child {
+    border-left: 1px solid #EAECF0;
+  }
+
+  .ant-table-tbody > tr > td:last-child {
+    border-right: 1px solid #EAECF0;
+  }
+
+    .ant-table-tbody > tr {
+   height: 72px;
   }
 `;
 
@@ -84,8 +101,7 @@ const data = Array.from({ length: 10 }).map<DataType>((_, i) => ({
 const DashboardTable: React.FC = () => {
   const [size, setSize] = useState<SizeType>('middle');
   const [rowSelection, setRowSelection] = useState<TableRowSelection<DataType> | undefined>({});
-  setRowSelection({});
-  setSize('middle')
+
 
   const tableColumns = columns.map((item) => ({ ...item }));
 

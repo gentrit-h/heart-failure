@@ -32,7 +32,7 @@ const MainLayout = () => {
       style={{ maxHeight: 'calc(100vh - 12px)' }}
     >
       <Header />
-      <div className="flex-1 overflow-y-auto px-[35px]">
+      <div className="flex-1 overflow-y-auto px-[35px] mt-[32px]">
         <Outlet />
       </div>
     </div>

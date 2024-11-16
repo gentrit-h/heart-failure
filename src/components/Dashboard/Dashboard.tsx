@@ -13,7 +13,7 @@ const Dashboard: React.FC<MainContentProps> = () => {
 <div>
         <section
           data-layername="section"
-          className="flex flex-col mt-8 w-full max-md:max-w-full"
+          className="flex flex-col w-full max-md:max-w-full"
         >
           <div
             data-layername="container"
