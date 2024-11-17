@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from "react"
-import { Calendar as CalendarIcon, ChevronDown, Link, Search } from "lucide-react"
+import { Calendar as CalendarIcon, ChevronDown, Info, Link, MoreVertical, Search, X } from "lucide-react"
 import { format } from "date-fns"
 import { DateRange } from "react-day-picker"
 import {
@@ -16,9 +16,9 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
+  DropdownMenuItem,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import {
@@ -26,60 +26,318 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Calendar } from "@/components/ui/calendar"
 
-interface Patient {
-  id: string
-  name: string
-  transmissionDate: string
-  deviceType: string
-  connectivity: string
-  cmems1: string
-  cmems2: string
-  activities: string
-  status: "new" | "confirmed" | "dismissed"
-  priority: "high" | "medium" | "low"
-}
-
-const patients: Patient[] = [
+const patients = [
   {
     id: "124398594",
-    name: "John Doe",
-    transmissionDate: "15/05/2023 10:30",
-    deviceType: "PPM",
-    connectivity: "Connected",
-    cmems1: "-",
-    cmems2: "New Data",
-    activities: "Activities for the last hour",
+    name: "Alice Johnson",
+    source: "Home",
+    date: "01/11/2024 08:30",
+    goal: "34(2)",
+    systolicPAP: "53 mmHg",
+    diastolicPAP: "19 mmHg",
+    meanPAP: "34 mmHg",
+    pulsePressure: "34 mmHg",
+    paHeartRate: "80 bpm",
+    waveform: true,
     status: "new",
     priority: "high"
   },
   {
     id: "124398595",
-    name: "Jane Smith",
-    transmissionDate: "14/05/2023 14:45",
-    deviceType: "PPM/SRTD",
-    connectivity: "Disconnected",
-    cmems1: "-",
-    cmems2: "-",
-    activities: "Activities for the last hour",
+    name: "Bob Smith",
+    source: "Clinic",
+    date: "01/11/2024 10:15",
+    goal: "40(1)",
+    systolicPAP: "57 mmHg",
+    diastolicPAP: "21 mmHg",
+    meanPAP: "36 mmHg",
+    pulsePressure: "36 mmHg",
+    paHeartRate: "75 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "low"
+  },
+  {
+    id: "124398596",
+    name: "Catherine Lee",
+    source: "Hospital",
+    date: "02/11/2024 14:05",
+    goal: "42(0)",
+    systolicPAP: "60 mmHg",
+    diastolicPAP: "22 mmHg",
+    meanPAP: "38 mmHg",
+    pulsePressure: "38 mmHg",
+    paHeartRate: "78 bpm",
+    waveform: true,
     status: "confirmed",
     priority: "medium"
   },
-  // Add more sample data to have at least 20 patients for pagination demonstration
-  ...[...Array(18)].map((_, index) => ({
-    id: `12439${8596 + index}`,
-    name: `Patient ${index + 3}`,
-    transmissionDate: `${15 - (index % 7)}/05/2023 ${10 + index}:${30 + index}`,
-    deviceType: index % 2 === 0 ? "PPM" : "PPM/SRTD",
-    connectivity: index % 3 === 0 ? "Connected" : "Disconnected",
-    cmems1: index % 4 === 0 ? "New Data" : "-",
-    cmems2: index % 5 === 0 ? "New Data" : "-",
-    activities: "Activities for the last hour",
-    status: ["new", "confirmed", "dismissed"][index % 2] as "new" | "confirmed" | "dismissed",
-    priority: ["high", "medium", "low"][index % 3] as "high" | "medium" | "low"
-  }))
-]
+  {
+    id: "124398597",
+    name: "David Brown",
+    source: "Home",
+    date: "03/11/2024 09:45",
+    goal: "38(1)",
+    systolicPAP: "55 mmHg",
+    diastolicPAP: "20 mmHg",
+    meanPAP: "35 mmHg",
+    pulsePressure: "35 mmHg",
+    paHeartRate: "82 bpm",
+    waveform: true,
+    status: "new",
+    priority: "low"
+  },
+  {
+    id: "124398598",
+    name: "Emma Wilson",
+    source: "Clinic",
+    date: "03/11/2024 12:30",
+    goal: "39(3)",
+    systolicPAP: "54 mmHg",
+    diastolicPAP: "19 mmHg",
+    meanPAP: "33 mmHg",
+    pulsePressure: "35 mmHg",
+    paHeartRate: "77 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "high"
+  },
+  {
+    id: "124398599",
+    name: "Frank Miller",
+    source: "Hospital",
+    date: "04/11/2024 16:00",
+    goal: "36(2)",
+    systolicPAP: "58 mmHg",
+    diastolicPAP: "20 mmHg",
+    meanPAP: "37 mmHg",
+    pulsePressure: "38 mmHg",
+    paHeartRate: "83 bpm",
+    waveform: true,
+    status: "confirmed",
+    priority: "low"
+  },
+  {
+    id: "124398600",
+    name: "Grace Davis",
+    source: "Home",
+    date: "05/11/2024 11:20",
+    goal: "37(0)",
+    systolicPAP: "56 mmHg",
+    diastolicPAP: "19 mmHg",
+    meanPAP: "36 mmHg",
+    pulsePressure: "37 mmHg",
+    paHeartRate: "81 bpm",
+    waveform: true,
+    status: "new",
+    priority: "low"
+  },
+  {
+    id: "124398601",
+    name: "Henry Adams",
+    source: "Clinic",
+    date: "06/11/2024 08:15",
+    goal: "35(1)",
+    systolicPAP: "59 mmHg",
+    diastolicPAP: "21 mmHg",
+    meanPAP: "38 mmHg",
+    pulsePressure: "38 mmHg",
+    paHeartRate: "79 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "high"
+  },
+  {
+    id: "124398602",
+    name: "Isabel Moore",
+    source: "Hospital",
+    date: "06/11/2024 15:45",
+    goal: "33(2)",
+    systolicPAP: "61 mmHg",
+    diastolicPAP: "22 mmHg",
+    meanPAP: "39 mmHg",
+    pulsePressure: "39 mmHg",
+    paHeartRate: "76 bpm",
+    waveform: true,
+    status: "confirmed",
+    priority: "medium"
+  },
+  {
+    id: "124398603",
+    name: "Jack Taylor",
+    source: "Home",
+    date: "07/11/2024 07:30",
+    goal: "34(3)",
+    systolicPAP: "54 mmHg",
+    diastolicPAP: "20 mmHg",
+    meanPAP: "34 mmHg",
+    pulsePressure: "34 mmHg",
+    paHeartRate: "78 bpm",
+    waveform: true,
+    status: "new",
+    priority: "high"
+  },
+  {
+    id: "124398604",
+    name: "Katherine White",
+    source: "Clinic",
+    date: "07/11/2024 09:20",
+    goal: "40(1)",
+    systolicPAP: "57 mmHg",
+    diastolicPAP: "21 mmHg",
+    meanPAP: "36 mmHg",
+    pulsePressure: "36 mmHg",
+    paHeartRate: "75 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "medium"
+  },
+  {
+    id: "124398605",
+    name: "Liam Harris",
+    source: "Hospital",
+    date: "08/11/2024 14:10",
+    goal: "42(0)",
+    systolicPAP: "60 mmHg",
+    diastolicPAP: "22 mmHg",
+    meanPAP: "38 mmHg",
+    pulsePressure: "38 mmHg",
+    paHeartRate: "78 bpm",
+    waveform: true,
+    status: "confirmed",
+    priority: "low"
+  },
+  {
+    id: "124398606",
+    name: "Maria Clark",
+    source: "Home",
+    date: "08/11/2024 15:30",
+    goal: "38(1)",
+    systolicPAP: "55 mmHg",
+    diastolicPAP: "20 mmHg",
+    meanPAP: "35 mmHg",
+    pulsePressure: "35 mmHg",
+    paHeartRate: "82 bpm",
+    waveform: true,
+    status: "new",
+    priority: "medium"
+  },
+  {
+    id: "124398607",
+    name: "Nathan Robinson",
+    source: "Clinic",
+    date: "09/11/2024 12:05",
+    goal: "39(3)",
+    systolicPAP: "54 mmHg",
+    diastolicPAP: "19 mmHg",
+    meanPAP: "33 mmHg",
+    pulsePressure: "35 mmHg",
+    paHeartRate: "77 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "high"
+  },
+  {
+    id: "124398608",
+    name: "Olivia Scott",
+    source: "Hospital",
+    date: "10/11/2024 16:40",
+    goal: "36(2)",
+    systolicPAP: "58 mmHg",
+    diastolicPAP: "20 mmHg",
+    meanPAP: "37 mmHg",
+    pulsePressure: "38 mmHg",
+    paHeartRate: "83 bpm",
+    waveform: true,
+    status: "confirmed",
+    priority: "high"
+  },
+  {
+    id: "124398609",
+    name: "Paul King",
+    source: "Home",
+    date: "11/11/2024 11:00",
+    goal: "37(0)",
+    systolicPAP: "56 mmHg",
+    diastolicPAP: "19 mmHg",
+    meanPAP: "36 mmHg",
+    pulsePressure: "37 mmHg",
+    paHeartRate: "81 bpm",
+    waveform: true,
+    status: "new",
+    priority: "high"
+  },
+  {
+    id: "124398610",
+    name: "Quinn Baker",
+    source: "Clinic",
+    date: "11/11/2024 09:00",
+    goal: "35(1)",
+    systolicPAP: "59 mmHg",
+    diastolicPAP: "21 mmHg",
+    meanPAP: "38 mmHg",
+    pulsePressure: "38 mmHg",
+    paHeartRate: "79 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "medium"
+  },
+  {
+    id: "124398611",
+    name: "Rachel Turner",
+    source: "Hospital",
+    date: "12/11/2024 16:50",
+    goal: "33(2)",
+    systolicPAP: "61 mmHg",
+    diastolicPAP: "22 mmHg",
+    meanPAP: "39 mmHg",
+    pulsePressure: "39 mmHg",
+    paHeartRate: "76 bpm",
+    waveform: true,
+    status: "confirmed",
+    priority: "low"
+  },
+  {
+    id: "124398612",
+    name: "Sam Anderson",
+    source: "Home",
+    date: "12/11/2024 08:25",
+    goal: "34(3)",
+    systolicPAP: "54 mmHg",
+    diastolicPAP: "20 mmHg",
+    meanPAP: "34 mmHg",
+    pulsePressure: "34 mmHg",
+    paHeartRate: "78 bpm",
+    waveform: true,
+    status: "new",
+    priority: "high"
+  },
+  {
+    id: "124398613",
+    name: "Tina Carter",
+    source: "Clinic",
+    date: "13/11/2024 10:10",
+    goal: "40(1)",
+    systolicPAP: "57 mmHg",
+    diastolicPAP: "21 mmHg",
+    meanPAP: "36 mmHg",
+    pulsePressure: "36 mmHg",
+    paHeartRate: "75 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "medium"
+  }
+];
+
 
 export default function Cmems() {
   const [selectedPatients, setSelectedPatients] = React.useState<string[]>([])
@@ -169,7 +427,7 @@ export default function Cmems() {
             </button>
           ))}
         </div>
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2 flex-1">
             <Search className="h-5 w-5 text-muted-foreground" />
             <Input
@@ -215,13 +473,13 @@ export default function Cmems() {
               Filters
             </Button>
           </div>
-        </div>
+        </div> */}
       </div>
 
-      <div className="rounded-md border">
+      <div className="rounded-t-md border">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="h-[40px]">
             <div className={`absolute left-0 top-0 bottom-0 w-[5px] mt-[6px] mb-[6px] rounded-tr-[6px] rounded-br-[6px]`} />
               <TableHead className="w-12">
                 <Checkbox
@@ -231,71 +489,22 @@ export default function Cmems() {
                 />
               </TableHead>
               <TableHead>Patients</TableHead>
-              <TableHead>Transmission Date</TableHead>
-              <TableHead>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-full justify-start pl-[0px]">
-                      Device Type
-                      <ChevronDown className="ml-2 h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start">
-                    {["PPM", "PPM/SRTD"].map((type) => (
-                      <DropdownMenuCheckboxItem
-                        key={type}
-                        checked={filters.deviceType.includes(type)}
-                        onCheckedChange={(checked) => {
-                          setFilters({
-                            ...filters,
-                            deviceType: checked
-                              ? [...filters.deviceType, type]
-                              : filters.deviceType.filter((t) => t !== type),
-                          })
-                        }}
-                      >
-                        {type}
-                      </DropdownMenuCheckboxItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </TableHead>
-              <TableHead>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-full justify-start pl-[0px]">
-                      Connectivity
-                      <ChevronDown className="ml-2 h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start">
-                    {["Connected", "Disconnected"].map((status) => (
-                      <DropdownMenuCheckboxItem
-                        key={status}
-                        checked={filters.connectivity.includes(status)}
-                        onCheckedChange={(checked) => {
-                          setFilters({
-                            ...filters,
-                            connectivity: checked
-                              ? [...filters.connectivity, status]
-                              : filters.connectivity.filter((s) => s !== status),
-                          })
-                        }}
-                      >
-                        {status}
-                      </DropdownMenuCheckboxItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </TableHead>
-              <TableHead>CMEMS</TableHead>
-              <TableHead>CMEMS</TableHead>
-              <TableHead>Activities</TableHead>
+              <TableHead className="text-center">Source</TableHead>
+              <TableHead className="text-center">Date</TableHead>
+              <TableHead className="text-center">Goal (+/-)</TableHead>
+              <TableHead className="text-center">Systolic PAP</TableHead>
+              <TableHead className="text-center">Diastolic PAP</TableHead>
+              <TableHead className="text-center">Mean PAP</TableHead>
+              <TableHead className="text-center">Pulse Pressure</TableHead>
+              <TableHead className="text-center">PA Heart Rate</TableHead>
+              <TableHead className="text-center">Waveform</TableHead>
+              <TableHead className="text-center">Status</TableHead>
+              <TableHead className="w-[100px]"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {getCurrentPagePatients().map((patient) => (
-              <TableRow key={patient.id} className="h-[60px] relative">
+              <TableRow key={patient.id} className="h-[72px] relative">
                 <div className={`absolute left-0 top-0 bottom-0 w-[5px] ${getPriorityColor(patient.priority)} mt-[6px]  mb-[6px] rounded-tr-[6px] rounded-br-[6px]`} />
                 <TableCell>
                   <Checkbox 
@@ -308,44 +517,70 @@ export default function Cmems() {
                   <div className="font-medium">{patient.name}</div>
                   <div className="text-sm text-muted-foreground">{patient.id}</div>
                 </TableCell>
-                <TableCell>{patient.transmissionDate}</TableCell>
-                <TableCell>{patient.deviceType}</TableCell>
+                <TableCell className="text-center">{patient.source}</TableCell>
+                <TableCell className="text-center">{patient.date}</TableCell>
+                <TableCell className="text-center">{patient.goal}</TableCell>
+                <TableCell className="text-center">{patient.systolicPAP}</TableCell>
+                <TableCell className="text-center">{patient.diastolicPAP}</TableCell>
+                <TableCell className="text-center">{patient.meanPAP}</TableCell>
+                <TableCell className="text-center">{patient.pulsePressure}</TableCell>
+                <TableCell className="text-center">{patient.paHeartRate}</TableCell>
                 <TableCell>
-                  <span
-                    className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
-                      patient.connectivity === "Connected"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {patient.connectivity}
-                  </span>
+                  <div className="flex justify-center cursor-pointer">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 21H4.6C4.03995 21 3.75992 21 3.54601 20.891C3.35785 20.7951 3.20487 20.6422 3.10899 20.454C3 20.2401 3 19.9601 3 19.4V3M20 8L16.0811 12.1827C15.9326 12.3412 15.8584 12.4204 15.7688 12.4614C15.6897 12.4976 15.6026 12.5125 15.516 12.5047C15.4179 12.4958 15.3215 12.4458 15.1287 12.3457L11.8713 10.6543C11.6785 10.5542 11.5821 10.5042 11.484 10.4953C11.3974 10.4875 11.3103 10.5024 11.2312 10.5386C11.1416 10.5796 11.0674 10.6588 10.9189 10.8173L7 15" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  </div>
                 </TableCell>
                 <TableCell>
-                  {patient.cmems1 === "New Data" ? (
-                    <Link href="#" className="text-blue-600 hover:underline">
-                      New Data
-                    </Link>
-                  ) : (
-                    patient.cmems1
-                  )}
+                <div className="flex justify-center">
+                  <Select>
+                    <SelectTrigger className="w-[130px]">
+                      <SelectValue placeholder="Select Status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="new">New</SelectItem>
+                      <SelectItem value="confirmed">Confirmed</SelectItem>
+                      <SelectItem value="dismissed">Dismissed</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
                 </TableCell>
                 <TableCell>
-                  {patient.cmems2 === "New Data" ? (
-                    <Link href="#" className="text-blue-600 hover:underline">
-                      New Data
-                    </Link>
-                  ) : (
-                    patient.cmems2
-                  )}
+                <div className="flex justify-center">
+                  <div className="flex space-x-2">
+                    <Button variant="ghost" size="icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20 6L9 17L4 12" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </Button>
+                    <Button variant="ghost" size="icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18 6L6 18M6 6L18 18" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </Button>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 16V12M12 8H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem>View details</DropdownMenuItem>
+                        <DropdownMenuItem>Export data</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                  </div>
                 </TableCell>
-                <TableCell>{patient.activities}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-between space-x-2 py-4 border-b border-l border-r mt-0 pl-3 pr-3" style={{ marginTop: 0 }}>
+      <div className="flex items-center justify-between space-x-2 py-2 border-b border-l border-r rounded-b-md mt-0 pl-3 pr-3" style={{ marginTop: 0 }}>
         <Button
           variant="outline"
           size="sm"

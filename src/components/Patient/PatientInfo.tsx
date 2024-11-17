@@ -15,12 +15,18 @@ import {
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import ClinicalInfo from "./Clinicalinfo"
+import Summary from "./Summary"
+import CmemsHistory from "./CmemsHitory"
+import SymptomsHistory from "./SymptomsHistory"
+import PatientInfoHeader from "./PatientInfoHeader"
+import React from "react"
 
-export default function PatientInfo({selectedPatient}) {
+export default function PatientInfo({selectedPatient, addPixelsForBiggerScreens}) {
   const patientData = selectedPatient?.patient;
   return (
       <div>
-      <div className="flex gap-4 mb-8">
+        <PatientInfoHeader />
+      {/* <div className="flex gap-4 mb-8">
         <Card className="flex-1 pl-6 pr-6 pb-[13.5px] pt-[13.5px] w-[60%] h-[115px]">
           <div className="grid gap-y-2 divide-x" style={{ gridTemplateColumns: '28% 32% 32% 8%' }}>
 
@@ -112,9 +118,9 @@ export default function PatientInfo({selectedPatient}) {
           <Button className="bg-blue-600 hover:bg-blue-700">Notify Patient</Button>
           </div>
         </Card>
-      </div>
+      </div> */}
 
-      <Tabs defaultValue="transmission" className="w-full">
+      <Tabs defaultValue="summary" className="w-full">
         <TabsList className="border-b w-full justify-start rounded-none h-auto p-0 bg-transparent">
           <TabsTrigger
             value="summary"
@@ -159,25 +165,25 @@ export default function PatientInfo({selectedPatient}) {
             *Dynamic Tabs (CMEMS Summary + CIED Summary)*
           </TabsTrigger>
         </TabsList>
-
-        <TabsContent value="transmission" className="mt-6">
+        <div className="overflow-y-auto pr-3" style={{height: 490+addPixelsForBiggerScreens+'px'}}>
+        <TabsContent value="transmission" className="mt-6 border rounded-sm">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead>TSM Date</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Alert</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Note</TableHead>
+              <TableRow className=''>
+                <TableHead className=" text-center w-[21%]">TSM Date</TableHead>
+                <TableHead className="w-[21%] text-center">Type</TableHead>
+                <TableHead className="w-[21%] text-center">Alert</TableHead>
+                <TableHead className="w-[21%] text-center">Status</TableHead>
+                <TableHead className="w-[16%] text-center">Note</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {[...Array(7)].map((_, i) => (
-                <TableRow key={i}>
-                  <TableCell>dd/mm/yyyy 00:00</TableCell>
-                  <TableCell>-</TableCell>
-                  <TableCell>-</TableCell>
-                  <TableCell>
+              {[...Array(6)].map((_, i) => (
+                <TableRow key={i}  className=''>
+                  <TableCell className=" text-center">dd/mm/yyyy 00:00</TableCell>
+                  <TableCell className=" text-center">-</TableCell>
+                  <TableCell className=" text-center">-</TableCell>
+                  <TableCell className=" text-center">
                     <Badge
                       variant="outline"
                       className={
@@ -189,25 +195,35 @@ export default function PatientInfo({selectedPatient}) {
                       {i % 2 === 0 ? "Connected" : "Disconnected"}
                     </Badge>
                   </TableCell>
-                  <TableCell>
-                    <FileText className="h-4 w-4 text-gray-500" />
+                  <TableCell className="flex justify-center pt-[25px]">
+                    <FileText className="h-5 w-5 text-gray-500" />
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-
-          <div className="flex justify-between items-center mt-4">
+          <div className="flex justify-between items-center px-5 py-2 border-t">
             <Button variant="outline" disabled>
               Previous
             </Button>
             <span className="text-sm text-gray-500">Page 1 of 10</span>
             <Button variant="outline">Next</Button>
           </div>
+
         </TabsContent>
         <TabsContent value="clinical" className='mt-6'>
           <ClinicalInfo />
         </TabsContent>
+        <TabsContent value="summary" className='mt-6'>
+          <Summary />
+        </TabsContent>
+        <TabsContent value="cmems" className='mt-6'>
+          <CmemsHistory />
+        </TabsContent>
+        <TabsContent value="symptoms" className='mt-6'>
+          <SymptomsHistory />
+        </TabsContent>
+        </div>
       </Tabs>
       </div>
   )

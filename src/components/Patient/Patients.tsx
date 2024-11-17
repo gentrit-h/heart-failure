@@ -2,7 +2,7 @@
 'use client'
 
 import * as React from "react"
-import { Calendar as CalendarIcon, ChevronDown, Link, Search, Clock, FileText } from "lucide-react"
+import { Calendar as CalendarIcon, ChevronDown, Link, Search, Clock, FileText, X } from "lucide-react"
 import { format } from "date-fns"
 
 import { DateRange } from "react-day-picker"
@@ -30,6 +30,8 @@ import {
 } from "@/components/ui/popover"
 import { Calendar } from "@/components/ui/calendar"
 import PatientInfo from "./PatientInfo"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 
 interface Patient {
   id: string
@@ -66,19 +68,315 @@ const patients: Patient[] = [
     communicationHistory: false,
     note: true
   },
-  // Additional patients for pagination demonstration...
-  ...[...Array(18)].map((_, index) => ({
-    id: `12439${8596 + index}`,
-    name: `Patient ${index + 3}`,
-    deviceInfo: index % 2 === 0 ? "MDT - ICD" : "BSX - PPM",
-    status: index % 3 === 0 ? "Connected" : "Disconnected",
-    lastTransmission: `${15 - (index % 7)}/05/2023`,
-    lastConnection: `${14 - (index % 7)}/05/2023`,
+  {
+    id: "124398596",
+    name: "John Doe",
+    deviceInfo: "BIO - CRT",
+    status: "Connected",
+    lastTransmission: "01/06/2023",
+    lastConnection: "31/05/2023",
+    monitoring: "RemoteView",
+    communicationHistory: true,
+    note: true
+  },
+  {
+    id: "124398597",
+    name: "Alice Johnson",
+    deviceInfo: "STJ - ILR",
+    status: "Disconnected",
+    lastTransmission: "20/04/2023",
+    lastConnection: "19/04/2023",
+    monitoring: "RemoteView",
+    communicationHistory: false,
+    note: false
+  },
+  {
+    id: "124398598",
+    name: "Robert Brown",
+    deviceInfo: "MDT - PPM",
+    status: "Connected",
+    lastTransmission: "17/07/2023",
+    lastConnection: "16/07/2023",
+    monitoring: "CardioMonitor",
+    communicationHistory: true,
+    note: true
+  },
+  {
+    id: "124398599",
+    name: "Laura White",
+    deviceInfo: "BSX - ICD",
+    status: "Disconnected",
+    lastTransmission: "05/08/2023",
+    lastConnection: "04/08/2023",
     monitoring: "Synopse",
-    communicationHistory: index % 2 === 0,
-    note: index % 2 !== 0
-  }))
-]
+    communicationHistory: false,
+    note: true
+  },
+  {
+    id: "124398600",
+    name: "David Green",
+    deviceInfo: "BIO - PPM",
+    status: "Connected",
+    lastTransmission: "10/09/2023",
+    lastConnection: "09/09/2023",
+    monitoring: "CardioMonitor",
+    communicationHistory: true,
+    note: false
+  },
+  {
+    id: "124398601",
+    name: "Emma Blue",
+    deviceInfo: "STJ - CRT",
+    status: "Disconnected",
+    lastTransmission: "21/05/2023",
+    lastConnection: "20/05/2023",
+    monitoring: "RemoteView",
+    communicationHistory: false,
+    note: false
+  },
+  {
+    id: "124398602",
+    name: "Michael Taylor",
+    deviceInfo: "MDT - ICD",
+    status: "Connected",
+    lastTransmission: "11/06/2023",
+    lastConnection: "10/06/2023",
+    monitoring: "Synopse",
+    communicationHistory: true,
+    note: false
+  },
+  {
+    id: "124398603",
+    name: "Sarah Brown",
+    deviceInfo: "BSX - ILR",
+    status: "Connected",
+    lastTransmission: "07/07/2023",
+    lastConnection: "06/07/2023",
+    monitoring: "CardioMonitor",
+    communicationHistory: false,
+    note: true
+  },
+  {
+    id: "124398604",
+    name: "Chris Black",
+    deviceInfo: "BIO - CRT",
+    status: "Disconnected",
+    lastTransmission: "15/05/2023",
+    lastConnection: "14/05/2023",
+    monitoring: "RemoteView",
+    communicationHistory: true,
+    note: true
+  },
+  {
+    id: "124398605",
+    name: "Nancy Gray",
+    deviceInfo: "STJ - PPM",
+    status: "Connected",
+    lastTransmission: "02/04/2023",
+    lastConnection: "01/04/2023",
+    monitoring: "Synopse",
+    communicationHistory: false,
+    note: false
+  },
+  {
+    id: "124398606",
+    name: "Peter Clark",
+    deviceInfo: "MDT - ICD",
+    status: "Disconnected",
+    lastTransmission: "18/08/2023",
+    lastConnection: "17/08/2023",
+    monitoring: "CardioMonitor",
+    communicationHistory: true,
+    note: false
+  },
+  {
+    id: "124398607",
+    name: "Julia King",
+    deviceInfo: "BSX - CRT",
+    status: "Connected",
+    lastTransmission: "19/09/2023",
+    lastConnection: "18/09/2023",
+    monitoring: "RemoteView",
+    communicationHistory: false,
+    note: true
+  },
+  {
+    id: "124398608",
+    name: "Matthew Harris",
+    deviceInfo: "BIO - ICD",
+    status: "Disconnected",
+    lastTransmission: "12/07/2023",
+    lastConnection: "11/07/2023",
+    monitoring: "Synopse",
+    communicationHistory: true,
+    note: true
+  },
+  {
+    id: "124398609",
+    name: "Evelyn Green",
+    deviceInfo: "STJ - ILR",
+    status: "Connected",
+    lastTransmission: "08/05/2023",
+    lastConnection: "07/05/2023",
+    monitoring: "CardioMonitor",
+    communicationHistory: false,
+    note: false
+  },
+  {
+    id: "124398610",
+    name: "Oliver Brown",
+    deviceInfo: "MDT - PPM",
+    status: "Disconnected",
+    lastTransmission: "25/05/2023",
+    lastConnection: "24/05/2023",
+    monitoring: "RemoteView",
+    communicationHistory: true,
+    note: true
+  },
+  {
+    id: "124398611",
+    name: "Sophia White",
+    deviceInfo: "BSX - CRT",
+    status: "Connected",
+    lastTransmission: "14/06/2023",
+    lastConnection: "13/06/2023",
+    monitoring: "Synopse",
+    communicationHistory: false,
+    note: false
+  },
+  {
+    id: "124398612",
+    name: "Lucas Brown",
+    deviceInfo: "BIO - ILR",
+    status: "Disconnected",
+    lastTransmission: "23/03/2023",
+    lastConnection: "22/03/2023",
+    monitoring: "CardioMonitor",
+    communicationHistory: true,
+    note: true
+  },
+  {
+    id: "124398613",
+    name: "Grace Scott",
+    deviceInfo: "STJ - ICD",
+    status: "Connected",
+    lastTransmission: "30/07/2023",
+    lastConnection: "29/07/2023",
+    monitoring: "RemoteView",
+    communicationHistory: false,
+    note: true
+  },
+  {
+    id: "124398614",
+    name: "Daniel Turner",
+    deviceInfo: "MDT - PPM",
+    status: "Disconnected",
+    lastTransmission: "04/09/2023",
+    lastConnection: "03/09/2023",
+    monitoring: "Synopse",
+    communicationHistory: true,
+    note: false
+  },
+  {
+    id: "124398615",
+    name: "Victoria Reed",
+    deviceInfo: "BSX - ICD",
+    status: "Connected",
+    lastTransmission: "12/05/2023",
+    lastConnection: "11/05/2023",
+    monitoring: "CardioMonitor",
+    communicationHistory: false,
+    note: true
+  },
+  {
+    id: "124398616",
+    name: "Adam Morris",
+    deviceInfo: "BIO - PPM",
+    status: "Disconnected",
+    lastTransmission: "03/10/2023",
+    lastConnection: "02/10/2023",
+    monitoring: "RemoteView",
+    communicationHistory: true,
+    note: true
+  },
+  {
+    id: "124398617",
+    name: "Chloe James",
+    deviceInfo: "STJ - ILR",
+    status: "Connected",
+    lastTransmission: "21/04/2023",
+    lastConnection: "20/04/2023",
+    monitoring: "Synopse",
+    communicationHistory: false,
+    note: false
+  },
+  {
+    id: "124398618",
+    name: "Henry Hill",
+    deviceInfo: "MDT - CRT",
+    status: "Disconnected",
+    lastTransmission: "10/11/2023",
+    lastConnection: "09/11/2023",
+    monitoring: "CardioMonitor",
+    communicationHistory: true,
+    note: false
+  },
+  {
+    id: "124398619",
+    name: "Isabella Adams",
+    deviceInfo: "BSX - ICD",
+    status: "Connected",
+    lastTransmission: "25/12/2023",
+    lastConnection: "24/12/2023",
+    monitoring: "RemoteView",
+    communicationHistory: false,
+    note: true
+  },
+  {
+    id: "124398620",
+    name: "Ryan Stewart",
+    deviceInfo: "BIO - CRT",
+    status: "Disconnected",
+    lastTransmission: "15/08/2023",
+    lastConnection: "14/08/2023",
+    monitoring: "Synopse",
+    communicationHistory: true,
+    note: true
+  },
+  {
+    id: "124398621",
+    name: "Mia Taylor",
+    deviceInfo: "STJ - PPM",
+    status: "Connected",
+    lastTransmission: "05/03/2023",
+    lastConnection: "04/03/2023",
+    monitoring: "CardioMonitor",
+    communicationHistory: false,
+    note: false
+  },
+  {
+    id: "124398622",
+    name: "Noah Evans",
+    deviceInfo: "MDT - ICD",
+    status: "Disconnected",
+    lastTransmission: "28/09/2023",
+    lastConnection: "27/09/2023",
+    monitoring: "RemoteView",
+    communicationHistory: true,
+    note: true
+  },
+  {
+    id: "124398623",
+    name: "Ella Green",
+    deviceInfo: "BSX - ILR",
+    status: "Connected",
+    lastTransmission: "16/10/2023",
+    lastConnection: "15/10/2023",
+    monitoring: "Synopse",
+    communicationHistory: false,
+    note: true
+  }
+];
 
 export default function Patients() {
   const [selectedPatients, setSelectedPatients] = React.useState<string[]>([])
@@ -87,8 +385,17 @@ export default function Patients() {
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(2022, 0, 6),
     to: new Date(2022, 0, 13),
-  })
-  const patientsPerPage = 9;
+  });
+  const parentRef = React.useRef(null);
+  const [parentHeight, setParentHeight] = React.useState(0);
+
+  React.useEffect(() => {
+    if (parentRef.current) {
+      setParentHeight(parentRef.current.offsetHeight);
+    }
+  }, []);
+  const patientsPerPage = parentHeight > 0 ? Math.floor((parentHeight - 105) / 72) : 9;
+  const addPixelsForBiggerScreens = parentHeight > 0 ? patientsPerPage * 72 - 9*72 : 0;
   const totalPages = Math.ceil(filteredPatients.length / patientsPerPage)
 
   const [currentTab, setCurrentTab] = React.useState("all")
@@ -142,7 +449,8 @@ export default function Patients() {
 
 
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-4 h-[calc(100vh-142px)]"  ref={parentRef}>
+      <div className="">
       {/* <div className="flex flex-col space-y-4">
         <div className="flex items-center space-x-2 flex-1">
           <Search className="h-5 w-5 text-muted-foreground" />
@@ -156,7 +464,8 @@ export default function Patients() {
       </div> */}
 
       <div className="rounded-md border flex">
-      <div className={` ${selectedPatient ? "w-[273px]" : "w-full"}`}>        <Table>
+      <div className={` ${selectedPatient ? "w-[273px]" : "w-full"}`}>        
+        <Table>
           <TableHeader>
             <TableRow>
               <TableHead className="w-12">
@@ -196,10 +505,9 @@ export default function Patients() {
                       onCheckedChange={() => togglePatient(patient.id)}
                     />
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="cursor-pointer" onClick={() => setSelectedPatient({...{patient}})}>
                     <div
-                      className="font-medium cursor-pointer"
-                      onClick={() => setSelectedPatient({...{patient}})}
+                      className="font-medium"
                     >
                       {patient.name}
                     </div>
@@ -278,20 +586,35 @@ export default function Patients() {
     <div className="w-[calc(100%-273px)] border-l">
       {/* Right-side div for patient data */}
       <div style={{overflowX: 'auto', height: '100%'}}>
-    <div className=" mx-auto p-6" style={{ minWidth: '1300px' }}>
-      <div className="flex justify-between items-center mb-6">
-        <div className="flex items-center gap-2">
-          <h1 className="text-xl font-semibold">{selectedPatient?.patient?.name}</h1>
-          <span className="text-xl">- Age 63</span>
-          <ChevronDown className="h-5 w-5 text-gray-500" />
+    <div className=" mx-auto px-6 pt-4 pb-3" style={{ minWidth: '1360px' }}>
+    <div className="flex justify-between items-start mb-4">
+        <div className="flex items-center gap-3">
+          <Avatar className="h-12 w-12">
+            <AvatarImage alt="Patient avatar" src={'./er.png'} />
+            <AvatarFallback>PA</AvatarFallback>
+          </Avatar>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-lg">{selectedPatient.patient.name}</span>
+              <ChevronDown className="h-5 w-5 text-gray-500" />
+            </div>
+            <div className="text-sm text-gray-500">Age 21</div>
+          </div>
         </div>
-        <div onClick={() => setSelectedPatient(null)} className="cursor-pointer">
-          <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M9.5 14.25L19 23.75L28.5 14.25" stroke="#101828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        <div className=" pt-1 flex items-center justify-center">
+        <Button className="bg-blue-600 hover:bg-blue-700">
+          Notify Patient
+        </Button>
+        <span>
+        <Button onClick={()=>setSelectedPatient(null)} variant="ghost" size="icon" className="ml-4 h-10 w-10">
+         <X />
+        </Button>
+        </span>
+
       </div>
-      <PatientInfo selectedPatient={selectedPatient} />
+
+      </div>
+      <PatientInfo selectedPatient={selectedPatient} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
       </div>
       </div>
       {/* Add patient details content here */}
@@ -299,7 +622,7 @@ export default function Patients() {
   )}
   
 </div>      
-
+</div>
     </div>
   )
 }

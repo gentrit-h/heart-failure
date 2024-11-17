@@ -21,7 +21,7 @@ import {
       { category: "Diuretics", otherDrugs: "MISC" },
       { category: "Entresto", otherDrugs: "ADAC" },
       { category: "ACE-E / AR-B", otherDrugs: "-" },
-      { category: "SGLPT", otherDrugs: "-" },
+      // { category: "SGLPT", otherDrugs: "-" },
       { category: "KT supplements", otherDrugs: "-" },
     ]
   
@@ -50,8 +50,8 @@ import {
   
     return (
       <div className="grid gap-6 md:grid-cols-[60%_40%]">
-        <Card>
-          <CardHeader className="h-[44px] p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
+        <Card className='h-[393px]'>
+          <CardHeader className=" p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
             <CardTitle className="text-center font-medium">Medication</CardTitle>
           </CardHeader>
           <CardContent className="p-0 m-0">
@@ -66,11 +66,11 @@ import {
               </TableHeader>
               <TableBody>
                 {medications.map((med, index) => (
-                  <TableRow key={index}>
+                  <TableRow key={index} className="">
                     <TableCell className="text-center">{med.category}</TableCell>
                     <TableCell className="flex justify-center items-center">
                       <Select>
-                        <SelectTrigger className="w-32">
+                        <SelectTrigger className="w-32 mt-2">
                           <SelectValue placeholder="Option 1" />
                         </SelectTrigger>
                         <SelectContent>
@@ -89,16 +89,16 @@ import {
           </CardContent>
         </Card>
   
-        <Card>
-        <CardHeader className="h-[44px] p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
+        <Card className="h-[350px]">
+        <CardHeader className="p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
             <CardTitle className="text-center font-medium">Lab work</CardTitle>
           </CardHeader>
           <CardContent className="p-0 m-0">
-            <div className="">
+            <div>
               {labWork.map((lab, index) => (
-                <div key={index} className="flex border-t h-[60px]">
+                <div key={index} className="flex border-t">
                   <span className="font-200 w-[40px] flex justify-center items-center">{index + 1}</span>
-                  <div className="px-[10px] py-[16px]">
+                  <div className="px-[10px] py-[8px]">
                     <div className="font-medium">{lab.name}</div>
                     <div className="text-sm text-muted-foreground">{lab.value}</div>
                   </div>
