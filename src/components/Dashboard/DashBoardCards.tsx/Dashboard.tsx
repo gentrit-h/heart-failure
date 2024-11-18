@@ -26,7 +26,7 @@ import LowBatteries from "./analytics/LowBatteries";
 import "./scrollbarStyles.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { openedCardState,embeddedAnalyticsState } from "../../../state/atoms";
+import { openedCardState, embeddedAnalyticsState } from "../../../state/atoms";
 
 const cardStyle = {
   border: "1px solid rgba(0, 0, 0, 0.06)", // Thin grey border
@@ -41,8 +41,9 @@ const cardStyleAlerts = {
   backgroundPosition: "top",
   backgroundSize: "100% 4px", // Adjust height of the border here
   backgroundRepeat: "no-repeat",
-  maxHeight: embeddedAnalyticsState?"77vh":"82vh",
+  maxHeight: embeddedAnalyticsState ? "77vh" : "82vh",
   overflowY: "auto",
+  minWidth: "26vw",
 };
 
 const cardStyleScheduled = {
@@ -50,8 +51,9 @@ const cardStyleScheduled = {
   backgroundPosition: "top",
   backgroundSize: "100% 4px", // Adjust height of the border here
   backgroundRepeat: "no-repeat",
-  maxHeight: embeddedAnalyticsState?"77vh":"82vh",
+  maxHeight: embeddedAnalyticsState ? "77vh" : "82vh",
   overflowY: "auto",
+  minWidth: "26vw",
 };
 
 const cardStyleAnalytics = {
@@ -59,8 +61,8 @@ const cardStyleAnalytics = {
   backgroundPosition: "top",
   backgroundSize: "100% 4px", // Adjust height of the border here
   backgroundRepeat: "no-repeat",
-  maxHeight: embeddedAnalyticsState?"77vh":"82vh",
-  minHeight: embeddedAnalyticsState?"77vh":"82vh",
+  maxHeight: embeddedAnalyticsState ? "77vh" : "82vh",
+  minHeight: embeddedAnalyticsState ? "77vh" : "82vh",
   overflowY: "auto",
 };
 
@@ -76,8 +78,6 @@ const smallFontStyle = {
   margin: "0", // Remove margins
   paddingLeft: "0px",
 };
-
-
 
 export default function Maindashboard() {
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -102,12 +102,11 @@ export default function Maindashboard() {
   }, []);
 
   return (
-    <div 
-    style={{
-      ...(openedCard === 'all' ? { minWidth: '100%' } : {})
-  }}
+    <div
+      style={{
+        ...(openedCard === "all" ? { minWidth: "100%" } : {}),
+      }}
     >
-      
       {/* className="flex flex-col min-h-screen px-[-10px] mt-[-15px]" */}
       {/* <header className="flex flex-col items-center justify-between px-6 py-4">
       <div className="flex items-center space-x-4 mt-2">
@@ -141,10 +140,12 @@ export default function Maindashboard() {
             className="col-span-full md:col-span-2 lg:col-span-1 scroll-container"
             style={{
               ...cardStyleAlerts,
-              '--scrollbar-track-color': 'lightgray',
-              '--scrollbar-thumb-color': 'rgba(255, 0, 0, 0.3)',
-              '--scrollbar-thumb-hover-color': 'gray',
-            }}          >
+              "--scrollbar-track-color": "#F2F4F8",
+              "--scrollbar-thumb-color": "#E2E4E7",
+              "--scrollbar-thumb-hover-color":
+                "#C5C8CE" /* A slightly darker color for hover */,
+            }}
+          >
             <CardHeader style={{ position: "relative" }}>
               <div className="flex gap-2 mt-0">
                 <input type="checkbox" className="h-3 w-3" />
@@ -156,17 +157,17 @@ export default function Maindashboard() {
                 <TableBody>
                   {[...Array(20)].map((_, i) => (
                     <TableRow key={i}>
-                      <TableCell style={smallFontStyle}
-                      onClick={() => {
-                        if (openedCard != "Alerts") {
-                          setOpenedCard("Alerts");
-                          sessionStorage.setItem('openedCard', 'Alerts');
-                        } else {
-                          setOpenedCard("all");
-                          sessionStorage.setItem('openedCard', 'all');
-            
-                        }
-                      }}
+                      <TableCell
+                        style={smallFontStyle}
+                        onClick={() => {
+                          if (openedCard != "Alerts") {
+                            setOpenedCard("Alerts");
+                            sessionStorage.setItem("openedCard", "Alerts");
+                          } else {
+                            setOpenedCard("all");
+                            sessionStorage.setItem("openedCard", "all");
+                          }
+                        }}
                       >
                         <div
                           className="flex justify-between items-start"
@@ -236,14 +237,17 @@ export default function Maindashboard() {
           </Card>
         )}
         {(openedCard == "all" || openedCard == "Scheduled") && (
-          <Card 
-          style={{
-            ...cardStyleScheduled,
-            '--scrollbar-track-color': 'lightgray',
-            '--scrollbar-thumb-color': 'rgba(76, 175, 80, 0.3)',
-            '--scrollbar-thumb-hover-color': 'gray',
-          }}           className="scroll-container">
-            <CardHeader>
+          <Card
+            className="col-span-full md:col-span-2 lg:col-span-1 scroll-container"
+            style={{
+              ...cardStyleScheduled,
+              "--scrollbar-track-color": "#F2F4F8",
+              "--scrollbar-thumb-color": "#E2E4E7",
+              "--scrollbar-thumb-hover-color":
+                "#C5C8CE" /* A slightly darker color for hover */,
+            }}
+          >
+            <CardHeader style={{ position: "relative" }}>
               <div className="flex gap-2 mt-0">
                 <input type="checkbox" className="h-3 w-3" />
                 <CardTitle>Scheduled</CardTitle>
@@ -254,25 +258,26 @@ export default function Maindashboard() {
                 <TableBody>
                   {[...Array(20)].map((_, i) => (
                     <TableRow key={i}>
-                      <TableCell style={smallFontStyle}
-                      onClick={() => {
-                        if (openedCard != "Scheduled") {
-                          setOpenedCard("Scheduled");
-                          sessionStorage.setItem('openedCard', 'Scheduled');
-                        } else {
-                          setOpenedCard("all");
-                          sessionStorage.setItem('openedCard', 'all');
-            
-                        }
-                      }}
+                      <TableCell
+                        style={smallFontStyle}
+                        onClick={() => {
+                          if (openedCard != "Scheduled") {
+                            setOpenedCard("Scheduled");
+                            sessionStorage.setItem("openedCard", "Scheduled");
+                          } else {
+                            setOpenedCard("all");
+                            sessionStorage.setItem("openedCard", "all");
+                          }
+                        }}
                       >
                         <div
                           className="flex justify-between items-center"
                           style={cardStyle}
                         >
                           <div>
-                            <div className="flex gap-2 mt-1">
-                              <input type="checkbox" className="mr-2" />
+                            <div className="flex gap-2 mt-0">
+                              <input type="checkbox" className="h-6 w-3" />
+
                               <div className="text-base font-medium">
                                 Patient Name - CMEMS/CIED
                               </div>
@@ -282,12 +287,48 @@ export default function Maindashboard() {
                             </div>
                           </div>
                           <div className="flex">
-                            <Button variant="ghost" size="icon">
-                              <FileText className="h-4 w-4" />
-                            </Button>
-                            <Button variant="ghost" size="icon">
-                              <Mail className="h-4 w-4" />
-                            </Button>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                              }}
+                            >
+                              <div>
+                                <svg
+                                  width="25"
+                                  height="25"
+                                  viewBox="0 0 25 25"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M22.608 10.1969H2.60803M11.608 14.1969H6.60803M2.60803 8.3969L2.60803 15.9969C2.60803 17.117 2.60803 17.6771 2.82602 18.1049C3.01777 18.4812 3.32373 18.7872 3.70005 18.9789C4.12787 19.1969 4.68793 19.1969 5.80803 19.1969L19.408 19.1969C20.5281 19.1969 21.0882 19.1969 21.516 18.9789C21.8923 18.7872 22.1983 18.4812 22.39 18.1049C22.608 17.6771 22.608 17.117 22.608 15.9969V8.3969C22.608 7.2768 22.608 6.71674 22.39 6.28892C22.1983 5.9126 21.8923 5.60663 21.516 5.41489C21.0882 5.1969 20.5281 5.1969 19.408 5.1969L5.80803 5.1969C4.68793 5.1969 4.12788 5.1969 3.70005 5.41489C3.32373 5.60663 3.01777 5.91259 2.82602 6.28892C2.60803 6.71674 2.60803 7.27679 2.60803 8.3969Z"
+                                    stroke="#004DE1"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                              </div>
+
+                              <div>
+                                <svg
+                                  width="25"
+                                  height="25"
+                                  viewBox="0 0 25 25"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M2.5094 7.1969L10.6743 12.9123C11.3355 13.3752 11.6661 13.6066 12.0257 13.6962C12.3433 13.7754 12.6755 13.7754 12.9931 13.6962C13.3527 13.6066 13.6833 13.3752 14.3445 12.9123L22.5094 7.1969M7.3094 20.1969H17.7094C19.3896 20.1969 20.2296 20.1969 20.8714 19.8699C21.4359 19.5823 21.8948 19.1234 22.1824 18.5589C22.5094 17.9171 22.5094 17.0771 22.5094 15.3969V8.9969C22.5094 7.31674 22.5094 6.47666 22.1824 5.83493C21.8948 5.27044 21.4359 4.8115 20.8714 4.52388C20.2296 4.1969 19.3896 4.1969 17.7094 4.1969H7.3094C5.62924 4.1969 4.78916 4.1969 4.14743 4.52388C3.58294 4.8115 3.124 5.27044 2.83638 5.83493C2.5094 6.47666 2.5094 7.31674 2.5094 8.9969V15.3969C2.5094 17.0771 2.5094 17.9171 2.83638 18.5589C3.124 19.1234 3.58294 19.5823 4.14743 19.8699C4.78916 20.1969 5.62924 20.1969 7.3094 20.1969Z"
+                                    stroke="#004DE1"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </TableCell>
@@ -303,10 +344,12 @@ export default function Maindashboard() {
             className="col-span-full md:col-span-2 lg:col-span-1 scroll-container"
             style={{
               ...cardStyleAnalytics,
-              '--scrollbar-track-color': 'lightgray',
-              '--scrollbar-thumb-color': 'rgba(0, 84, 246, 0.3)',
-              '--scrollbar-thumb-hover-color': 'gray',
-            }}           >
+              "--scrollbar-track-color": "#F2F4F8",
+              "--scrollbar-thumb-color": "#E2E4E7",
+              "--scrollbar-thumb-hover-color":
+                "#C5C8CE" /* A slightly darker color for hover */,
+            }}
+          >
             <CardHeader>
               <CardTitle>Analytics</CardTitle>
             </CardHeader>

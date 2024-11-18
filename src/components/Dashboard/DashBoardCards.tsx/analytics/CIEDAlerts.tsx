@@ -30,15 +30,15 @@ const chartConfig = {
   },
   Low: {
     label: "Low",
-    color: "green",
+    color: "#00DFA2",
   },
   Medium: {
     label: "Medium",
-    color: "yellow",
+    color: "#F6FA70",
   },
   High: {
     label: "High",
-    color: "red",
+    color: "#FF0060",
   },
 } satisfies ChartConfig;
 

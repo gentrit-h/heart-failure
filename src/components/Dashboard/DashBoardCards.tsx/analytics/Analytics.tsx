@@ -93,7 +93,7 @@ const chartConfig = {
       },
       Other: {
         label: "Other",
-        color: "#90A2FF",
+        color: "#0BA5EC",
       },
   } satisfies ChartConfig
 

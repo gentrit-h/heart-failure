@@ -31,20 +31,20 @@ const chartConfig = {
   },
   ILR: {
     label: "ILR",
-    color: "hsl(var(--chart-1))",
+    color: "#3378FE",
   },
   ICD: {
     label: "ICD",
-    color: "hsl(var(--chart-2))",
+    color: "#72A2FF",
   },
   PPM: {
     label: "PPM",
-    color: "hsl(var(--chart-3))",
+    color: "#0054F6",
   },
 
   other: {
     label: "Other",
-    color: "hsl(var(--chart-5))",
+    color: "#0BA5EC",
   },
 } satisfies ChartConfig;
 

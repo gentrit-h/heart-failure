@@ -6,7 +6,6 @@ import ActivePatients from "./ActivePatients";
 import TotalPatients from "./TotalPatients";
 import PatientsTable from "./PatientsTable";
 import MainDashboard from "./DashBoardCards.tsx/Dashboard";
-import { RecoilRoot } from "recoil";
 import { useRecoilState } from "recoil";
 import { embeddedAnalyticsState, openedCardState } from "../../state/atoms";
 import LowBatteryTable from "./DashBoardCards.tsx/analytics/LowBatteryTable";
@@ -53,9 +52,7 @@ const Dashboard: React.FC<MainContentProps> = () => {
 
 const DashboardWrapper: React.FC = () => {
   return (
-    <RecoilRoot>
       <Dashboard />
-    </RecoilRoot>
   );
 };
 
