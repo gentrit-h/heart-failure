@@ -14,6 +14,11 @@ import Patients from './components/Patient/Patients';
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
   if (!user?.isAuthenticated) {
+      const storedUser = sessionStorage.getItem('user');
+      if(JSON.parse(storedUser)?.isAuthenticated){
+        return <>{children}</>;
+    }
+    console.log("user",user)
     return <Navigate to="/login" />;
   }
   return <>{children}</>;

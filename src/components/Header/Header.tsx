@@ -43,11 +43,36 @@ const Header: React.FC<DashboardProps> = () => {
   }, [location]);
 
   return (
-    <header className="flex flex-wrap gap-10 justify-between items-center px-8 max-md:px-5">
-      <h1 className="self-stretch my-auto text-3xl font-medium leading-none text-gray-900">
-      {tabName}
+    <header className="flex flex-wrap gap-10 justify-between items-center px-8 max-md:px-5"
+    style={{
+      ...(tabName=='Dashboard' ? 
+        { 
+        paddingTop: '1vh' ,
+        paddingBottom: '1vh'
+      } : {}),
+      height:'6vh'
+    }}
+    >
+      <h1 className="self-stretch my-auto text-3xl font-medium leading-none text-gray-900"
+          style={{
+            ...(tabName=='Dashboard' ? 
+              { 
+              paddingTop: '0vh' ,
+              paddingBottom: '0vh'
+            } : {})
+          }}
+      >
+      {tabName=='Dashboard'? 'Inbox':tabName}
       </h1>
-      <div className="flex gap-5 justify-between items-center self-stretch my-auto w-35">
+      <div className="flex gap-5 justify-between items-center self-stretch my-auto w-35"
+          style={{
+            ...(tabName=='Dashboard' ? 
+              { 
+              paddingTop: '0vh' ,
+              paddingBottom: '0vh'
+            } : {})
+          }}
+      >
         <nav className="flex gap-1 items-start self-stretch my-auto">
           {navItems.map((item, index) => (
             <NavItemButton key={index} svg={item.svg} alt={item.alt} />
