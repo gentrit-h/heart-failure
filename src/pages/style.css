@@ -130,14 +130,14 @@
 
   /* src/styles/backgrounds.css */
 .background-svg-login {
-  background-image: url('src/assets/Background pattern decorative.svg');
+  background-image: url('../assets/Background pattern decorative.svg');
   background-size: cover; /* Adjust as necessary: cover, contain, etc. */
   background-repeat: no-repeat; /* No repeat */
   background-position: center top; /* Center the image */
 }
 
 .background-jpg-login {
-  background-image: url('src/assets/Section.jpg');
+  background-image: url('../assets/Section.jpg');
   background-size: cover; /* Adjust as necessary: cover, contain, etc. */
   background-repeat: no-repeat; /* No repeat */
   background-position: center top; /* Center the image */
