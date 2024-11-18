@@ -10,6 +10,7 @@ import Cmems from './components/Cmems/Cmems';
 import Cieds from './components/CIEDS/Cieds';
 import Patients from './components/Patient/Patients';
 // import PatientSummary from './components/PatientSummary/PatientSummary';
+import NewLoginPage from './pages/NewLoginPage';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
@@ -28,7 +29,7 @@ function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<NewLoginPage />} />
         <Route
           path="/"
           element={
