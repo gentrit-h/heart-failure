@@ -21,7 +21,7 @@ import SymptomsHistory from "./SymptomsHistory"
 import PatientInfoHeader from "./PatientInfoHeader"
 import React from "react"
 
-export default function PatientInfo({selectedPatient, addPixelsForBiggerScreens}) {
+export default function PatientInfo({selectedPatient, addPixelsForBiggerScreens, heightFromSummary}) {
   const patientData = selectedPatient?.patient;
   return (
       <div>
@@ -165,7 +165,10 @@ export default function PatientInfo({selectedPatient, addPixelsForBiggerScreens}
             *Dynamic Tabs (CMEMS Summary + CIED Summary)*
           </TabsTrigger>
         </TabsList>
-        <div className="overflow-y-auto pr-3" style={{height: 490+addPixelsForBiggerScreens+'px'}}>
+        <div className="overflow-y-auto pr-3" style={{ 
+  height: `${490 + addPixelsForBiggerScreens}px`, 
+  ...(heightFromSummary && { maxHeight: heightFromSummary }) 
+}}>
         <TabsContent value="transmission" className="mt-6 border rounded-sm">
           <Table>
             <TableHeader>

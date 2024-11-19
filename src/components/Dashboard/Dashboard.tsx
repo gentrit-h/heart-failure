@@ -10,6 +10,13 @@ import { useRecoilState } from "recoil";
 import { embeddedAnalyticsState, openedCardState } from "../../state/atoms";
 import LowBatteryTable from "./DashBoardCards.tsx/analytics/LowBatteryTable";
 import Component from "./DashBoardCards.tsx/embeddedAnalytics/EmbeddedAnalytics";
+import PatientInfo from "../Patient/PatientInfo";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { ChevronDown, Battery, Signal, ExternalLink, FileText, X } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+
+
+
 
 interface MainContentProps {}
 
@@ -44,6 +51,47 @@ const Dashboard: React.FC<MainContentProps> = () => {
         {(openedCard == "Analytics" ||
           sessionStorage.getItem("openedCard") == "Analytics") && (
           <LowBatteryTable />
+        )}
+        {(openedCard == "Alerts" ||
+          sessionStorage.getItem("openedCard") == "Alerts") && (
+            <div style={{position:'relative'}}>
+            <div className="w-[calc(100%-273px)] border-l"
+            style={{width:'73.6vw', position:'absolute', top:10, right:0}}
+            >
+            {/* Right-side div for patient data */}
+            <div style={{overflowX: 'auto', height: '100%'}}>
+          <div className=" mx-auto px-6 pt-4 pb-3" style={{ minWidth: '1360px' }}>
+          <div className="flex justify-between items-start mb-4">
+              <div className="flex items-center gap-3">
+                <Avatar className="h-12 w-12">
+                  <AvatarImage alt="Patient avatar" src={'./er.png'} />
+                  <AvatarFallback>PA</AvatarFallback>
+                </Avatar>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-lg">{'ermal'}</span>
+                    <ChevronDown className="h-5 w-5 text-gray-500" />
+                  </div>
+                  <div className="text-sm text-gray-500">Age 21</div>
+                </div>
+              </div>
+              <div className=" pt-1 flex items-center justify-center">
+              <Button className="bg-blue-600 hover:bg-blue-700">
+                Notify Patient
+              </Button>
+              <span>
+              <Button onClick={()=>{}} variant="ghost" size="icon" className="ml-4 h-10 w-10">
+               <X />
+              </Button>
+              </span>
+            </div>
+            </div>
+            <PatientInfo selectedPatient={"selectedPatient"} addPixelsForBiggerScreens={0} heightFromSummary={'46vh'}/>
+            </div>
+            </div>
+            {/* Add patient details content here */}
+          </div>
+          </div>
         )}
       </div>
     </div>

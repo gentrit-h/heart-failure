@@ -1,5 +1,5 @@
 import { Bell, ChevronDown, Mail, MoreVertical, FileText } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -34,6 +34,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { openedCardState, embeddedAnalyticsState } from "../../../state/atoms";
 
+
 import {
   Popover,
   PopoverContent,
@@ -56,7 +57,7 @@ const cardStyleAlerts = {
   backgroundRepeat: "no-repeat",
   maxHeight: embeddedAnalyticsState ? "77vh" : "82vh",
   overflowY: "auto",
-  minWidth: "26vw",
+  // minWidth: "31vw",
 };
 
 const cardStyleScheduled = {
@@ -66,7 +67,7 @@ const cardStyleScheduled = {
   backgroundRepeat: "no-repeat",
   maxHeight: embeddedAnalyticsState ? "77vh" : "82vh",
   overflowY: "auto",
-  minWidth: "26vw",
+  minWidth: "31vw",
 };
 
 const cardStyleAnalytics = {
@@ -77,6 +78,7 @@ const cardStyleAnalytics = {
   maxHeight: embeddedAnalyticsState ? "77vh" : "82vh",
   minHeight: embeddedAnalyticsState ? "77vh" : "82vh",
   overflowY: "auto",
+  
 };
 
 const tableStyle = {
@@ -603,6 +605,9 @@ export default function Maindashboard() {
               "--scrollbar-track-color": "#F2F4F8",
               "--scrollbar-thumb-color": "#E2E4E7",
               "--scrollbar-thumb-hover-color": "#C5C8CE",
+              maxWidth: openedCard == 'Alerts' ? '19vw':'100vw',
+              minWidth: openedCard == 'Alerts' ? '19vw': "31vw",
+
             }}
           >
             <CardHeader style={{ position: "relative" }}>
@@ -646,7 +651,7 @@ export default function Maindashboard() {
                               <div className="text-[10px] text-muted-foreground">
                                 Scheduled - {alert.scheduledDate}
                               </div>
-                              <div className="flex gap-1 mt-1">
+                              {openedCard=='all' && <div className="flex gap-1 mt-1">
                                 {alert.badges.map((badge, idx) => (
                                   <Badge
                                     key={idx}
@@ -661,7 +666,37 @@ export default function Maindashboard() {
                                     {badge.text}
                                   </Badge>
                                 ))}
-                              </div>
+                              </div>}
+                              {openedCard=='Alerts' && <div className="flex gap-1 mt-1">
+                                {alert.badges.filter((item,index)=>index<1).map((badge, idx) => (
+                                  <><Badge
+                                    key={idx}
+                                    variant={badge.variant}
+                                    style={{
+                                      ...badge.style,
+                                      paddingLeft: "4px",
+                                      paddingRight: "4px",
+                                    }}
+                                    className="text-[10px]"
+                                  >
+                                    {badge.text}
+                                  </Badge>
+                                  <Badge
+                                    key={idx}
+                                    variant={badge.variant}
+                                    style={{
+                                      backgroundColor:'lightgrey',
+                                      color:'black',
+                                      paddingLeft: "6px",
+                                      paddingRight: "6px",
+                                    }}
+                                    className="text-[10px]"
+                                  >
+                                    {'+'}
+                                  </Badge>
+                                  </>
+                                ))}
+                              </div>}
                             </div>
                           </div>
                           <Popover isOpen={isOpen} onOpenChange={setIsOpen}>

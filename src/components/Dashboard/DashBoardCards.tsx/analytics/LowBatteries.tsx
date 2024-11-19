@@ -58,7 +58,21 @@ export default function LowBatteries() {
   const [openedCard, setOpenedCard] = useRecoilState(openedCardState);
 
   return (
-    <Card className="flex flex-col" style={{ height: "100%" }}>
+    <div style={{cursor:'pointer'}}
+    onClick={() => {
+      if (openedCard != "Analytics") {
+        setOpenedCard("Analytics");
+        sessionStorage.setItem('openedCard', 'Analytics');
+      } else {
+        setOpenedCard("all");
+        sessionStorage.setItem('openedCard', 'all');
+
+      }
+    }}
+    
+    >
+    <Card className="flex flex-col" style={{ height: "100%" }}
+    >
       <CardHeader
         className="items-center pb-0"
         style={{
@@ -70,16 +84,6 @@ export default function LowBatteries() {
       >
         <CardTitle
           className="text-sm"
-          onClick={() => {
-            if (openedCard != "Analytics") {
-              setOpenedCard("Analytics");
-              sessionStorage.setItem('openedCard', 'Analytics');
-            } else {
-              setOpenedCard("all");
-              sessionStorage.setItem('openedCard', 'all');
-
-            }
-          }}
         >
           Low Battery Devices
         </CardTitle>
@@ -140,5 +144,6 @@ export default function LowBatteries() {
         </div>
       </CardFooter>
     </Card>
+    </div>
   );
 }

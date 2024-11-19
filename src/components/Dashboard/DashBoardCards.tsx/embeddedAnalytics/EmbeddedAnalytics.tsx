@@ -14,9 +14,16 @@ interface StatCardProps {
     style?: React.CSSProperties; // Add the style prop
 }
 
-function StatCard({ icon, count, percentage, label, color, style }: StatCardProps) {
+function StatCard({ icon, count, percentage, label, color, style, borderColor }: StatCardProps) {
     return (
-        <Card className="overflow-hidden h-full"> {/* Apply style here */}
+        <Card className="overflow-hidden h-full" 
+        style={{
+            backgroundImage: `linear-gradient(to right, ${borderColor}, rgba(255, 0, 0, 0))`,
+            backgroundPosition: "top",
+            backgroundSize: "100% 4px", // Adjust height of the border here
+            backgroundRepeat: "no-repeat",
+        }}
+        > {/* Apply style here */}
             <CardContent className="p-0 h-full">
                 <div className="flex items-center h-full"
                 style={{paddingLeft:'1vh'}}
@@ -79,6 +86,7 @@ export default function Component() {
                 percentage={1}
                 label="New (24H)"
                 color="bg-blue-100"
+                borderColor='blue'
             />
             <StatCard
                 icon={
@@ -93,6 +101,8 @@ export default function Component() {
                 percentage={10}
                 label="Unopened"
                 color="bg-indigo-100"
+                borderColor='blue'
+
             />
             <StatCard
                 icon={
@@ -107,6 +117,8 @@ export default function Component() {
                 percentage={1}
                 label="Waiting signature"
                 color="bg-yellow-100"
+                borderColor='yellow'
+
             />
             <StatCard
                 icon={
@@ -121,6 +133,8 @@ export default function Component() {
                 percentage={1}
                 label="Processed"
                 color="bg-teal-100"
+                borderColor='green'
+
             />
         </div>
     );
