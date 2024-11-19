@@ -23,7 +23,7 @@ import React from "react"
 import { ProgressBars } from "./ProgressBars"
 import TransmissionSummary from "./TransmissionSummary"
 
-export default function PatientInfo({selectedPatient, hidePatientInfo, addPixelsForBiggerScreens, heightFromSummary}) {
+export default function PatientInfo({selectedPatient, hidePatientInfo, addPixelsForBiggerScreens, heightFromSummary, isCmemsOrCieds}: {selectedPatient: any, hidePatientInfo: boolean, addPixelsForBiggerScreens: number, heightFromSummary?: number, isCmemsOrCieds?: boolean}) {
   const patientData = selectedPatient?.patient;
   return (
       <div>
@@ -167,7 +167,7 @@ export default function PatientInfo({selectedPatient, hidePatientInfo, addPixels
             20/11/2024 - Transmission Summary
           </TabsTrigger>
         </TabsList>
-        <div className="overflow-y-auto pr-3" style={{height: 453+addPixelsForBiggerScreens+(hidePatientInfo ? 129 : 0)+'px', ...(heightFromSummary && { maxHeight: heightFromSummary }) }}>
+        <div className="overflow-y-auto pr-3" style={{height: 460+addPixelsForBiggerScreens+(hidePatientInfo ? 129 : 0)+(isCmemsOrCieds ? -144 :0)+'px', ...(heightFromSummary && { maxHeight: heightFromSummary }) }}>
         <TabsContent value="transmission" className="mt-6">
           <>
           <ProgressBars />

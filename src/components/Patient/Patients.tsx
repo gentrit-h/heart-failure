@@ -548,7 +548,7 @@ export default function Patients() {
             ))}
           </TableBody>
         </Table>
-        <div className={`flex items-center border-t justify-between space-x-2 py-2 mt-0 pl-3 pr-3`} style={{ marginTop: 0 }}>
+        <div className={`flex items-center border-t justify-between space-x-2 py-3 mt-0 pl-3 pr-3`} style={{ marginTop: 0 }}>
         <Button
           variant="outline"
           size="sm"

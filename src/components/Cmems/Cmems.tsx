@@ -362,8 +362,8 @@ export default function Cmems() {
       setParentHeight(parentRef.current.offsetHeight);
     }
   }, []);
-  const patientsPerPage = parentHeight > 0 ? Math.floor((parentHeight - 105) / 72) : 9;
-  const addPixelsForBiggerScreens = parentHeight > 0 ? patientsPerPage * 72 - 9*72 : 0;
+  const patientsPerPage = parentHeight > 0 ? Math.floor((parentHeight - 155) / 72) : 7;
+  const addPixelsForBiggerScreens = parentHeight > 0 ? patientsPerPage * 72 - 7*72 : 0;
   const totalPages = Math.ceil(filteredPatients.length / patientsPerPage)
   const [hidePatientInfo, setHidePatientInfo] = React.useState(false)
 
@@ -610,7 +610,7 @@ export default function Cmems() {
             ))}
           </TableBody>
         </Table>
-        <div className={`flex items-center border-t justify-between space-x-2 py-2 mt-0 pl-3 pr-3`} style={{ marginTop: 0 }}>
+        <div className={`flex items-center border-t justify-between space-x-2 py-3 mt-0 pl-3 pr-3`} style={{ marginTop: 0 }}>
         <Button
           variant="outline"
           size="sm"
@@ -669,7 +669,7 @@ export default function Cmems() {
       </div>
 
       </div>
-      <PatientInfo selectedPatient={selectedPatient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
+      <PatientInfo isCmemsOrCieds={true} selectedPatient={selectedPatient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
       </div>
       </div>
       {/* Add patient details content here */}
