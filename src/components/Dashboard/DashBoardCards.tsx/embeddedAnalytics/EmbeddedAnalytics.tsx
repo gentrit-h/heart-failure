@@ -34,7 +34,7 @@ function StatCard({ icon, count, percentage, label, color, style, borderColor }:
                     >
                         {icon}
                     </div>
-                    <div className="p-2 sm:p-3 md:p-4 flex-grow" >
+                    <div className="p-2 sm:p-3 md:p-4 mb-[3%] flex-grow" >
                         <div 
                         className="flex items-center gap-1 sm:gap-2"
                         style={{height:'5vh', maxWidth:'5vh'}}

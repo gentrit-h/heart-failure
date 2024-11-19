@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { Calendar as CalendarIcon, ChevronDown, Info, Link, MoreVertical, Search, X } from "lucide-react"
-import { format } from "date-fns"
 import { DateRange } from "react-day-picker"
 import {
   Table,
@@ -34,6 +33,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Calendar } from "@/components/ui/calendar"
+import PatientInfo from "../Patient/PatientInfo"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const patients = [
   {
@@ -353,8 +354,18 @@ export default function Cmems() {
     deviceType: [] as string[],
     connectivity: [] as string[],
   })
-  const patientsPerPage = 9
+  const parentRef = React.useRef(null);
+  const [parentHeight, setParentHeight] = React.useState(0);
+
+  React.useEffect(() => {
+    if (parentRef.current) {
+      setParentHeight(parentRef.current.offsetHeight);
+    }
+  }, []);
+  const patientsPerPage = parentHeight > 0 ? Math.floor((parentHeight - 105) / 72) : 9;
+  const addPixelsForBiggerScreens = parentHeight > 0 ? patientsPerPage * 72 - 9*72 : 0;
   const totalPages = Math.ceil(filteredPatients.length / patientsPerPage)
+  const [hidePatientInfo, setHidePatientInfo] = React.useState(false)
 
   const togglePatient = (patientId: string) => {
     setSelectedPatients(prev =>
@@ -363,6 +374,7 @@ export default function Cmems() {
         : [...prev, patientId]
     )
   }
+  const [selectedPatient, setSelectedPatient] = React.useState<any>(null)
 
   const toggleAll = () => {
     const currentPagePatients = getCurrentPagePatients()
@@ -410,7 +422,7 @@ export default function Cmems() {
   }
 
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-4 h-[88vh]" ref={parentRef}>
       <div className="flex flex-col space-y-4">
         <div className="flex space-x-1 border-b">
           {["all", "new", "confirmed", "dismissed"].map((tab) => (
@@ -477,9 +489,12 @@ export default function Cmems() {
       </div>
 
       <div className="rounded-t-md border">
+      <div className="flex flex-row">
+
+      <div className={` ${selectedPatient ? "w-[273px]" : "w-full"}`}>        
         <Table>
           <TableHeader>
-            <TableRow className="h-[40px]">
+            <TableRow>
             <div className={`absolute left-0 top-0 bottom-0 w-[5px] mt-[6px] mb-[6px] rounded-tr-[6px] rounded-br-[6px]`} />
               <TableHead className="w-12">
                 <Checkbox
@@ -489,6 +504,8 @@ export default function Cmems() {
                 />
               </TableHead>
               <TableHead>Patients</TableHead>
+              {!selectedPatient && (
+                <>
               <TableHead className="text-center">Source</TableHead>
               <TableHead className="text-center">Date</TableHead>
               <TableHead className="text-center">Goal (+/-)</TableHead>
@@ -499,7 +516,10 @@ export default function Cmems() {
               <TableHead className="text-center">PA Heart Rate</TableHead>
               <TableHead className="text-center">Waveform</TableHead>
               <TableHead className="text-center">Status</TableHead>
+              <TableHead className="text-center">View</TableHead>
               <TableHead className="w-[100px]"></TableHead>
+              </>
+              )}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -513,10 +533,12 @@ export default function Cmems() {
                     onCheckedChange={() => togglePatient(patient.id)}
                   />
                 </TableCell>
-                <TableCell>
+                <TableCell className="cursor-pointer" onClick={() => setSelectedPatient({...{patient}})}>
                   <div className="font-medium">{patient.name}</div>
                   <div className="text-sm text-muted-foreground">{patient.id}</div>
                 </TableCell>
+                {!selectedPatient && (
+                <>
                 <TableCell className="text-center">{patient.source}</TableCell>
                 <TableCell className="text-center">{patient.date}</TableCell>
                 <TableCell className="text-center">{patient.goal}</TableCell>
@@ -547,6 +569,13 @@ export default function Cmems() {
                 </div>
                 </TableCell>
                 <TableCell>
+                  <div className="flex justify-center">
+                  <Button className="border rounded-md w-full mr-3" style={{background: "#F1F5FE", borderColor: "#004DE1", color: "#004DE1", fontWeight: 500}}>
+                    View Summary
+                  </Button>
+                  </div>
+                  </TableCell>
+                <TableCell>
                 <div className="flex justify-center">
                   <div className="flex space-x-2">
                     <Button variant="ghost" size="icon">
@@ -575,12 +604,13 @@ export default function Cmems() {
                   </div>
                   </div>
                 </TableCell>
+                </>
+                )}
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      </div>
-      <div className="flex items-center justify-between space-x-2 py-2 border-b border-l border-r rounded-b-md mt-0 pl-3 pr-3" style={{ marginTop: 0 }}>
+        <div className={`flex items-center border-t justify-between space-x-2 py-2 mt-0 pl-3 pr-3`} style={{ marginTop: 0 }}>
         <Button
           variant="outline"
           size="sm"
@@ -600,6 +630,53 @@ export default function Cmems() {
         >
           Next
         </Button>
+      </div>
+      </div>
+
+      {selectedPatient && (
+    <div className="w-[calc(100%-273px)] border-l">
+      {/* Right-side div for patient data */}
+      <div style={{overflowX: 'auto', height: '100%'}}>
+    <div className=" mx-auto px-6 pt-4 pb-3" style={{ minWidth: '1370px' }}>
+    <div className="flex justify-between items-start mb-4">
+        <div className="flex items-center gap-3">
+          <Avatar className="h-12 w-12">
+            <AvatarImage alt="Patient avatar" src={'./er.png'} />
+            <AvatarFallback>PA</AvatarFallback>
+          </Avatar>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-lg">{selectedPatient.patient.name}</span>
+              <Button onClick={()=>setHidePatientInfo(!hidePatientInfo)} variant="ghost" size="icon" className="ml-1 h-10 w-10">
+                <ChevronDown className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${hidePatientInfo ? 'rotate-180' : 'rotate-0'}`} />
+              </Button>            </div>
+            <div className="text-sm text-gray-500">Age 21</div>
+          </div>
+        </div>
+        <div className=" pt-1 flex items-center justify-center">
+        <Button className="border rounded-md w-full mr-3" style={{background: "#F1F5FE", borderColor: "#004DE1", color: "#004DE1", fontWeight: 500}}>
+        Action Plan
+        </Button>
+        <Button className="bg-blue-600 hover:bg-blue-700 px-7">
+          Notify Patient
+        </Button>
+        <span>
+        <Button onClick={()=>setSelectedPatient(null)} variant="ghost" size="icon" className="ml-4 h-10 w-10">
+         <X />
+        </Button>
+        </span>
+
+      </div>
+
+      </div>
+      <PatientInfo selectedPatient={selectedPatient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
+      </div>
+      </div>
+      {/* Add patient details content here */}
+    </div>
+  )}
+</div>
+
       </div>
     </div>
   )

@@ -91,7 +91,7 @@ const Dashboard: React.FC<MainContentProps> = () => {
               </span>
             </div>
             </div>
-            <PatientInfo selectedPatient={"selectedPatient"} addPixelsForBiggerScreens={0} heightFromSummary={'46vh'}/>
+            <PatientInfo hidePatientInfo={false} selectedPatient={"selectedPatient"} addPixelsForBiggerScreens={0} heightFromSummary={'46vh'}/>
             </div>
             </div>
             {/* Add patient details content here */}
@@ -135,7 +135,7 @@ const Dashboard: React.FC<MainContentProps> = () => {
               </span>
             </div>
             </div>
-            <PatientInfo selectedPatient={"selectedPatient"} addPixelsForBiggerScreens={0} heightFromSummary={'46vh'}/>
+            <PatientInfo hidePatientInfo={false} selectedPatient={"selectedPatient"} addPixelsForBiggerScreens={0} heightFromSummary={'46vh'}/>
             </div>
             </div>
             {/* Add patient details content here */}

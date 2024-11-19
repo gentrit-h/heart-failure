@@ -20,12 +20,14 @@ import CmemsHistory from "./CmemsHitory"
 import SymptomsHistory from "./SymptomsHistory"
 import PatientInfoHeader from "./PatientInfoHeader"
 import React from "react"
+import { ProgressBars } from "./ProgressBars"
+import TransmissionSummary from "./TransmissionSummary"
 
-export default function PatientInfo({selectedPatient, addPixelsForBiggerScreens, heightFromSummary}) {
+export default function PatientInfo({selectedPatient, hidePatientInfo, addPixelsForBiggerScreens, heightFromSummary}) {
   const patientData = selectedPatient?.patient;
   return (
       <div>
-        <PatientInfoHeader />
+        <PatientInfoHeader hidePatientInfo={hidePatientInfo} />
       {/* <div className="flex gap-4 mb-8">
         <Card className="flex-1 pl-6 pr-6 pb-[13.5px] pt-[13.5px] w-[60%] h-[115px]">
           <div className="grid gap-y-2 divide-x" style={{ gridTemplateColumns: '28% 32% 32% 8%' }}>
@@ -138,7 +140,7 @@ export default function PatientInfo({selectedPatient, addPixelsForBiggerScreens,
             value="cmems"
             className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent"
           >
-            CMEMS History
+            Hemodynamics
           </TabsTrigger>
           <TabsTrigger
             value="clinical"
@@ -162,14 +164,14 @@ export default function PatientInfo({selectedPatient, addPixelsForBiggerScreens,
             value="dynamic"
             className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent"
           >
-            *Dynamic Tabs (CMEMS Summary + CIED Summary)*
+            20/11/2024 - Transmission Summary
           </TabsTrigger>
         </TabsList>
-        <div className="overflow-y-auto pr-3" style={{ 
-  height: `${490 + addPixelsForBiggerScreens}px`, 
-  ...(heightFromSummary && { maxHeight: heightFromSummary }) 
-}}>
-        <TabsContent value="transmission" className="mt-6 border rounded-sm">
+        <div className="overflow-y-auto pr-3" style={{height: 453+addPixelsForBiggerScreens+(hidePatientInfo ? 129 : 0)+'px', ...(heightFromSummary && { maxHeight: heightFromSummary }) }}>
+        <TabsContent value="transmission" className="mt-6">
+          <>
+          <ProgressBars />
+          <div className="mt-6 border rounded-sm">
           <Table>
             <TableHeader>
               <TableRow className=''>
@@ -181,10 +183,10 @@ export default function PatientInfo({selectedPatient, addPixelsForBiggerScreens,
               </TableRow>
             </TableHeader>
             <TableBody>
-              {[...Array(6)].map((_, i) => (
-                <TableRow key={i}  className=''>
-                  <TableCell className=" text-center">dd/mm/yyyy 00:00</TableCell>
-                  <TableCell className=" text-center">-</TableCell>
+              {[...Array(4)].map((_, i) => (
+                <TableRow key={i} className="h-[45px]">
+                  <TableCell className=" text-center">1{5+i}/11/2024 0{i*2}:{i+3}0</TableCell>
+                  <TableCell className=" text-center">AT/AF</TableCell>
                   <TableCell className=" text-center">-</TableCell>
                   <TableCell className=" text-center">
                     <Badge
@@ -198,8 +200,10 @@ export default function PatientInfo({selectedPatient, addPixelsForBiggerScreens,
                       {i % 2 === 0 ? "Connected" : "Disconnected"}
                     </Badge>
                   </TableCell>
-                  <TableCell className="flex justify-center pt-[25px]">
+                  <TableCell>
+                    <div className="flex justify-center">
                     <FileText className="h-5 w-5 text-gray-500" />
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
@@ -212,7 +216,9 @@ export default function PatientInfo({selectedPatient, addPixelsForBiggerScreens,
             <span className="text-sm text-gray-500">Page 1 of 10</span>
             <Button variant="outline">Next</Button>
           </div>
+          </div>
 
+          </>
         </TabsContent>
         <TabsContent value="clinical" className='mt-6'>
           <ClinicalInfo />
@@ -225,6 +231,9 @@ export default function PatientInfo({selectedPatient, addPixelsForBiggerScreens,
         </TabsContent>
         <TabsContent value="symptoms" className='mt-6'>
           <SymptomsHistory />
+        </TabsContent>
+        <TabsContent value="dynamic" className='mt-6'>
+          <TransmissionSummary />
         </TabsContent>
         </div>
       </Tabs>

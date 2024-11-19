@@ -23,6 +23,7 @@ import {
     TableRow,
   } from "@/components/ui/table"
   import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ProgressBars } from "./ProgressBars";
 
 // Sample data for the trend graphs
 const trendData = Array.from({ length: 30 }, (_, i) => ({
@@ -51,10 +52,26 @@ const medications = [
   ]
 
 export default function Summary() {
+  function SelectModified() {
+    return (<><Select>
+              <SelectTrigger className="w-32 mt-2">
+                <SelectValue placeholder="Option 1" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="option1">Option 1</SelectItem>
+                <SelectItem value="option2">Option 2</SelectItem>
+                <SelectItem value="option3">Option 3</SelectItem>
+              </SelectContent>
+            </Select></>)
+  }
   return (
-    <div className="pr-3">
+    <div className="flex items-center justify-center">
+    <div className="pr-3  max-w-[1600px]">
     <div className="space-y-6">
       {/* Measurements Grid */}
+      <div className="flex items-center justify-center">
+<ProgressBars />
+      </div>
       <div className="rounded-md border">
       <Table>
   <TableHeader>
@@ -66,12 +83,13 @@ export default function Summary() {
       <TableHead className="text-center">Last Mean PAP</TableHead>
       <TableHead className="text-center">Pulse Pressure</TableHead>
       <TableHead className="text-center">PA Heart Rate</TableHead>
-      <TableHead></TableHead> {/* Empty cell for the icons */}
+      <TableHead className="text-center">Waveform</TableHead>
+      <TableHead className="text-center">Note</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
     <TableRow className="h-[60px] hover:bg-transparent">
-      <TableCell className="text-center">dd/mm/yyyy</TableCell>
+      <TableCell className="text-center">19/11/2024</TableCell>
       <TableCell className="text-center">15 mmHg</TableCell>
       <TableCell className="text-center">25 mmHg</TableCell>
       <TableCell className="text-center">30 mmHg</TableCell>
@@ -79,10 +97,14 @@ export default function Summary() {
       <TableCell className="text-center">5 mmHg</TableCell>
       <TableCell className="text-center">80 bpm</TableCell>
       <TableCell>
-        <div className="flex gap-4 items-end">
-          <LineChartIcon className="h-5 w-5 text-blue-500" />
-          <FileText className="h-5 w-5 text-blue-500" />
+        <div className="flex justify-center">
+        <LineChartIcon className="h-5 w-5 text-blue-500" />
         </div>
+      </TableCell>
+      <TableCell>
+        <div className="flex justify-center items-center">
+      <FileText className="h-5 w-5 text-blue-500" />
+      </div>
       </TableCell>
     </TableRow>
   </TableBody>
@@ -98,8 +120,10 @@ export default function Summary() {
   <TableBody>
     <TableRow className="hover:bg-transparent">
       <TableCell className="text-center px-3 py-2">
-      <div className="w-full aspect-[1385/240]">
+        <div className=" flex justify-center items-center ">
+      <div className="w-full max-w-[1400px] aspect-[1385/240]">
   <img src={img3} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
+</div>
 </div>
         {/* <img src={img3} className="w-[100%] cursor-pointer" style={{height: addPixelsForBiggerScreens>0 ? "400px":""}} alt="placeholder" /> */}
       </TableCell>
@@ -107,7 +131,6 @@ export default function Summary() {
   </TableBody>
 </Table>
 </div>
-        {/* <img src={img2} className="w-[100%] h-[319px] cursor-pointer" alt="placeholder" /> */}
 <div className="w-full aspect-[1438/319]">
   <img src={img2} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
 </div>
@@ -119,38 +142,70 @@ export default function Summary() {
           <CardContent className="p-0 m-0">
             <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead className="pl-[100px]"  style={{backgroundColor: "white"}}>Category</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Name</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Dose</TableHead>
+                <TableRow className="h-[60px]">
+                  <TableHead className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Category</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Beta Blockers</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Diuretics</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>ARNIs</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>ACEi / ARBs</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>SGLT2 Inhibitors</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Ivabradine</TableHead>
                   <TableHead className="text-center" style={{backgroundColor: "white"}}>Other Drugs</TableHead>
                 </TableRow>
+                <TableRow className="h-[60px]">
+                  <TableHead className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Name</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
+                    <div className="flex items-center justify-center">
+                    <SelectModified />
+                    </div>
+                    </TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
+                  <div className="flex items-center justify-center">
+                    <SelectModified />
+                    </div>
+                  </TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
+                  <div className="flex items-center justify-center">
+                    <SelectModified />
+                    </div>
+                  </TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
+                  <div className="flex items-center justify-center">
+                    <SelectModified />
+                    </div>
+                  </TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
+                  <div className="flex items-center justify-center">
+                    <SelectModified />
+                    </div>
+                  </TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
+                  <div className="flex items-center justify-center">
+                    <SelectModified />
+                    </div>
+                  </TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
+                  <div className="flex items-center justify-center">
+                    <SelectModified />
+                    </div>
+                  </TableHead>
+                </TableRow>
+                <TableRow className="h-[60px]">
+                  <TableHead className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Dose</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
+                </TableRow>
               </TableHeader>
-              <TableBody>
-                {medications.map((med, index) => (
-                  <TableRow key={index} className="h-[60px]">
-                    <TableCell className="pl-[100px]">{med.category}</TableCell>
-                    <TableCell className="flex justify-center items-center">
-                      <Select>
-                        <SelectTrigger className="w-32 mt-2">
-                          <SelectValue placeholder="Option 1" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="option1">Option 1</SelectItem>
-                          <SelectItem value="option2">Option 2</SelectItem>
-                          <SelectItem value="option3">Option 3</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </TableCell>
-                    <TableCell className="text-center">-</TableCell>
-                    <TableCell className="text-center">{med.otherDrugs}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
             </Table>
           </CardContent>
         </Card>
         </div>
+    </div>
     </div>
     </div>
   )

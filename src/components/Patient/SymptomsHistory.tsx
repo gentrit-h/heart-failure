@@ -2,8 +2,8 @@
 
 import { Heart } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Table,
   TableBody,
@@ -15,12 +15,23 @@ import {
 import React from 'react'
 import img4 from './img4.png'
 import img5 from './img5.png'
-import img6 from './img6.png'
-import img7 from './img7.png'
-import img8 from './img8.png'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 
 export default function SymptomsHistory() {
+  const symptoms = [
+    { date: "21/11/2024", breath: "0", palp: "3", weight: "1", swelling: "4" },
+    { date: "20/11/2024", breath: "2", palp: "2", weight: "0", swelling: "3" },
+    { date: "16/11/2024", breath: "2", palp: "2", weight: "0", swelling: "3" },
+    { date: "01/11/2024", breath: "2", palp: "2", weight: "1", swelling: "3" },
+    { date: "15/10/2024", breath: "2", palp: "2", weight: "1", swelling: "4" },
+  ]
   return (
     <div className="w-full mx-auto p-4 space-y-6">
 
@@ -45,101 +56,79 @@ export default function SymptomsHistory() {
   </div>
 </Card>
 
+<div className="rounded-md border">
+<Table>
+  <TableHeader>
+    <TableRow  className="h-[44px]">
+      <TableHead className="pl-5">Trend Graph</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow className="hover:bg-transparent">
+      <TableCell className="text-center px-3 py-2">
+        <div className=" flex justify-center items-center ">
+          <div className="w-full max-w-[1400px] aspect-[1360/240]">
+            <img src={img5} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
+          </div>
+        </div>
+        {/* <img src={img3} className="w-[100%] cursor-pointer" style={{height: addPixelsForBiggerScreens>0 ? "400px":""}} alt="placeholder" /> */}
+      </TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+</div>
 
-      {/* Graphs Grid */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className='border rounded-md'>
-            <Table>
-            <TableHeader>
-              <TableRow className=''>
-                <TableHead className="">Shortness of breath</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow key={1} className=''>
-                  <TableCell className=" text-center">
-                  <div className="w-full] aspect-[670.88/240]">
-                    <img src={img5} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
-                  </div>
-                  </TableCell>
+<Card className=''>
+          <CardHeader className=" p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
+            <CardTitle className="text-center font-medium">Medication</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0 m-0">
+            <div className="w-full">
+            <Table className="">
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-center"  style={{backgroundColor: "white"}}>Date</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Shortness of breath</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Palpitations</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Weight Gain</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Swelling</TableHead>
                 </TableRow>
-            </TableBody>
-          </Table>
-          </div>
-        <div className='border rounded-md'>
-            <Table>
-            <TableHeader>
-              <TableRow className=''>
-                <TableHead className="">Palpitations</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow key={1} className=''>
-                  <TableCell className=" text-center">
-                  <div className="w-full aspect-[670.88/240]">
-                    <img src={img6} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
-                  </div>
-                  </TableCell>
-                </TableRow>
-            </TableBody>
-          </Table>
-          </div>
-        <div className='border rounded-md'>
-            <Table>
-            <TableHeader>
-              <TableRow className=''>
-                <TableHead className="">Weight Gain</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow key={1} className=''>
-                  <TableCell className=" text-center">
-                  <div className="w-full aspect-[670.88/240]">
-                    <img src={img7} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
-                  </div>
-                  </TableCell>
-                </TableRow>
-            </TableBody>
-          </Table>
-          </div>
-          <div className='border rounded-md'>
-            <Table>
-            <TableHeader>
-              <TableRow className=''>
-                <TableHead className="">Swelling</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow key={1} className=''>
-                  <TableCell className="text-center">
-                  <div className="w-full aspect-[670.88/240]">
-                    <img src={img8} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
-                  </div>
-                  </TableCell>
-                </TableRow>
-            </TableBody>
-          </Table>
-          </div>
+              </TableHeader>
+              
+              <TableBody>
+                {symptoms.map((symp, index) => (
+                  <TableRow key={index} className="h-[60px]">
+                    <TableCell className="text-center">{symp.date}</TableCell>
+                    <TableCell className="text-center">{symp.breath}</TableCell>
+                    <TableCell className="text-center">{symp.palp}</TableCell>
+                    <TableCell className="text-center">{symp.weight}</TableCell>
+                    <TableCell className="text-center">{symp.swelling}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <div className={`flex items-center border-t justify-between space-x-2 py-3 mt-0 pl-3 pr-3`} style={{ marginTop: 0 }}>
+        <Button
+          variant="outline"
+          size="sm"
+          disabled={true}
+        >
+          Previous
+        </Button>
+        <span className="text-sm text-muted-foreground">
+          Page 1 of 4
+        </span>
+        <Button
+          variant="outline"
+          size="sm"
+          disabled={false}
+        >
+          Next
+        </Button>
       </div>
-
-      <div className='border rounded-md'>
-            <Table>
-            <TableHeader>
-              <TableRow className=''>
-                <TableHead className="text-center">CIED - 17/Nov/2024</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow key={1} className=''>
-                  <TableCell className="flex justify-center items-center py-4">
-                  <div className="w-[80%] aspect-[1171.6/156]">
-                    <img src={img4} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
-                  </div>
-                    </TableCell>
-                </TableRow>
-            </TableBody>
-          </Table>
-          </div>
-    </div>
+            </div>
+          </CardContent>
+        </Card>
+            </div>
   )
 }

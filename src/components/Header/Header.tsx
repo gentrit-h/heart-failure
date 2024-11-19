@@ -7,6 +7,9 @@ import UserDropdown from "./UserDropdown";
 import { useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { embeddedAnalyticsState } from "../../state/atoms";
+import { Search, SlidersHorizontal } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 interface DashboardProps {}
 
@@ -85,6 +88,25 @@ const Header: React.FC<DashboardProps> = () => {
       >
         {tabName == "Dashboard" ? "Inbox" : tabName}
       </h1>
+      <div className="flex gap-2 w-[25vw] max-w-3xl mx-auto px-4">
+      <div className="relative flex-1">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <Input
+          type="text"
+          placeholder="Search for patient"
+          className="w-full pl-9 pr-4 h-10"
+        />
+      </div>
+      <Button variant="outline" className="flex items-center gap-2 h-15">
+        <div>
+        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.5 10H15.5M3 5H18M8 15H13" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+        </div>
+        Filters
+      </Button>
+    </div>
       <div
         className="flex gap-5 justify-between items-center self-stretch my-auto w-35"
         style={{

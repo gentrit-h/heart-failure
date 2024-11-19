@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { Calendar as CalendarIcon, ChevronDown, Info, Link, MoreVertical, Search, X } from "lucide-react"
-import { format } from "date-fns"
 import { DateRange } from "react-day-picker"
 import {
   Table,
@@ -34,310 +33,312 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Calendar } from "@/components/ui/calendar"
-
+import PatientInfo from "../Patient/PatientInfo"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const patients = [
-    {
-      id: "124398594",
-      name: "Alice Johnson",
-      source: "Home",
-      date: "01/11/2024 08:30",
-      goal: "34(2)",
-      systolicPAP: "53 mmHg",
-      diastolicPAP: "19 mmHg",
-      meanPAP: "34 mmHg",
-      pulsePressure: "34 mmHg",
-      paHeartRate: "80 bpm",
-      waveform: true,
-      status: "new",
-      priority: "high"
-    },
-    {
-      id: "124398595",
-      name: "Bob Smith",
-      source: "Clinic",
-      date: "01/11/2024 10:15",
-      goal: "40(1)",
-      systolicPAP: "57 mmHg",
-      diastolicPAP: "21 mmHg",
-      meanPAP: "36 mmHg",
-      pulsePressure: "36 mmHg",
-      paHeartRate: "75 bpm",
-      waveform: false,
-      status: "dismissed",
-      priority: "low"
-    },
-    {
-      id: "124398596",
-      name: "Catherine Lee",
-      source: "Hospital",
-      date: "02/11/2024 14:05",
-      goal: "42(0)",
-      systolicPAP: "60 mmHg",
-      diastolicPAP: "22 mmHg",
-      meanPAP: "38 mmHg",
-      pulsePressure: "38 mmHg",
-      paHeartRate: "78 bpm",
-      waveform: true,
-      status: "confirmed",
-      priority: "medium"
-    },
-    {
-      id: "124398597",
-      name: "David Brown",
-      source: "Home",
-      date: "03/11/2024 09:45",
-      goal: "38(1)",
-      systolicPAP: "55 mmHg",
-      diastolicPAP: "20 mmHg",
-      meanPAP: "35 mmHg",
-      pulsePressure: "35 mmHg",
-      paHeartRate: "82 bpm",
-      waveform: true,
-      status: "new",
-      priority: "low"
-    },
-    {
-      id: "124398598",
-      name: "Emma Wilson",
-      source: "Clinic",
-      date: "03/11/2024 12:30",
-      goal: "39(3)",
-      systolicPAP: "54 mmHg",
-      diastolicPAP: "19 mmHg",
-      meanPAP: "33 mmHg",
-      pulsePressure: "35 mmHg",
-      paHeartRate: "77 bpm",
-      waveform: false,
-      status: "dismissed",
-      priority: "high"
-    },
-    {
-      id: "124398599",
-      name: "Frank Miller",
-      source: "Hospital",
-      date: "04/11/2024 16:00",
-      goal: "36(2)",
-      systolicPAP: "58 mmHg",
-      diastolicPAP: "20 mmHg",
-      meanPAP: "37 mmHg",
-      pulsePressure: "38 mmHg",
-      paHeartRate: "83 bpm",
-      waveform: true,
-      status: "confirmed",
-      priority: "low"
-    },
-    {
-      id: "124398600",
-      name: "Grace Davis",
-      source: "Home",
-      date: "05/11/2024 11:20",
-      goal: "37(0)",
-      systolicPAP: "56 mmHg",
-      diastolicPAP: "19 mmHg",
-      meanPAP: "36 mmHg",
-      pulsePressure: "37 mmHg",
-      paHeartRate: "81 bpm",
-      waveform: true,
-      status: "new",
-      priority: "low"
-    },
-    {
-      id: "124398601",
-      name: "Henry Adams",
-      source: "Clinic",
-      date: "06/11/2024 08:15",
-      goal: "35(1)",
-      systolicPAP: "59 mmHg",
-      diastolicPAP: "21 mmHg",
-      meanPAP: "38 mmHg",
-      pulsePressure: "38 mmHg",
-      paHeartRate: "79 bpm",
-      waveform: false,
-      status: "dismissed",
-      priority: "high"
-    },
-    {
-      id: "124398602",
-      name: "Isabel Moore",
-      source: "Hospital",
-      date: "06/11/2024 15:45",
-      goal: "33(2)",
-      systolicPAP: "61 mmHg",
-      diastolicPAP: "22 mmHg",
-      meanPAP: "39 mmHg",
-      pulsePressure: "39 mmHg",
-      paHeartRate: "76 bpm",
-      waveform: true,
-      status: "confirmed",
-      priority: "medium"
-    },
-    {
-      id: "124398603",
-      name: "Jack Taylor",
-      source: "Home",
-      date: "07/11/2024 07:30",
-      goal: "34(3)",
-      systolicPAP: "54 mmHg",
-      diastolicPAP: "20 mmHg",
-      meanPAP: "34 mmHg",
-      pulsePressure: "34 mmHg",
-      paHeartRate: "78 bpm",
-      waveform: true,
-      status: "new",
-      priority: "high"
-    },
-    {
-      id: "124398604",
-      name: "Katherine White",
-      source: "Clinic",
-      date: "07/11/2024 09:20",
-      goal: "40(1)",
-      systolicPAP: "57 mmHg",
-      diastolicPAP: "21 mmHg",
-      meanPAP: "36 mmHg",
-      pulsePressure: "36 mmHg",
-      paHeartRate: "75 bpm",
-      waveform: false,
-      status: "dismissed",
-      priority: "medium"
-    },
-    {
-      id: "124398605",
-      name: "Liam Harris",
-      source: "Hospital",
-      date: "08/11/2024 14:10",
-      goal: "42(0)",
-      systolicPAP: "60 mmHg",
-      diastolicPAP: "22 mmHg",
-      meanPAP: "38 mmHg",
-      pulsePressure: "38 mmHg",
-      paHeartRate: "78 bpm",
-      waveform: true,
-      status: "confirmed",
-      priority: "low"
-    },
-    {
-      id: "124398606",
-      name: "Maria Clark",
-      source: "Home",
-      date: "08/11/2024 15:30",
-      goal: "38(1)",
-      systolicPAP: "55 mmHg",
-      diastolicPAP: "20 mmHg",
-      meanPAP: "35 mmHg",
-      pulsePressure: "35 mmHg",
-      paHeartRate: "82 bpm",
-      waveform: true,
-      status: "new",
-      priority: "medium"
-    },
-    {
-      id: "124398607",
-      name: "Nathan Robinson",
-      source: "Clinic",
-      date: "09/11/2024 12:05",
-      goal: "39(3)",
-      systolicPAP: "54 mmHg",
-      diastolicPAP: "19 mmHg",
-      meanPAP: "33 mmHg",
-      pulsePressure: "35 mmHg",
-      paHeartRate: "77 bpm",
-      waveform: false,
-      status: "dismissed",
-      priority: "high"
-    },
-    {
-      id: "124398608",
-      name: "Olivia Scott",
-      source: "Hospital",
-      date: "10/11/2024 16:40",
-      goal: "36(2)",
-      systolicPAP: "58 mmHg",
-      diastolicPAP: "20 mmHg",
-      meanPAP: "37 mmHg",
-      pulsePressure: "38 mmHg",
-      paHeartRate: "83 bpm",
-      waveform: true,
-      status: "confirmed",
-      priority: "high"
-    },
-    {
-      id: "124398609",
-      name: "Paul King",
-      source: "Home",
-      date: "11/11/2024 11:00",
-      goal: "37(0)",
-      systolicPAP: "56 mmHg",
-      diastolicPAP: "19 mmHg",
-      meanPAP: "36 mmHg",
-      pulsePressure: "37 mmHg",
-      paHeartRate: "81 bpm",
-      waveform: true,
-      status: "new",
-      priority: "high"
-    },
-    {
-      id: "124398610",
-      name: "Quinn Baker",
-      source: "Clinic",
-      date: "11/11/2024 09:00",
-      goal: "35(1)",
-      systolicPAP: "59 mmHg",
-      diastolicPAP: "21 mmHg",
-      meanPAP: "38 mmHg",
-      pulsePressure: "38 mmHg",
-      paHeartRate: "79 bpm",
-      waveform: false,
-      status: "dismissed",
-      priority: "medium"
-    },
-    {
-      id: "124398611",
-      name: "Rachel Turner",
-      source: "Hospital",
-      date: "12/11/2024 16:50",
-      goal: "33(2)",
-      systolicPAP: "61 mmHg",
-      diastolicPAP: "22 mmHg",
-      meanPAP: "39 mmHg",
-      pulsePressure: "39 mmHg",
-      paHeartRate: "76 bpm",
-      waveform: true,
-      status: "confirmed",
-      priority: "low"
-    },
-    {
-      id: "124398612",
-      name: "Sam Anderson",
-      source: "Home",
-      date: "12/11/2024 08:25",
-      goal: "34(3)",
-      systolicPAP: "54 mmHg",
-      diastolicPAP: "20 mmHg",
-      meanPAP: "34 mmHg",
-      pulsePressure: "34 mmHg",
-      paHeartRate: "78 bpm",
-      waveform: true,
-      status: "new",
-      priority: "high"
-    },
-    {
-      id: "124398613",
-      name: "Tina Carter",
-      source: "Clinic",
-      date: "13/11/2024 10:10",
-      goal: "40(1)",
-      systolicPAP: "57 mmHg",
-      diastolicPAP: "21 mmHg",
-      meanPAP: "36 mmHg",
-      pulsePressure: "36 mmHg",
-      paHeartRate: "75 bpm",
-      waveform: false,
-      status: "dismissed",
-      priority: "medium"
-    }
-  ];
+  {
+    id: "124398594",
+    name: "Alice Johnson",
+    source: "Home",
+    date: "01/11/2024 08:30",
+    goal: "34(2)",
+    systolicPAP: "53 mmHg",
+    diastolicPAP: "19 mmHg",
+    meanPAP: "34 mmHg",
+    pulsePressure: "34 mmHg",
+    paHeartRate: "80 bpm",
+    waveform: true,
+    status: "new",
+    priority: "high"
+  },
+  {
+    id: "124398595",
+    name: "Bob Smith",
+    source: "Clinic",
+    date: "01/11/2024 10:15",
+    goal: "40(1)",
+    systolicPAP: "57 mmHg",
+    diastolicPAP: "21 mmHg",
+    meanPAP: "36 mmHg",
+    pulsePressure: "36 mmHg",
+    paHeartRate: "75 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "low"
+  },
+  {
+    id: "124398596",
+    name: "Catherine Lee",
+    source: "Hospital",
+    date: "02/11/2024 14:05",
+    goal: "42(0)",
+    systolicPAP: "60 mmHg",
+    diastolicPAP: "22 mmHg",
+    meanPAP: "38 mmHg",
+    pulsePressure: "38 mmHg",
+    paHeartRate: "78 bpm",
+    waveform: true,
+    status: "confirmed",
+    priority: "medium"
+  },
+  {
+    id: "124398597",
+    name: "David Brown",
+    source: "Home",
+    date: "03/11/2024 09:45",
+    goal: "38(1)",
+    systolicPAP: "55 mmHg",
+    diastolicPAP: "20 mmHg",
+    meanPAP: "35 mmHg",
+    pulsePressure: "35 mmHg",
+    paHeartRate: "82 bpm",
+    waveform: true,
+    status: "new",
+    priority: "low"
+  },
+  {
+    id: "124398598",
+    name: "Emma Wilson",
+    source: "Clinic",
+    date: "03/11/2024 12:30",
+    goal: "39(3)",
+    systolicPAP: "54 mmHg",
+    diastolicPAP: "19 mmHg",
+    meanPAP: "33 mmHg",
+    pulsePressure: "35 mmHg",
+    paHeartRate: "77 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "high"
+  },
+  {
+    id: "124398599",
+    name: "Frank Miller",
+    source: "Hospital",
+    date: "04/11/2024 16:00",
+    goal: "36(2)",
+    systolicPAP: "58 mmHg",
+    diastolicPAP: "20 mmHg",
+    meanPAP: "37 mmHg",
+    pulsePressure: "38 mmHg",
+    paHeartRate: "83 bpm",
+    waveform: true,
+    status: "confirmed",
+    priority: "low"
+  },
+  {
+    id: "124398600",
+    name: "Grace Davis",
+    source: "Home",
+    date: "05/11/2024 11:20",
+    goal: "37(0)",
+    systolicPAP: "56 mmHg",
+    diastolicPAP: "19 mmHg",
+    meanPAP: "36 mmHg",
+    pulsePressure: "37 mmHg",
+    paHeartRate: "81 bpm",
+    waveform: true,
+    status: "new",
+    priority: "low"
+  },
+  {
+    id: "124398601",
+    name: "Henry Adams",
+    source: "Clinic",
+    date: "06/11/2024 08:15",
+    goal: "35(1)",
+    systolicPAP: "59 mmHg",
+    diastolicPAP: "21 mmHg",
+    meanPAP: "38 mmHg",
+    pulsePressure: "38 mmHg",
+    paHeartRate: "79 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "high"
+  },
+  {
+    id: "124398602",
+    name: "Isabel Moore",
+    source: "Hospital",
+    date: "06/11/2024 15:45",
+    goal: "33(2)",
+    systolicPAP: "61 mmHg",
+    diastolicPAP: "22 mmHg",
+    meanPAP: "39 mmHg",
+    pulsePressure: "39 mmHg",
+    paHeartRate: "76 bpm",
+    waveform: true,
+    status: "confirmed",
+    priority: "medium"
+  },
+  {
+    id: "124398603",
+    name: "Jack Taylor",
+    source: "Home",
+    date: "07/11/2024 07:30",
+    goal: "34(3)",
+    systolicPAP: "54 mmHg",
+    diastolicPAP: "20 mmHg",
+    meanPAP: "34 mmHg",
+    pulsePressure: "34 mmHg",
+    paHeartRate: "78 bpm",
+    waveform: true,
+    status: "new",
+    priority: "high"
+  },
+  {
+    id: "124398604",
+    name: "Katherine White",
+    source: "Clinic",
+    date: "07/11/2024 09:20",
+    goal: "40(1)",
+    systolicPAP: "57 mmHg",
+    diastolicPAP: "21 mmHg",
+    meanPAP: "36 mmHg",
+    pulsePressure: "36 mmHg",
+    paHeartRate: "75 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "medium"
+  },
+  {
+    id: "124398605",
+    name: "Liam Harris",
+    source: "Hospital",
+    date: "08/11/2024 14:10",
+    goal: "42(0)",
+    systolicPAP: "60 mmHg",
+    diastolicPAP: "22 mmHg",
+    meanPAP: "38 mmHg",
+    pulsePressure: "38 mmHg",
+    paHeartRate: "78 bpm",
+    waveform: true,
+    status: "confirmed",
+    priority: "low"
+  },
+  {
+    id: "124398606",
+    name: "Maria Clark",
+    source: "Home",
+    date: "08/11/2024 15:30",
+    goal: "38(1)",
+    systolicPAP: "55 mmHg",
+    diastolicPAP: "20 mmHg",
+    meanPAP: "35 mmHg",
+    pulsePressure: "35 mmHg",
+    paHeartRate: "82 bpm",
+    waveform: true,
+    status: "new",
+    priority: "medium"
+  },
+  {
+    id: "124398607",
+    name: "Nathan Robinson",
+    source: "Clinic",
+    date: "09/11/2024 12:05",
+    goal: "39(3)",
+    systolicPAP: "54 mmHg",
+    diastolicPAP: "19 mmHg",
+    meanPAP: "33 mmHg",
+    pulsePressure: "35 mmHg",
+    paHeartRate: "77 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "high"
+  },
+  {
+    id: "124398608",
+    name: "Olivia Scott",
+    source: "Hospital",
+    date: "10/11/2024 16:40",
+    goal: "36(2)",
+    systolicPAP: "58 mmHg",
+    diastolicPAP: "20 mmHg",
+    meanPAP: "37 mmHg",
+    pulsePressure: "38 mmHg",
+    paHeartRate: "83 bpm",
+    waveform: true,
+    status: "confirmed",
+    priority: "high"
+  },
+  {
+    id: "124398609",
+    name: "Paul King",
+    source: "Home",
+    date: "11/11/2024 11:00",
+    goal: "37(0)",
+    systolicPAP: "56 mmHg",
+    diastolicPAP: "19 mmHg",
+    meanPAP: "36 mmHg",
+    pulsePressure: "37 mmHg",
+    paHeartRate: "81 bpm",
+    waveform: true,
+    status: "new",
+    priority: "high"
+  },
+  {
+    id: "124398610",
+    name: "Quinn Baker",
+    source: "Clinic",
+    date: "11/11/2024 09:00",
+    goal: "35(1)",
+    systolicPAP: "59 mmHg",
+    diastolicPAP: "21 mmHg",
+    meanPAP: "38 mmHg",
+    pulsePressure: "38 mmHg",
+    paHeartRate: "79 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "medium"
+  },
+  {
+    id: "124398611",
+    name: "Rachel Turner",
+    source: "Hospital",
+    date: "12/11/2024 16:50",
+    goal: "33(2)",
+    systolicPAP: "61 mmHg",
+    diastolicPAP: "22 mmHg",
+    meanPAP: "39 mmHg",
+    pulsePressure: "39 mmHg",
+    paHeartRate: "76 bpm",
+    waveform: true,
+    status: "confirmed",
+    priority: "low"
+  },
+  {
+    id: "124398612",
+    name: "Sam Anderson",
+    source: "Home",
+    date: "12/11/2024 08:25",
+    goal: "34(3)",
+    systolicPAP: "54 mmHg",
+    diastolicPAP: "20 mmHg",
+    meanPAP: "34 mmHg",
+    pulsePressure: "34 mmHg",
+    paHeartRate: "78 bpm",
+    waveform: true,
+    status: "new",
+    priority: "high"
+  },
+  {
+    id: "124398613",
+    name: "Tina Carter",
+    source: "Clinic",
+    date: "13/11/2024 10:10",
+    goal: "40(1)",
+    systolicPAP: "57 mmHg",
+    diastolicPAP: "21 mmHg",
+    meanPAP: "36 mmHg",
+    pulsePressure: "36 mmHg",
+    paHeartRate: "75 bpm",
+    waveform: false,
+    status: "dismissed",
+    priority: "medium"
+  }
+];
+
 
 export default function Cieds() {
   const [selectedPatients, setSelectedPatients] = React.useState<string[]>([])
@@ -353,8 +354,18 @@ export default function Cieds() {
     deviceType: [] as string[],
     connectivity: [] as string[],
   })
-  const patientsPerPage = 9
+  const parentRef = React.useRef(null);
+  const [parentHeight, setParentHeight] = React.useState(0);
+
+  React.useEffect(() => {
+    if (parentRef.current) {
+      setParentHeight(parentRef.current.offsetHeight);
+    }
+  }, []);
+  const patientsPerPage = parentHeight > 0 ? Math.floor((parentHeight - 105) / 72) : 9;
+  const addPixelsForBiggerScreens = parentHeight > 0 ? patientsPerPage * 72 - 9*72 : 0;
   const totalPages = Math.ceil(filteredPatients.length / patientsPerPage)
+  const [hidePatientInfo, setHidePatientInfo] = React.useState(false)
 
   const togglePatient = (patientId: string) => {
     setSelectedPatients(prev =>
@@ -363,6 +374,7 @@ export default function Cieds() {
         : [...prev, patientId]
     )
   }
+  const [selectedPatient, setSelectedPatient] = React.useState<any>(null)
 
   const toggleAll = () => {
     const currentPagePatients = getCurrentPagePatients()
@@ -410,7 +422,7 @@ export default function Cieds() {
   }
 
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-4 h-[88vh]" ref={parentRef}>
       <div className="flex flex-col space-y-4">
         <div className="flex space-x-1 border-b">
           {["all", "new", "confirmed", "dismissed"].map((tab) => (
@@ -477,9 +489,12 @@ export default function Cieds() {
       </div>
 
       <div className="rounded-t-md border">
+      <div className="flex flex-row">
+
+      <div className={` ${selectedPatient ? "w-[273px]" : "w-full"}`}>        
         <Table>
           <TableHeader>
-            <TableRow className="h-[40px]">
+            <TableRow>
             <div className={`absolute left-0 top-0 bottom-0 w-[5px] mt-[6px] mb-[6px] rounded-tr-[6px] rounded-br-[6px]`} />
               <TableHead className="w-12">
                 <Checkbox
@@ -489,6 +504,8 @@ export default function Cieds() {
                 />
               </TableHead>
               <TableHead>Patients</TableHead>
+              {!selectedPatient && (
+                <>
               <TableHead className="text-center">Source</TableHead>
               <TableHead className="text-center">Date</TableHead>
               <TableHead className="text-center">Goal (+/-)</TableHead>
@@ -499,7 +516,10 @@ export default function Cieds() {
               <TableHead className="text-center">PA Heart Rate</TableHead>
               <TableHead className="text-center">Waveform</TableHead>
               <TableHead className="text-center">Status</TableHead>
+              <TableHead className="text-center">View</TableHead>
               <TableHead className="w-[100px]"></TableHead>
+              </>
+              )}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -513,10 +533,12 @@ export default function Cieds() {
                     onCheckedChange={() => togglePatient(patient.id)}
                   />
                 </TableCell>
-                <TableCell>
+                <TableCell className="cursor-pointer" onClick={() => setSelectedPatient({...{patient}})}>
                   <div className="font-medium">{patient.name}</div>
                   <div className="text-sm text-muted-foreground">{patient.id}</div>
                 </TableCell>
+                {!selectedPatient && (
+                <>
                 <TableCell className="text-center">{patient.source}</TableCell>
                 <TableCell className="text-center">{patient.date}</TableCell>
                 <TableCell className="text-center">{patient.goal}</TableCell>
@@ -547,6 +569,13 @@ export default function Cieds() {
                 </div>
                 </TableCell>
                 <TableCell>
+                  <div className="flex justify-center">
+                  <Button className="border rounded-md w-full mr-3" style={{background: "#F1F5FE", borderColor: "#004DE1", color: "#004DE1", fontWeight: 500}}>
+                    View Summary
+                  </Button>
+                  </div>
+                  </TableCell>
+                <TableCell>
                 <div className="flex justify-center">
                   <div className="flex space-x-2">
                     <Button variant="ghost" size="icon">
@@ -575,12 +604,13 @@ export default function Cieds() {
                   </div>
                   </div>
                 </TableCell>
+                </>
+                )}
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      </div>
-      <div className="flex items-center justify-between space-x-2 py-2 border-b border-l border-r rounded-b-md mt-0 pl-3 pr-3" style={{ marginTop: 0 }}>
+        <div className={`flex items-center border-t justify-between space-x-2 py-2 mt-0 pl-3 pr-3`} style={{ marginTop: 0 }}>
         <Button
           variant="outline"
           size="sm"
@@ -600,6 +630,53 @@ export default function Cieds() {
         >
           Next
         </Button>
+      </div>
+      </div>
+
+      {selectedPatient && (
+    <div className="w-[calc(100%-273px)] border-l">
+      {/* Right-side div for patient data */}
+      <div style={{overflowX: 'auto', height: '100%'}}>
+    <div className=" mx-auto px-6 pt-4 pb-3" style={{ minWidth: '1370px' }}>
+    <div className="flex justify-between items-start mb-4">
+        <div className="flex items-center gap-3">
+          <Avatar className="h-12 w-12">
+            <AvatarImage alt="Patient avatar" src={'./er.png'} />
+            <AvatarFallback>PA</AvatarFallback>
+          </Avatar>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-lg">{selectedPatient.patient.name}</span>
+              <Button onClick={()=>setHidePatientInfo(!hidePatientInfo)} variant="ghost" size="icon" className="ml-1 h-10 w-10">
+                <ChevronDown className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${hidePatientInfo ? 'rotate-180' : 'rotate-0'}`} />
+              </Button>            </div>
+            <div className="text-sm text-gray-500">Age 21</div>
+          </div>
+        </div>
+        <div className=" pt-1 flex items-center justify-center">
+        <Button className="border rounded-md w-full mr-3" style={{background: "#F1F5FE", borderColor: "#004DE1", color: "#004DE1", fontWeight: 500}}>
+        Action Plan
+        </Button>
+        <Button className="bg-blue-600 hover:bg-blue-700 px-7">
+          Notify Patient
+        </Button>
+        <span>
+        <Button onClick={()=>setSelectedPatient(null)} variant="ghost" size="icon" className="ml-4 h-10 w-10">
+         <X />
+        </Button>
+        </span>
+
+      </div>
+
+      </div>
+      <PatientInfo selectedPatient={selectedPatient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
+      </div>
+      </div>
+      {/* Add patient details content here */}
+    </div>
+  )}
+</div>
+
       </div>
     </div>
   )

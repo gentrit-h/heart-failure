@@ -4,44 +4,8 @@ import { Card } from "@/components/ui/card"
 import { ChevronDown, Battery, Signal, ExternalLink, FileText } from 'lucide-react'
 import React from "react"
 
-interface PatientInfoProps {
-  avatar?: string
-  name?: string
-  age?: number
-  mrn?: string
-  phone?: string
-  activeDate?: string
-  gender?: string
-  doctor?: string
-  dob?: string
-  status?: string
-  cmems?: boolean
-  cied?: boolean
-  batteryStatus?: string
-  connectionStatus?: string
-  onNotify?: () => void
-  onHistory?: () => void
-}
-
-export default function PatientInfoHeader({
-  avatar = "/placeholder.svg",
-  name = "Patient name",
-  age = 34,
-  mrn = "4885478",
-  phone = "(858) 488-8524",
-  activeDate = "Jun 12, 2000",
-  gender = "Male",
-  doctor = "Dr. John doe",
-  dob = "Jun 12, 1961",
-  status = "Active",
-  cmems = true,
-  cied = true,
-  batteryStatus = "OK",
-  connectionStatus = "Connected",
-  onNotify,
-  onHistory,
-}: PatientInfoProps) {
-  return (
+export default function PatientInfoHeader({hidePatientInfo}) {
+  return ( hidePatientInfo ? <></> :
     <div className="px-4 pb-6 pt-4 border-t">
  <div className="grid gap-y-2 divide-x" style={{ gridTemplateColumns: '16% 16% 16% 21% 24% 7%' }}>
 
@@ -70,26 +34,18 @@ export default function PatientInfoHeader({
     <span className="text-gray-500">Dr. John doe</span>
   </div>
   <div className="flex gap-2">
-    <span>Status:</span>
-    <span className="text-gray-500">Active</span>
+    <span>CMEMS/CIED Patient</span>
   </div>
 </div>
 
 <div className="space-y-2 px-4">
-<div className="flex gap-2">
-    <span >Active:</span>
-    <span className="text-gray-500 ">Jun 12, 2000</span>
+<div className="gap-2">
+    <div >Reason For Monitoring:</div>
+    <div className="text-gray-500 text-center">Post Ablation</div>
   </div>
   <div className="flex gap-2">
-    <span>CMEMS Patient:</span>
-    <div className="flex items-center gap-2">
-      <span className="text-gray-500">Yes</span>
-      <FileText className="h-4 w-4 text-blue-500" />
-    </div>
-  </div>
-  <div className="flex gap-2">
-    <span>CIED Patient:</span>
-    <span className="text-gray-500">Yes</span>
+    <span>Ejection Fraction:</span>
+    <span className="text-gray-500">40%</span>
   </div>
 </div>
 <div className="flex items-center">

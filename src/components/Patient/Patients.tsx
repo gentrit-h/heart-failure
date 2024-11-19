@@ -399,6 +399,7 @@ export default function Patients() {
   const totalPages = Math.ceil(filteredPatients.length / patientsPerPage)
 
   const [currentTab, setCurrentTab] = React.useState("all")
+  const [hidePatientInfo, setHidePatientInfo] = React.useState(false)
   const [filters, setFilters] = React.useState({
     search: "",
     deviceInfo: [] as string[],
@@ -449,21 +450,9 @@ export default function Patients() {
 
 
   return (
-    <div className="w-full space-y-4 h-[calc(100vh-142px)]"  ref={parentRef}>
-      <div className="">
-      {/* <div className="flex flex-col space-y-4">
-        <div className="flex items-center space-x-2 flex-1">
-          <Search className="h-5 w-5 text-muted-foreground" />
-          <Input
-            placeholder="Search for patient"
-            value={filters.search}
-            onChange={(e) => setFilters({...filters, search: e.target.value})}
-            className="w-full max-w-sm"
-          />
-        </div>
-      </div> */}
-
-      <div className="rounded-md border flex">
+    <div className="w-full space-y-4 h-[88vh]"  ref={parentRef}>
+      <div className="rounded-md border">
+      <div className="flex flex-row">
       <div className={` ${selectedPatient ? "w-[273px]" : "w-full"}`}>        
         <Table>
           <TableHeader>
@@ -559,7 +548,7 @@ export default function Patients() {
             ))}
           </TableBody>
         </Table>
-        <div className={`flex items-center border-t justify-between space-x-2 py-4  mt-0 pl-3 pr-3`} style={{ marginTop: 0 }}>
+        <div className={`flex items-center border-t justify-between space-x-2 py-2 mt-0 pl-3 pr-3`} style={{ marginTop: 0 }}>
         <Button
           variant="outline"
           size="sm"
@@ -586,7 +575,7 @@ export default function Patients() {
     <div className="w-[calc(100%-273px)] border-l">
       {/* Right-side div for patient data */}
       <div style={{overflowX: 'auto', height: '100%'}}>
-    <div className=" mx-auto px-6 pt-4 pb-3" style={{ minWidth: '1360px' }}>
+    <div className=" mx-auto px-6 pt-4 pb-3" style={{ minWidth: '1370px' }}>
     <div className="flex justify-between items-start mb-4">
         <div className="flex items-center gap-3">
           <Avatar className="h-12 w-12">
@@ -596,13 +585,17 @@ export default function Patients() {
           <div>
             <div className="flex items-center gap-2">
               <span className="font-semibold text-lg">{selectedPatient.patient.name}</span>
-              <ChevronDown className="h-5 w-5 text-gray-500" />
-            </div>
+              <Button onClick={()=>setHidePatientInfo(!hidePatientInfo)} variant="ghost" size="icon" className="ml-1 h-10 w-10">
+                <ChevronDown className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${hidePatientInfo ? 'rotate-180' : 'rotate-0'}`} />
+              </Button>            </div>
             <div className="text-sm text-gray-500">Age 21</div>
           </div>
         </div>
         <div className=" pt-1 flex items-center justify-center">
-        <Button className="bg-blue-600 hover:bg-blue-700">
+        <Button className="border rounded-md w-full mr-3" style={{background: "#F1F5FE", borderColor: "#004DE1", color: "#004DE1", fontWeight: 500}}>
+        Action Plan
+        </Button>
+        <Button className="bg-blue-600 hover:bg-blue-700 px-7">
           Notify Patient
         </Button>
         <span>
@@ -614,7 +607,7 @@ export default function Patients() {
       </div>
 
       </div>
-      <PatientInfo selectedPatient={selectedPatient} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
+      <PatientInfo selectedPatient={selectedPatient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
       </div>
       </div>
       {/* Add patient details content here */}
