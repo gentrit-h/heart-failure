@@ -607,7 +607,7 @@ export default function Patients() {
       </div>
 
       </div>
-      <PatientInfo selectedPatient={selectedPatient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
+      <PatientInfo defaultTab={'summary'} selectedPatient={selectedPatient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
       </div>
       </div>
       {/* Add patient details content here */}

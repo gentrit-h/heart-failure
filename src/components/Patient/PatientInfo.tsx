@@ -23,7 +23,7 @@ import React from "react"
 import { ProgressBars } from "./ProgressBars"
 import TransmissionSummary from "./TransmissionSummary"
 
-export default function PatientInfo({selectedPatient, hidePatientInfo, addPixelsForBiggerScreens, heightFromSummary, isCmemsOrCieds}: {selectedPatient: any, hidePatientInfo: boolean, addPixelsForBiggerScreens: number, heightFromSummary?: number, isCmemsOrCieds?: boolean}) {
+export default function PatientInfo({selectedPatient, defaultTab, hidePatientInfo, addPixelsForBiggerScreens, heightFromSummary, isCmemsOrCieds}: {selectedPatient: any, hidePatientInfo: boolean, addPixelsForBiggerScreens: number, heightFromSummary?: number, isCmemsOrCieds?: boolean, defaultTab?: string}) {
   const patientData = selectedPatient?.patient;
   return (
       <div>
@@ -122,7 +122,7 @@ export default function PatientInfo({selectedPatient, hidePatientInfo, addPixels
         </Card>
       </div> */}
 
-      <Tabs defaultValue="summary" className="w-full">
+      <Tabs defaultValue={defaultTab ? defaultTab : "dynamic"} className="w-full">
         <TabsList className="border-b w-full justify-start rounded-none h-auto p-0 bg-transparent">
           <TabsTrigger
             value="summary"
