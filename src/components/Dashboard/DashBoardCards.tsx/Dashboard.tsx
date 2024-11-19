@@ -67,7 +67,7 @@ const cardStyleScheduled = {
   backgroundRepeat: "no-repeat",
   maxHeight: embeddedAnalyticsState ? "77vh" : "82vh",
   overflowY: "auto",
-  minWidth: "31vw",
+  // minWidth: "31vw",
 };
 
 const cardStyleAnalytics = {
@@ -854,6 +854,8 @@ export default function Maindashboard() {
               "--scrollbar-thumb-color": "#E2E4E7",
               "--scrollbar-thumb-hover-color":
                 "#C5C8CE" /* A slightly darker color for hover */,
+                maxWidth: openedCard == 'Scheduled' ? '19vw':'100vw',
+              minWidth: openedCard == 'Scheduled' ? '19vw': "31vw",
             }}
           >
             <CardHeader style={{ position: "relative" }}>
