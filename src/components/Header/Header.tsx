@@ -5,16 +5,30 @@ import React from "react";
 import NavItemButton from "./NavItemButton";
 import UserDropdown from "./UserDropdown";
 import { useLocation } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { embeddedAnalyticsState } from "../../state/atoms";
 
 interface DashboardProps {}
 
 const Header: React.FC<DashboardProps> = () => {
   const notificationsSvg = () => (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="40" height="40" rx="6" fill="white"/>
-    <path d="M21.4417 27.5C21.2952 27.7525 21.0849 27.9622 20.8319 28.1079C20.5788 28.2536 20.292 28.3303 20 28.3303C19.708 28.3303 19.4212 28.2536 19.1681 28.1079C18.9151 27.9622 18.7048 27.7525 18.5583 27.5M25 16.6666C25 15.3405 24.4732 14.0688 23.5355 13.1311C22.5979 12.1934 21.3261 11.6666 20 11.6666C18.6739 11.6666 17.4021 12.1934 16.4645 13.1311C15.5268 14.0688 15 15.3405 15 16.6666C15 22.5 12.5 24.1666 12.5 24.1666H27.5C27.5 24.1666 25 22.5 25 16.6666Z" stroke="#004DE1" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg
+      width="40"
+      height="40"
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="40" height="40" rx="6" fill="white" />
+      <path
+        d="M21.4417 27.5C21.2952 27.7525 21.0849 27.9622 20.8319 28.1079C20.5788 28.2536 20.292 28.3303 20 28.3303C19.708 28.3303 19.4212 28.2536 19.1681 28.1079C18.9151 27.9622 18.7048 27.7525 18.5583 27.5M25 16.6666C25 15.3405 24.4732 14.0688 23.5355 13.1311C22.5979 12.1934 21.3261 11.6666 20 11.6666C18.6739 11.6666 17.4021 12.1934 16.4645 13.1311C15.5268 14.0688 15 15.3405 15 16.6666C15 22.5 12.5 24.1666 12.5 24.1666H27.5C27.5 24.1666 25 22.5 25 16.6666Z"
+        stroke="#004DE1"
+        stroke-width="1.66667"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
     </svg>
-  )
+  );
   const navItems = [
     {
       svg: notificationsSvg(),
@@ -23,18 +37,18 @@ const Header: React.FC<DashboardProps> = () => {
   ];
   const location = useLocation();
   const getTabName = () => {
-    if(location.pathname.startsWith('/dashboard')) {
-      return 'Dashboard';
-    } else if(location.pathname.startsWith('/patients')) {
-      return 'Patients';
-    } else if(location.pathname.startsWith('/cmems')) {
-      return 'CMEMS';
-    } else if(location.pathname.startsWith('/cieds')) {
-      return 'CIEDS';
-    } else if(location.pathname.startsWith('/settings')) {
-      return 'Settings';
+    if (location.pathname.startsWith("/dashboard")) {
+      return "Dashboard";
+    } else if (location.pathname.startsWith("/patients")) {
+      return "Patients";
+    } else if (location.pathname.startsWith("/cmems")) {
+      return "CMEMS";
+    } else if (location.pathname.startsWith("/cieds")) {
+      return "CIEDS";
+    } else if (location.pathname.startsWith("/settings")) {
+      return "Settings";
     } else {
-      return 'Dashboard';
+      return "Dashboard";
     }
   };
   const [tabName, setTabName] = React.useState(getTabName());
@@ -42,37 +56,69 @@ const Header: React.FC<DashboardProps> = () => {
     setTabName(getTabName());
   }, [location]);
 
+  const [embeddedAnalytics, setEmbeddedAnalytics] = useRecoilState(embeddedAnalyticsState);
+
+
   return (
-    <header className="flex flex-wrap gap-10 justify-between items-center px-8 max-md:px-5"
-    style={{
-      ...(tabName=='Dashboard' ? 
-        { 
-        paddingTop: '1vh' ,
-        paddingBottom: '1vh'
-      } : {}),
-      height:'6vh'
-    }}
+    <header
+      className="flex flex-wrap gap-10 justify-between items-center px-8 max-md:px-5"
+      style={{
+        ...(tabName == "Dashboard"
+          ? {
+              paddingTop: "1vh",
+              paddingBottom: "1vh",
+            }
+          : {}),
+        height: "6vh",
+      }}
     >
-      <h1 className="self-stretch my-auto text-3xl font-medium leading-none text-gray-900"
-          style={{
-            ...(tabName=='Dashboard' ? 
-              { 
-              paddingTop: '0vh' ,
-              paddingBottom: '0vh'
-            } : {})
-          }}
+      <h1
+        className="self-stretch my-auto text-3xl font-medium leading-none text-gray-900"
+        style={{
+          ...(tabName == "Dashboard"
+            ? {
+                paddingTop: "0vh",
+                paddingBottom: "0vh",
+              }
+            : {}),
+        }}
       >
-      {tabName=='Dashboard'? 'Inbox':tabName}
+        {tabName == "Dashboard" ? "Inbox" : tabName}
       </h1>
-      <div className="flex gap-5 justify-between items-center self-stretch my-auto w-35"
-          style={{
-            ...(tabName=='Dashboard' ? 
-              { 
-              paddingTop: '0vh' ,
-              paddingBottom: '0vh'
-            } : {})
-          }}
+      <div
+        className="flex gap-5 justify-between items-center self-stretch my-auto w-35"
+        style={{
+          ...(tabName == "Dashboard"
+            ? {
+                paddingTop: "0vh",
+                paddingBottom: "0vh",
+              }
+            : {}),
+        }}
       >
+        <div onClick={(e)=>{
+          e.stopPropagation()
+        setEmbeddedAnalytics(!embeddedAnalytics)
+        }}
+        style={{ cursor: 'pointer',    userSelect: 'none' }} // Add this line
+
+        >
+          <svg
+            width="13"
+            height="8"
+            viewBox="0 0 22 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.5 2.25L11 11.75L20.5 2.25"
+              stroke="#101828"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
         <nav className="flex gap-1 items-start self-stretch my-auto">
           {navItems.map((item, index) => (
             <NavItemButton key={index} svg={item.svg} alt={item.alt} />
