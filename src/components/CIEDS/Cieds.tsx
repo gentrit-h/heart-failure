@@ -1,8 +1,17 @@
-'use client'
+"use client";
 
-import * as React from "react"
-import { Calendar as CalendarIcon, ChevronDown, Info, Link, MoreVertical, Search, X } from "lucide-react"
-import { DateRange } from "react-day-picker"
+import * as React from "react";
+import {
+  ArrowUpRight,
+  Calendar as CalendarIcon,
+  ChevronDown,
+  Info,
+  Link,
+  MoreVertical,
+  Search,
+  X,
+} from "lucide-react";
+import { DateRange } from "react-day-picker";
 import {
   Table,
   TableBody,
@@ -10,31 +19,35 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/table";
+import { useState } from "react";
+
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Calendar } from "@/components/ui/calendar"
-import PatientInfo from "../Patient/PatientInfo"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from "@/components/ui/select";
+import { Calendar } from "@/components/ui/calendar";
+import PatientInfo from "../Patient/PatientInfo";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { PopoverClose } from "@radix-ui/react-popover";
+import { WaveForm } from "./WaveForm";
 
 const patients = [
   {
@@ -50,7 +63,7 @@ const patients = [
     paHeartRate: "80 bpm",
     waveform: true,
     status: "new",
-    priority: "high"
+    priority: "high",
   },
   {
     id: "124398595",
@@ -65,7 +78,7 @@ const patients = [
     paHeartRate: "75 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "low"
+    priority: "low",
   },
   {
     id: "124398596",
@@ -80,7 +93,7 @@ const patients = [
     paHeartRate: "78 bpm",
     waveform: true,
     status: "confirmed",
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "124398597",
@@ -95,7 +108,7 @@ const patients = [
     paHeartRate: "82 bpm",
     waveform: true,
     status: "new",
-    priority: "low"
+    priority: "low",
   },
   {
     id: "124398598",
@@ -110,7 +123,7 @@ const patients = [
     paHeartRate: "77 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "high"
+    priority: "high",
   },
   {
     id: "124398599",
@@ -125,7 +138,7 @@ const patients = [
     paHeartRate: "83 bpm",
     waveform: true,
     status: "confirmed",
-    priority: "low"
+    priority: "low",
   },
   {
     id: "124398600",
@@ -140,7 +153,7 @@ const patients = [
     paHeartRate: "81 bpm",
     waveform: true,
     status: "new",
-    priority: "low"
+    priority: "low",
   },
   {
     id: "124398601",
@@ -155,7 +168,7 @@ const patients = [
     paHeartRate: "79 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "high"
+    priority: "high",
   },
   {
     id: "124398602",
@@ -170,7 +183,7 @@ const patients = [
     paHeartRate: "76 bpm",
     waveform: true,
     status: "confirmed",
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "124398603",
@@ -185,7 +198,7 @@ const patients = [
     paHeartRate: "78 bpm",
     waveform: true,
     status: "new",
-    priority: "high"
+    priority: "high",
   },
   {
     id: "124398604",
@@ -200,7 +213,7 @@ const patients = [
     paHeartRate: "75 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "124398605",
@@ -215,7 +228,7 @@ const patients = [
     paHeartRate: "78 bpm",
     waveform: true,
     status: "confirmed",
-    priority: "low"
+    priority: "low",
   },
   {
     id: "124398606",
@@ -230,7 +243,7 @@ const patients = [
     paHeartRate: "82 bpm",
     waveform: true,
     status: "new",
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "124398607",
@@ -245,7 +258,7 @@ const patients = [
     paHeartRate: "77 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "high"
+    priority: "high",
   },
   {
     id: "124398608",
@@ -260,7 +273,7 @@ const patients = [
     paHeartRate: "83 bpm",
     waveform: true,
     status: "confirmed",
-    priority: "high"
+    priority: "high",
   },
   {
     id: "124398609",
@@ -275,7 +288,7 @@ const patients = [
     paHeartRate: "81 bpm",
     waveform: true,
     status: "new",
-    priority: "high"
+    priority: "high",
   },
   {
     id: "124398610",
@@ -290,7 +303,7 @@ const patients = [
     paHeartRate: "79 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "124398611",
@@ -305,7 +318,7 @@ const patients = [
     paHeartRate: "76 bpm",
     waveform: true,
     status: "confirmed",
-    priority: "low"
+    priority: "low",
   },
   {
     id: "124398612",
@@ -320,7 +333,7 @@ const patients = [
     paHeartRate: "78 bpm",
     waveform: true,
     status: "new",
-    priority: "high"
+    priority: "high",
   },
   {
     id: "124398613",
@@ -335,25 +348,24 @@ const patients = [
     paHeartRate: "75 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "medium"
-  }
+    priority: "medium",
+  },
 ];
 
-
 export default function Cieds() {
-  const [selectedPatients, setSelectedPatients] = React.useState<string[]>([])
-  const [currentPage, setCurrentPage] = React.useState(1)
-  const [filteredPatients, setFilteredPatients] = React.useState(patients)
+  const [selectedPatients, setSelectedPatients] = React.useState<string[]>([]);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [filteredPatients, setFilteredPatients] = React.useState(patients);
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(2022, 0, 6),
     to: new Date(2022, 0, 13),
-  })
-  const [currentTab, setCurrentTab] = React.useState("all")
+  });
+  const [currentTab, setCurrentTab] = React.useState("all");
   const [filters, setFilters] = React.useState({
     search: "",
     deviceType: [] as string[],
     connectivity: [] as string[],
-  })
+  });
   const parentRef = React.useRef(null);
   const [parentHeight, setParentHeight] = React.useState(0);
 
@@ -362,64 +374,95 @@ export default function Cieds() {
       setParentHeight(parentRef.current.offsetHeight);
     }
   }, []);
-  const patientsPerPage = parentHeight > 0 ? Math.floor((parentHeight - 155) / 72) : 7;
-  const addPixelsForBiggerScreens = parentHeight > 0 ? patientsPerPage * 72 - 7*72 : 0;
-  const totalPages = Math.ceil(filteredPatients.length / patientsPerPage)
-  const [hidePatientInfo, setHidePatientInfo] = React.useState(false)
+  const patientsPerPage =
+    parentHeight > 0 ? Math.floor((parentHeight - 155) / 72) : 7;
+  const addPixelsForBiggerScreens =
+    parentHeight > 0 ? patientsPerPage * 72 - 7 * 72 : 0;
+  const totalPages = Math.ceil(filteredPatients.length / patientsPerPage);
+  const [hidePatientInfo, setHidePatientInfo] = React.useState(false);
 
   const togglePatient = (patientId: string) => {
-    setSelectedPatients(prev =>
+    setSelectedPatients((prev) =>
       prev.includes(patientId)
-        ? prev.filter(id => id !== patientId)
+        ? prev.filter((id) => id !== patientId)
         : [...prev, patientId]
-    )
-  }
-  const [selectedPatient, setSelectedPatient] = React.useState<any>(null)
+    );
+  };
+  const [selectedPatient, setSelectedPatient] = React.useState<any>(null);
 
   const toggleAll = () => {
-    const currentPagePatients = getCurrentPagePatients()
-    const allSelected = currentPagePatients.every(patient => selectedPatients.includes(patient.id))
+    const currentPagePatients = getCurrentPagePatients();
+    const allSelected = currentPagePatients.every((patient) =>
+      selectedPatients.includes(patient.id)
+    );
     if (allSelected) {
-      setSelectedPatients(prev => prev.filter(id => !currentPagePatients.some(patient => patient.id === id)))
+      setSelectedPatients((prev) =>
+        prev.filter(
+          (id) => !currentPagePatients.some((patient) => patient.id === id)
+        )
+      );
     } else {
-      setSelectedPatients(prev => [...new Set([...prev, ...currentPagePatients.map(patient => patient.id)])])
+      setSelectedPatients((prev) => [
+        ...new Set([
+          ...prev,
+          ...currentPagePatients.map((patient) => patient.id),
+        ]),
+      ]);
     }
-  }
+  };
 
   const applyFilters = () => {
-    setFilteredPatients(patients.filter(patient => {
-      const searchMatch = patient.name.toLowerCase().includes(filters.search.toLowerCase()) ||
-                          patient.id.includes(filters.search)
-      const deviceTypeMatch = filters.deviceType.length === 0 || filters.deviceType.includes(patient.deviceType)
-      const connectivityMatch = filters.connectivity.length === 0 || filters.connectivity.includes(patient.connectivity)
-      const statusMatch = currentTab === "all" || patient.status === currentTab
-      return searchMatch && deviceTypeMatch && connectivityMatch && statusMatch
-    }))
-    setCurrentPage(1) // Reset to first page when filters change
-  }
+    setFilteredPatients(
+      patients.filter((patient) => {
+        const searchMatch =
+          patient.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+          patient.id.includes(filters.search);
+        const deviceTypeMatch =
+          filters.deviceType.length === 0 ||
+          filters.deviceType.includes(patient.deviceType);
+        const connectivityMatch =
+          filters.connectivity.length === 0 ||
+          filters.connectivity.includes(patient.connectivity);
+        const statusMatch =
+          currentTab === "all" || patient.status === currentTab;
+        return (
+          searchMatch && deviceTypeMatch && connectivityMatch && statusMatch
+        );
+      })
+    );
+    setCurrentPage(1); // Reset to first page when filters change
+  };
 
   React.useEffect(() => {
-    applyFilters()
-  }, [filters, currentTab])
+    applyFilters();
+  }, [filters, currentTab]);
 
   const getCurrentPagePatients = () => {
-    const startIndex = (currentPage - 1) * patientsPerPage
-    const endIndex = startIndex + patientsPerPage
-    return filteredPatients.slice(startIndex, endIndex)
-  }
+    const startIndex = (currentPage - 1) * patientsPerPage;
+    const endIndex = startIndex + patientsPerPage;
+    return filteredPatients.slice(startIndex, endIndex);
+  };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case "high":
-        return "bg-red-500"
+        return "bg-red-500";
       case "medium":
-        return "bg-yellow-500"
+        return "bg-yellow-500";
       case "low":
-        return "bg-green-500"
+        return "bg-green-500";
       default:
-        return "bg-gray-500"
+        return "bg-gray-500";
     }
-  }
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => setIsOpen(!isOpen);
+  const handleClose = (e) => {
+    e.stopPropagation();
+    setIsOpen(false);
+  };
 
   return (
     <div className="w-full space-y-4 h-[88vh]" ref={parentRef}>
@@ -489,195 +532,373 @@ export default function Cieds() {
       </div>
 
       <div className="rounded-t-md border">
-      <div className="flex flex-row">
-
-      <div className={` ${selectedPatient ? "w-[273px]" : "w-full"}`}>        
-        <Table>
-          <TableHeader>
-            <TableRow>
-            <div className={`absolute left-0 top-0 bottom-0 w-[5px] mt-[6px] mb-[6px] rounded-tr-[6px] rounded-br-[6px]`} />
-              <TableHead className="w-12">
-                <Checkbox
-                  className="ml-[5px]"
-                  checked={getCurrentPagePatients().every(patient => selectedPatients.includes(patient.id))}
-                  onCheckedChange={toggleAll}
-                />
-              </TableHead>
-              <TableHead>Patients</TableHead>
-              {!selectedPatient && (
-                <>
-              <TableHead className="text-center">Source</TableHead>
-              <TableHead className="text-center">Date</TableHead>
-              <TableHead className="text-center">Goal (+/-)</TableHead>
-              <TableHead className="text-center">Systolic PAP</TableHead>
-              <TableHead className="text-center">Diastolic PAP</TableHead>
-              <TableHead className="text-center">Mean PAP</TableHead>
-              <TableHead className="text-center">Pulse Pressure</TableHead>
-              <TableHead className="text-center">PA Heart Rate</TableHead>
-              <TableHead className="text-center">Waveform</TableHead>
-              <TableHead className="text-center">Status</TableHead>
-              <TableHead className="text-center">View</TableHead>
-              <TableHead className="w-[100px]"></TableHead>
-              </>
-              )}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {getCurrentPagePatients().map((patient) => (
-              <TableRow key={patient.id} className="h-[72px] relative">
-                <div className={`absolute left-0 top-0 bottom-0 w-[5px] ${getPriorityColor(patient.priority)} mt-[6px]  mb-[6px] rounded-tr-[6px] rounded-br-[6px]`} />
-                <TableCell>
-                  <Checkbox 
-                    className="ml-[5px]"
-                    checked={selectedPatients.includes(patient.id)}
-                    onCheckedChange={() => togglePatient(patient.id)}
+        <div className="flex flex-row">
+          <div className={` ${selectedPatient ? "w-[273px]" : "w-full"}`}>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <div
+                    className={`absolute left-0 top-0 bottom-0 w-[5px] mt-[6px] mb-[6px] rounded-tr-[6px] rounded-br-[6px]`}
                   />
-                </TableCell>
-                <TableCell className="cursor-pointer" onClick={() => setSelectedPatient({...{patient}})}>
-                  <div className="font-medium">{patient.name}</div>
-                  <div className="text-sm text-muted-foreground">{patient.id}</div>
-                </TableCell>
-                {!selectedPatient && (
-                <>
-                <TableCell className="text-center">{patient.source}</TableCell>
-                <TableCell className="text-center">{patient.date}</TableCell>
-                <TableCell className="text-center">{patient.goal}</TableCell>
-                <TableCell className="text-center">{patient.systolicPAP}</TableCell>
-                <TableCell className="text-center">{patient.diastolicPAP}</TableCell>
-                <TableCell className="text-center">{patient.meanPAP}</TableCell>
-                <TableCell className="text-center">{patient.pulsePressure}</TableCell>
-                <TableCell className="text-center">{patient.paHeartRate}</TableCell>
-                <TableCell>
-                  <div className="flex justify-center cursor-pointer">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M21 21H4.6C4.03995 21 3.75992 21 3.54601 20.891C3.35785 20.7951 3.20487 20.6422 3.10899 20.454C3 20.2401 3 19.9601 3 19.4V3M20 8L16.0811 12.1827C15.9326 12.3412 15.8584 12.4204 15.7688 12.4614C15.6897 12.4976 15.6026 12.5125 15.516 12.5047C15.4179 12.4958 15.3215 12.4458 15.1287 12.3457L11.8713 10.6543C11.6785 10.5542 11.5821 10.5042 11.484 10.4953C11.3974 10.4875 11.3103 10.5024 11.2312 10.5386C11.1416 10.5796 11.0674 10.6588 10.9189 10.8173L7 15" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  </div>
-                </TableCell>
-                <TableCell>
-                <div className="flex justify-center">
-                  <Select>
-                    <SelectTrigger className="w-[130px]">
-                      <SelectValue placeholder="Select Status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="new">New</SelectItem>
-                      <SelectItem value="confirmed">Confirmed</SelectItem>
-                      <SelectItem value="dismissed">Dismissed</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                </TableCell>
-                <TableCell>
-                  <div className="flex justify-center">
-                  <Button className="border rounded-md w-full mr-3" style={{background: "#F1F5FE", borderColor: "#004DE1", color: "#004DE1", fontWeight: 500}}>
-                    View Summary
-                  </Button>
-                  </div>
-                  </TableCell>
-                <TableCell>
-                <div className="flex justify-center">
-                  <div className="flex space-x-2">
-                    <Button variant="ghost" size="icon">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M20 6L9 17L4 12" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </Button>
-                    <Button variant="ghost" size="icon">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M18 6L6 18M6 6L18 18" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </Button>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon">
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 16V12M12 8H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem>View details</DropdownMenuItem>
-                        <DropdownMenuItem>Export data</DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                  </div>
-                </TableCell>
-                </>
-                )}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        <div className={`flex items-center border-t justify-between space-x-2 py-3 mt-0 pl-3 pr-3`} style={{ marginTop: 0 }}>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </Button>
-        <span className="text-sm text-muted-foreground">
-          Page {currentPage} of {totalPages}
-        </span>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </Button>
-      </div>
-      </div>
+                  <TableHead className="w-12">
+                    <Checkbox
+                      className="ml-[5px]"
+                      checked={getCurrentPagePatients().every((patient) =>
+                        selectedPatients.includes(patient.id)
+                      )}
+                      onCheckedChange={toggleAll}
+                    />
+                  </TableHead>
+                  <TableHead>Patients</TableHead>
+                  {!selectedPatient && (
+                    <>
+                      <TableHead className="text-center">Source</TableHead>
+                      <TableHead className="text-center">Date</TableHead>
+                      <TableHead className="text-center">Goal (+/-)</TableHead>
+                      <TableHead className="text-center">
+                        Systolic PAP
+                      </TableHead>
+                      <TableHead className="text-center">
+                        Diastolic PAP
+                      </TableHead>
+                      <TableHead className="text-center">Mean PAP</TableHead>
+                      <TableHead className="text-center">
+                        Pulse Pressure
+                      </TableHead>
+                      <TableHead className="text-center">
+                        PA Heart Rate
+                      </TableHead>
+                      <TableHead className="text-center">Waveform</TableHead>
+                      <TableHead className="text-center">Status</TableHead>
+                      <TableHead className="text-center">View</TableHead>
+                      <TableHead className="w-[100px]"></TableHead>
+                    </>
+                  )}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {getCurrentPagePatients().map((patient) => (
+                  <TableRow key={patient.id} className="h-[72px] relative">
+                    <div
+                      className={`absolute left-0 top-0 bottom-0 w-[5px] ${getPriorityColor(
+                        patient.priority
+                      )} mt-[6px]  mb-[6px] rounded-tr-[6px] rounded-br-[6px]`}
+                    />
+                    <TableCell>
+                      <Checkbox
+                        className="ml-[5px]"
+                        checked={selectedPatients.includes(patient.id)}
+                        onCheckedChange={() => togglePatient(patient.id)}
+                      />
+                    </TableCell>
+                    <TableCell
+                      className="cursor-pointer"
+                      onClick={() => setSelectedPatient({ ...{ patient } })}
+                    >
+                      <div className="font-medium">{patient.name}</div>
+                      <div className="text-sm text-muted-foreground">
+                        {patient.id}
+                      </div>
+                    </TableCell>
+                    {!selectedPatient && (
+                      <>
+                        <TableCell className="text-center">
+                          {patient.source}
+                        </TableCell>
+                        <TableCell className="text-center">
+                          {patient.date}
+                        </TableCell>
+                        <TableCell className="text-center">
+                          {patient.goal}
+                        </TableCell>
+                        <TableCell className="text-center">
+                          {patient.systolicPAP}
+                        </TableCell>
+                        <TableCell className="text-center">
+                          {patient.diastolicPAP}
+                        </TableCell>
+                        <TableCell className="text-center">
+                          {patient.meanPAP}
+                        </TableCell>
+                        <TableCell className="text-center">
+                          {patient.pulsePressure}
+                        </TableCell>
+                        <TableCell className="text-center">
+                          {patient.paHeartRate}
+                        </TableCell>
+                        <TableCell>
+                          <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                position: "relative",
+                              }}
+                            >
+                              <PopoverTrigger asChild>
+                              <div className="flex justify-center">
+                                <div
+                                  className="flex justify-center cursor-pointer items-center"
+                                  style={{
+                                    transition: "background-color 0.3s ease",
+                                    width: "32px",
+                                    height: "32px",
+                                    borderRadius: "5px",
+                                  }}
+                                  onMouseEnter={(e) =>
+                                    (e.currentTarget.style.backgroundColor =
+                                      "lightgrey")
+                                  } // Change color on hover
+                                  onMouseLeave={(e) =>
+                                    (e.currentTarget.style.backgroundColor =
+                                      "white")
+                                  }
+                                >
+                                  <svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M21 21H4.6C4.03995 21 3.75992 21 3.54601 20.891C3.35785 20.7951 3.20487 20.6422 3.10899 20.454C3 20.2401 3 19.9601 3 19.4V3M20 8L16.0811 12.1827C15.9326 12.3412 15.8584 12.4204 15.7688 12.4614C15.6897 12.4976 15.6026 12.5125 15.516 12.5047C15.4179 12.4958 15.3215 12.4458 15.1287 12.3457L11.8713 10.6543C11.6785 10.5542 11.5821 10.5042 11.484 10.4953C11.3974 10.4875 11.3103 10.5024 11.2312 10.5386C11.1416 10.5796 11.0674 10.6588 10.9189 10.8173L7 15"
+                                      stroke="#667085"
+                                      stroke-width="2"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                              </PopoverTrigger>
+                              
+                            </div>
 
-      {selectedPatient && (
-    <div className="w-[calc(100%-273px)] border-l">
-      {/* Right-side div for patient data */}
-      <div style={{overflowX: 'auto', height: '100%'}}>
-    <div className=" mx-auto px-6 pt-4 pb-3" style={{ minWidth: '1370px' }}>
-    <div className="flex justify-between items-start mb-4">
-        <div className="flex items-center gap-3">
-          <Avatar className="h-12 w-12">
-            <AvatarImage alt="Patient avatar" src={'./er.png'} />
-            <AvatarFallback>PA</AvatarFallback>
-          </Avatar>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-lg">{selectedPatient.patient.name}</span>
-              <Button onClick={()=>setHidePatientInfo(!hidePatientInfo)} variant="ghost" size="icon" className="ml-1 h-10 w-10">
-                <ChevronDown className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${hidePatientInfo ? 'rotate-180' : 'rotate-0'}`} />
-              </Button>            </div>
-            <div className="text-sm text-gray-500">Age 21</div>
+                            <PopoverContent
+                              className="w-86"
+                              align="end"
+                              style={{
+                                width: "29vw",
+                              }}
+                            >
+                              <WaveForm></WaveForm>
+                              <PopoverClose asChild>
+                              </PopoverClose>
+                            </PopoverContent>
+                          </Popover>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex justify-center">
+                            <Select>
+                              <SelectTrigger className="w-[130px]">
+                                <SelectValue placeholder="Select Status" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="new">New</SelectItem>
+                                <SelectItem value="confirmed">
+                                  Confirmed
+                                </SelectItem>
+                                <SelectItem value="dismissed">
+                                  Dismissed
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex justify-center">
+                            <Button
+                              className="border rounded-md w-full mr-3"
+                              style={{
+                                background: "#F1F5FE",
+                                borderColor: "#004DE1",
+                                color: "#004DE1",
+                                fontWeight: 500,
+                              }}
+                            >
+                              View Summary
+                            </Button>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex justify-center">
+                            <div className="flex space-x-2">
+                              <Button variant="ghost" size="icon">
+                                <svg
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M20 6L9 17L4 12"
+                                    stroke="#667085"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                              </Button>
+                              <Button variant="ghost" size="icon">
+                                <svg
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M18 6L6 18M6 6L18 18"
+                                    stroke="#667085"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                              </Button>
+                              <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                  <Button variant="ghost" size="icon">
+                                    <svg
+                                      width="24"
+                                      height="24"
+                                      viewBox="0 0 24 24"
+                                      fill="none"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M12 16V12M12 8H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
+                                        stroke="#667085"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                      />
+                                    </svg>
+                                  </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                  <DropdownMenuItem>
+                                    View details
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem>
+                                    Export data
+                                  </DropdownMenuItem>
+                                </DropdownMenuContent>
+                              </DropdownMenu>
+                            </div>
+                          </div>
+                        </TableCell>
+                      </>
+                    )}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <div
+              className={`flex items-center border-t justify-between space-x-2 py-3 mt-0 pl-3 pr-3`}
+              style={{ marginTop: 0 }}
+            >
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </Button>
+              <span className="text-sm text-muted-foreground">
+                Page {currentPage} of {totalPages}
+              </span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() =>
+                  setCurrentPage((p) => Math.min(totalPages, p + 1))
+                }
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </Button>
+            </div>
           </div>
+
+          {selectedPatient && (
+            <div className="w-[calc(100%-273px)] border-l">
+              {/* Right-side div for patient data */}
+              <div style={{ overflowX: "auto", height: "100%" }}>
+                <div
+                  className=" mx-auto px-6 pt-4 pb-3"
+                  style={{ minWidth: "1370px" }}
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex items-center gap-3">
+                      <Avatar className="h-12 w-12">
+                        <AvatarImage alt="Patient avatar" src={"./er.png"} />
+                        <AvatarFallback>PA</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-lg">
+                            {selectedPatient.patient.name}
+                          </span>
+                          <Button
+                            onClick={() => setHidePatientInfo(!hidePatientInfo)}
+                            variant="ghost"
+                            size="icon"
+                            className="ml-1 h-10 w-10"
+                          >
+                            <ChevronDown
+                              className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${
+                                hidePatientInfo ? "rotate-180" : "rotate-0"
+                              }`}
+                            />
+                          </Button>{" "}
+                        </div>
+                        <div className="text-sm text-gray-500">Age 21</div>
+                      </div>
+                    </div>
+                    <div className=" pt-1 flex items-center justify-center">
+                      <Button
+                        className="border rounded-md w-full mr-3"
+                        style={{
+                          background: "#F1F5FE",
+                          borderColor: "#004DE1",
+                          color: "#004DE1",
+                          fontWeight: 500,
+                        }}
+                      >
+                        Action Plan
+                      </Button>
+                      <Button className="bg-blue-600 hover:bg-blue-700 px-7">
+                        Notify Patient
+                      </Button>
+                      <span>
+                        <Button
+                          onClick={() => setSelectedPatient(null)}
+                          variant="ghost"
+                          size="icon"
+                          className="ml-4 h-10 w-10"
+                        >
+                          <X />
+                        </Button>
+                      </span>
+                    </div>
+                  </div>
+                  <PatientInfo
+                    isCmemsOrCieds={true}
+                    selectedPatient={selectedPatient}
+                    hidePatientInfo={hidePatientInfo}
+                    addPixelsForBiggerScreens={addPixelsForBiggerScreens}
+                  />
+                </div>
+              </div>
+              {/* Add patient details content here */}
+            </div>
+          )}
         </div>
-        <div className=" pt-1 flex items-center justify-center">
-        <Button className="border rounded-md w-full mr-3" style={{background: "#F1F5FE", borderColor: "#004DE1", color: "#004DE1", fontWeight: 500}}>
-        Action Plan
-        </Button>
-        <Button className="bg-blue-600 hover:bg-blue-700 px-7">
-          Notify Patient
-        </Button>
-        <span>
-        <Button onClick={()=>setSelectedPatient(null)} variant="ghost" size="icon" className="ml-4 h-10 w-10">
-         <X />
-        </Button>
-        </span>
-
-      </div>
-
-      </div>
-      <PatientInfo isCmemsOrCieds={true} selectedPatient={selectedPatient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
-      </div>
-      </div>
-      {/* Add patient details content here */}
-    </div>
-  )}
-</div>
-
       </div>
     </div>
-  )
+  );
 }

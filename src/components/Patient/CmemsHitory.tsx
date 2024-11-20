@@ -11,6 +11,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import React from 'react'
+import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
+import { WaveForm } from '../CIEDS/WaveForm'
 
 export default function CmemsHistory() {
   const data = [
@@ -78,36 +80,38 @@ export default function CmemsHistory() {
 
   return (
     <div className="w-full">
-      <div className='mb-4'>
-      <Tabs defaultValue="summary" className="w-full">
-        <TabsList className=" w-full justify-start rounded-none h-auto p-0 bg-transparent">
-          <TabsTrigger
-            value="summary"
-            className="rounded-none  border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent"
-          >
-            Readings
-          </TabsTrigger>
-          <TabsTrigger
-            value="transmission"
-            className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent"
-          >
-            History
-          </TabsTrigger>
-          <TabsTrigger
-            value="cmems"
-            className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent"
-          >
-            Billable
-          </TabsTrigger>
-        </TabsList>
-        </ Tabs>
+      <div className="mb-4">
+        <Tabs defaultValue="summary" className="w-full">
+          <TabsList className=" w-full justify-start rounded-none h-auto p-0 bg-transparent">
+            <TabsTrigger
+              value="summary"
+              className="rounded-none  border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent"
+            >
+              Readings
+            </TabsTrigger>
+            <TabsTrigger
+              value="transmission"
+              className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent"
+            >
+              History
+            </TabsTrigger>
+            <TabsTrigger
+              value="cmems"
+              className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent"
+            >
+              Billable
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
       </div>
 
       <div className="rounded-t-md border">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[120px] pl-[18px] text-center">Status</TableHead>
+              <TableHead className="w-[120px] pl-[18px] text-center">
+                Status
+              </TableHead>
               <TableHead className="text-center">Date</TableHead>
               <TableHead className="text-center">Goal (+/-)</TableHead>
               <TableHead className="text-center">Systolic PAP</TableHead>
@@ -123,7 +127,7 @@ export default function CmemsHistory() {
               <TableRow key={index}>
                 <TableCell>
                   <div className="flex items-center justify-center">
-                <Badge
+                    <Badge
                       variant="outline"
                       className={
                         row.status === "Connected"
@@ -131,24 +135,85 @@ export default function CmemsHistory() {
                           : "bg-red-50 text-red-700"
                       }
                     >
-                      {row.status === "Connected" ? "Connected" : "Disconnected"}
+                      {row.status === "Connected"
+                        ? "Connected"
+                        : "Disconnected"}
                     </Badge>
-                    </div>
+                  </div>
                 </TableCell>
                 <TableCell className="text-center">{row.date}</TableCell>
                 <TableCell className="text-center">{row.goal}</TableCell>
                 <TableCell className="text-center">{row.systolicPap}</TableCell>
-                <TableCell className="text-center">{row.diastolicPap}</TableCell>
+                <TableCell className="text-center">
+                  {row.diastolicPap}
+                </TableCell>
                 <TableCell className="text-center">{row.meanPap}</TableCell>
-                <TableCell className="text-center">{row.pulsPressure}</TableCell>
+                <TableCell className="text-center">
+                  {row.pulsPressure}
+                </TableCell>
                 <TableCell className="text-center">{row.paHeartRate}</TableCell>
                 <TableCell>
-                  <div className='flex justify-center'>
-                  <Button variant="ghost" size="icon" className="h-8 w-8">
-                    <LineChart className="h-4 w-4" />
-                    <span className="sr-only">View waveform</span>
-                  </Button>
-                  </div>
+                  <Popover>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        position: "relative",
+                        zIndex:'100000'
+                      }}
+                    >
+                      <PopoverTrigger asChild>
+                        <div className="flex justify-center">
+                          <div
+                            className="flex justify-center cursor-pointer items-center"
+                            style={{
+                              transition: "background-color 0.3s ease",
+                              width: "32px",
+                              height: "32px",
+                              borderRadius: "5px",
+                              zIndex:'100'
+                            }}
+                            onMouseEnter={(e) =>
+                              (e.currentTarget.style.backgroundColor =
+                                "lightgrey")
+                            } // Change color on hover
+                            onMouseLeave={(e) =>
+                              (e.currentTarget.style.backgroundColor = "white")
+                            }
+                          >
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M21 21H4.6C4.03995 21 3.75992 21 3.54601 20.891C3.35785 20.7951 3.20487 20.6422 3.10899 20.454C3 20.2401 3 19.9601 3 19.4V3M20 8L16.0811 12.1827C15.9326 12.3412 15.8584 12.4204 15.7688 12.4614C15.6897 12.4976 15.6026 12.5125 15.516 12.5047C15.4179 12.4958 15.3215 12.4458 15.1287 12.3457L11.8713 10.6543C11.6785 10.5542 11.5821 10.5042 11.484 10.4953C11.3974 10.4875 11.3103 10.5024 11.2312 10.5386C11.1416 10.5796 11.0674 10.6588 10.9189 10.8173L7 15"
+                                stroke="#667085"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </PopoverTrigger>
+                    </div>
+
+                    <PopoverContent
+                      className="w-86"
+                      align="end"
+                      sideOffset={-60}
+                      alignOffset={60}
+                      style={{
+                        width: "29vw",
+                      }}
+                    >
+                      <WaveForm></WaveForm>
+                      <PopoverClose asChild></PopoverClose>
+                    </PopoverContent>
+                  </Popover>
                 </TableCell>
               </TableRow>
             ))}
@@ -165,5 +230,5 @@ export default function CmemsHistory() {
         </Button>
       </div>
     </div>
-  )
+  );
 }
