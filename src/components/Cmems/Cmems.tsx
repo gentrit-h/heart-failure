@@ -570,7 +570,7 @@ export default function Cmems() {
                 </TableCell>
                 <TableCell>
                   <div className="flex justify-center">
-                  <Button className="border rounded-md w-full mr-3" style={{background: "#F1F5FE", borderColor: "#004DE1", color: "#004DE1", fontWeight: 500}}>
+                  <Button onClick={() => {setSelectedPatient({...{patient}})}} className="border rounded-md w-full mr-3" style={{background: "#F1F5FE", borderColor: "#004DE1", color: "#004DE1", fontWeight: 500}}>
                     View Summary
                   </Button>
                   </div>
@@ -669,7 +669,7 @@ export default function Cmems() {
       </div>
 
       </div>
-      <PatientInfo isCmemsOrCieds={true} selectedPatient={selectedPatient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
+      <PatientInfo defaultTab={"summary"} isCmemsOrCieds={true} selectedPatient={selectedPatient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
       </div>
       </div>
       {/* Add patient details content here */}

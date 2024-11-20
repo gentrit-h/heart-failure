@@ -249,7 +249,7 @@ export default function Maindashboard() {
 
   const alerts = [
     {
-      patientName: "Chris Green - CMEMS",
+      patientName: "Chris Green",
       scheduledDate: "01/10/24",
       badges: [
         { text: "Has shock", variant: "destructive" },
@@ -269,7 +269,7 @@ export default function Maindashboard() {
       icons: ["type1"],
     },
     {
-      patientName: "John Doe - CMEMS",
+      patientName: "John Doe",
       scheduledDate: "01/07/24",
       badges: [
         { text: "ATP is true", variant: "destructive" },
@@ -284,7 +284,7 @@ export default function Maindashboard() {
       icons: ["type3", "type2"],
     },
     {
-      patientName: "Jane Smith - CMEMS",
+      patientName: "Jane Smith",
       scheduledDate: "01/08/24",
       badges: [
         { text: "Has shock", variant: "destructive" },
@@ -304,7 +304,7 @@ export default function Maindashboard() {
       icons: ["type2"],
     },
     {
-      patientName: "Alex Brown - CMEMS",
+      patientName: "Alex Brown",
       scheduledDate: "01/09/24",
       badges: [
         {
@@ -322,7 +322,7 @@ export default function Maindashboard() {
       icons: ["type1"],
     },
     {
-      patientName: "Chris Green - CMEMS",
+      patientName: "Chris Green",
       scheduledDate: "01/10/24",
       badges: [
         { text: "Has shock", variant: "destructive" },
@@ -341,7 +341,7 @@ export default function Maindashboard() {
       icons: ["type4", "type2"],
     },
     {
-      patientName: "Taylor White - CMEMS",
+      patientName: "Taylor White",
       scheduledDate: "01/11/24",
       badges: [
         { text: "Has shock", variant: "destructive" },
@@ -360,7 +360,7 @@ export default function Maindashboard() {
       icons: ["type2"],
     },
     {
-      patientName: "Chris Green - CMEMS",
+      patientName: "Chris Green",
       scheduledDate: "01/10/24",
       badges: [
         { text: "Has shock", variant: "destructive" },
@@ -380,7 +380,7 @@ export default function Maindashboard() {
       icons: ["type2"],
     },
     {
-      patientName: "John Doe - CMEMS",
+      patientName: "John Doe",
       scheduledDate: "01/07/24",
       badges: [
         { text: "ATP is true", variant: "destructive" },
@@ -395,7 +395,7 @@ export default function Maindashboard() {
       icons: ["type4", "type2"],
     },
     {
-      patientName: "Jane Smith - CMEMS",
+      patientName: "Jane Smith",
       scheduledDate: "01/08/24",
       badges: [
         { text: "Has shock", variant: "destructive" },
@@ -415,7 +415,7 @@ export default function Maindashboard() {
       icons: ["type2"],
     },
     {
-      patientName: "Alex Brown - CMEMS",
+      patientName: "Alex Brown",
       scheduledDate: "01/09/24",
       badges: [
         {
@@ -433,7 +433,7 @@ export default function Maindashboard() {
       icons: ["type1"],
     },
     {
-      patientName: "Chris Green - CMEMS",
+      patientName: "Chris Green",
       scheduledDate: "01/10/24",
       badges: [
         { text: "Has shock", variant: "destructive" },
@@ -452,7 +452,7 @@ export default function Maindashboard() {
       icons: ["type4"],
     },
     {
-      patientName: "Taylor White - CMEMS",
+      patientName: "Taylor White",
       scheduledDate: "01/11/24",
       badges: [
         { text: "Has shock", variant: "destructive" },
@@ -474,77 +474,77 @@ export default function Maindashboard() {
 
   const patients = [
     {
-      patientName: "Chris Green - CMEMS",
+      patientName: "Chris Green",
       scheduledDate: "01/10/24",
       icons: ["type1","type6"],
     },
     {
-      patientName: "John Doe - CMEMS",
+      patientName: "John Doe",
       scheduledDate: "01/07/24",
       icons: ["type2", "type7"],
     },
     {
-      patientName: "Jane Smith - CMEMS",
+      patientName: "Jane Smith",
       scheduledDate: "01/08/24",
       icons: ["type1","type6"],
     },
     {
-      patientName: "Alex Brown - CMEMS",
+      patientName: "Alex Brown",
       scheduledDate: "01/09/24",
       icons: ["type2", "type7"],
     },
     {
-      patientName: "Taylor White - CMEMS",
+      patientName: "Taylor White",
       scheduledDate: "01/11/24",
       icons: ["type1", "type6"],
     },
     {
-      patientName: "Chris Green - CMEMS",
+      patientName: "Chris Green",
       scheduledDate: "01/10/24",
       icons: ["type1","type6"],
     },
     {
-      patientName: "John Doe - CMEMS",
+      patientName: "John Doe",
       scheduledDate: "01/07/24",
       icons: ["type2", "type7"],
     },
     {
-      patientName: "Jane Smith - CMEMS",
+      patientName: "Jane Smith",
       scheduledDate: "01/08/24",
       icons: ["type1","type6"],
     },
     {
-      patientName: "Alex Brown - CMEMS",
+      patientName: "Alex Brown",
       scheduledDate: "01/09/24",
       icons: ["type1", "type7"],
     },
     {
-      patientName: "Taylor White - CMEMS",
+      patientName: "Taylor White",
       scheduledDate: "01/11/24",
       icons: ["type1", "type6"],
     },
     {
-      patientName: "Chris Green - CMEMS",
+      patientName: "Chris Green",
       scheduledDate: "01/10/24",
       icons: ["type1","type6"],
     },
     {
-      patientName: "John Doe - CMEMS",
+      patientName: "John Doe",
       scheduledDate: "01/07/24",
       icons: ["type2", "type7"],
     },
     {
-      patientName: "Jane Smith - CMEMS",
+      patientName: "Jane Smith",
       scheduledDate: "01/08/24",
       icons: ["type1","type6"],
     },
     {
-      patientName: "Alex Brown - CMEMS",
+      patientName: "Alex Brown",
       scheduledDate: "01/09/24",
       icons: ["type1", "type7"],
     },
     {
-      patientName: "Taylor White - CMEMS",
+      patientName: "Taylor White",
       scheduledDate: "01/11/24",
       icons: ["type1", "type6"],
     },

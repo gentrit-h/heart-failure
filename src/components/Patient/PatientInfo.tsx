@@ -22,9 +22,13 @@ import PatientInfoHeader from "./PatientInfoHeader"
 import React from "react"
 import { ProgressBars } from "./ProgressBars"
 import TransmissionSummary from "./TransmissionSummary"
+import { useRecoilState } from "recoil"
+import { embeddedAnalyticsState } from "../../state/atoms"
 
-export default function PatientInfo({selectedPatient, defaultTab, hidePatientInfo, addPixelsForBiggerScreens, heightFromSummary, isCmemsOrCieds}: {selectedPatient: any, hidePatientInfo: boolean, addPixelsForBiggerScreens: number, heightFromSummary?: number, isCmemsOrCieds?: boolean, defaultTab?: string}) {
+export default function PatientInfo({selectedPatient, defaultTab, hidePatientInfo, addPixelsForBiggerScreens, heightFromSummary, isCmemsOrCieds, isDashboard}: 
+    {selectedPatient: any, hidePatientInfo: boolean, addPixelsForBiggerScreens: number, heightFromSummary?: number, isCmemsOrCieds?: boolean, defaultTab?: string, isDashboard?: boolean}) {
   const patientData = selectedPatient?.patient;
+  const [embeddedAnalytics, setEmbeddedAnalytics] = useRecoilState(embeddedAnalyticsState);
   return (
       <div>
         <PatientInfoHeader hidePatientInfo={hidePatientInfo} />
@@ -167,7 +171,14 @@ export default function PatientInfo({selectedPatient, defaultTab, hidePatientInf
             20/11/2024 - Transmission Summary
           </TabsTrigger>
         </TabsList>
-        <div className="overflow-y-auto pr-3" style={{height: 460+addPixelsForBiggerScreens+(hidePatientInfo ? 129 : 0)+(isCmemsOrCieds ? -144 :0)+'px', ...(heightFromSummary && { maxHeight: heightFromSummary }) }}>
+        <div
+          className="overflow-y-auto pr-3"
+          style={{
+            height: isDashboard
+              ? hidePatientInfo ? embeddedAnalytics ? "calc(74vh - 113px)" : "calc(82vh - 113px)" : embeddedAnalytics ? "calc(74vh - 242px)" : "calc(82vh - 242px)" 
+              : `${460 + addPixelsForBiggerScreens + (hidePatientInfo ? 129 : 0) + (isCmemsOrCieds ? -144 : 0)}px`,
+          }}
+        >
         <TabsContent value="transmission" className="mt-6">
           <>
           <ProgressBars />
