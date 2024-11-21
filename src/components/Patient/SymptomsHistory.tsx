@@ -78,57 +78,49 @@ export default function SymptomsHistory() {
 </Table>
 </div>
 
-<Card className=''>
-          <CardHeader className=" p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
-            <CardTitle className="text-center font-medium">Medication</CardTitle>
+<div>
+        <Card>
+          <CardHeader className="p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
+            <CardTitle className="text-center font-medium">Symptoms</CardTitle>
           </CardHeader>
           <CardContent className="p-0 m-0">
-            <div className="w-full">
-            <Table className="">
+            <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead className="text-center"  style={{backgroundColor: "white"}}>Date</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Shortness of breath</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Palpitations</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Weight Gain</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Swelling</TableHead>
+                <TableRow className="h-[60px]">
+                  <TableHead className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Date</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>19/11/2024</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>12/11/2024</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>07/11/2024</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>30/10/2024</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>25/10/2024</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>21/10/2024</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>15/10/2024</TableHead>
+                </TableRow>
+                <TableRow className="h-[60px]">
+                  <TableHead className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Symptoms Score</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>4</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>5</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>6</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>8</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>10</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>12</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>13</TableHead>
+                </TableRow>
+                <TableRow className="h-[60px]">
+                  <TableHead className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Symptom Details</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>SoB:0, P:1, S:1, WG:2</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>SoB:1, P:1, S:1, WG:2</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>SoB:2, P:1, S:2, WG:1</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>SoB:3, P:2, S:2, WG:1</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>SoB:3, P:3, S:2, WG:2</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>SoB:4, P:3, S:3, WG:2</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>SoB:4, P:3, S:4, WG:2</TableHead>
                 </TableRow>
               </TableHeader>
-              
-              <TableBody>
-                {symptoms.map((symp, index) => (
-                  <TableRow key={index} className="h-[60px]">
-                    <TableCell className="text-center">{symp.date}</TableCell>
-                    <TableCell className="text-center">{symp.breath}</TableCell>
-                    <TableCell className="text-center">{symp.palp}</TableCell>
-                    <TableCell className="text-center">{symp.weight}</TableCell>
-                    <TableCell className="text-center">{symp.swelling}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
             </Table>
-            <div className={`flex items-center border-t justify-between space-x-2 py-3 mt-0 pl-3 pr-3`} style={{ marginTop: 0 }}>
-        <Button
-          variant="outline"
-          size="sm"
-          disabled={true}
-        >
-          Previous
-        </Button>
-        <span className="text-sm text-muted-foreground">
-          Page 1 of 4
-        </span>
-        <Button
-          variant="outline"
-          size="sm"
-          disabled={false}
-        >
-          Next
-        </Button>
-      </div>
-            </div>
           </CardContent>
         </Card>
+        </div>
             </div>
   )
 }

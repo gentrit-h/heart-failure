@@ -50,6 +50,10 @@ import React from "react"
         name: "Magnesium (Mg++):",
         value: "1.7-2.2 mg/dL (0.70-0.95 mmol/L)",
       },
+      {
+        name: "Troponin:",
+        value: "0-14 ng/L",
+      },
     ]
   
     return (
@@ -94,7 +98,7 @@ import React from "react"
           </CardContent>
         </Card>
   
-        <Card className="h-[350px]">
+        <Card className="h-[412px]">
         <CardHeader className="p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
             <CardTitle className="text-center font-medium">Lab work</CardTitle>
           </CardHeader>
@@ -113,7 +117,7 @@ import React from "react"
           </CardContent>
         </Card>
 
-        <Card className="h-[350px]">
+        <Card className="h-[412px]">
         <CardHeader className="p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
             <CardTitle className="text-center font-medium">Imaging</CardTitle>
           </CardHeader>

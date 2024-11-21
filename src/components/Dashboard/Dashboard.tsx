@@ -35,35 +35,17 @@ const Dashboard: React.FC<MainContentProps> = () => {
 
   const alerts = [
     {
-      patientName: "Oliver Johnson",
-      scheduledDate: "01/10/24",
-      mrn: "MRN123456",
-      badges: [
-        { text: "Has shock", variant: "destructive" },
-        { text: "ATP is true", variant: "destructive" },
-        {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "10 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type1"],
-      manufacturer: "MDT",
-    },
-    {
       patientName: "Emma Wilson",
       scheduledDate: "01/07/24",
       mrn: "MRN119457",
       badges: [
         { text: "ATP is true", variant: "destructive" },
         {
-          text: "5 Event(s)",
+          text: "Pacing Mode Abnormal",
+          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
+        },
+        {
+          text: "2 Event(s)",
           style: {
             backgroundColor: "rgba(245, 245, 245, 0.7)",
             color: "black",
@@ -74,18 +56,35 @@ const Dashboard: React.FC<MainContentProps> = () => {
       manufacturer: "BSX",
     },
     {
-      patientName: "Liam Davis",
-      scheduledDate: "01/08/24",
-      mrn: "MRN16756",
+      patientName: "Oliver Johnson",
+      scheduledDate: "01/10/24",
+      mrn: "MRN123456",
       badges: [
-        { text: "Has shock", variant: "destructive" },
-        { text: "ATP is true", variant: "destructive" },
+        { text: "PAP Mean High", variant: "destructive" },
         {
           text: "Type VT - Untreated only",
           style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
         },
         {
-          text: "15 Event(s)",
+          text: "3 Event(s)",
+          style: {
+            backgroundColor: "rgba(245, 245, 245, 0.7)",
+            color: "black",
+          },
+        },
+      ],
+      icons: ["type1"],
+      manufacturer: "MDT",
+    },
+    {
+      patientName: "Liam Davis",
+      scheduledDate: "01/08/24",
+      mrn: "MRN16756",
+      badges: [
+        { text: "Has shock", variant: "destructive" },
+        { text: "Battery Voltage Low", variant: "destructive" },
+        {
+          text: "1 Event(s)",
           style: {
             backgroundColor: "rgba(245, 245, 245, 0.7)",
             color: "black",
@@ -101,11 +100,11 @@ const Dashboard: React.FC<MainContentProps> = () => {
       mrn: "MRN676456",
       badges: [
         {
-          text: "Type VT - Untreated only",
+          text: "TachyCardia Event Recorded",
           style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
         },
         {
-          text: "15 Event(s)",
+          text: "2 Event(s)",
           style: {
             backgroundColor: "rgba(245, 245, 245, 0.7)",
             color: "black",
@@ -120,13 +119,13 @@ const Dashboard: React.FC<MainContentProps> = () => {
       scheduledDate: "01/10/24",
       mrn: "MRN679856",
       badges: [
-        { text: "Has shock", variant: "destructive" },
+        { text: "PAP Diastolic High", variant: "destructive" },
         {
-          text: "Type VT - Untreated only",
+          text: "Pacing Mode Abnormal",
           style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
         },
         {
-          text: "8 Event(s)",
+          text: "3 Event(s)",
           style: {
             backgroundColor: "rgba(245, 245, 245, 0.7)",
             color: "black",
@@ -141,13 +140,12 @@ const Dashboard: React.FC<MainContentProps> = () => {
       scheduledDate: "01/11/24",
       mrn: "MRN098756",
       badges: [
-        { text: "Has shock", variant: "destructive" },
         {
-          text: "Type VT - Untreated only",
+          text: "Battery Voltage Below Threshold",
           style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
         },
         {
-          text: "12 Event(s)",
+          text: "2 Event(s)",
           style: {
             backgroundColor: "rgba(245, 245, 245, 0.7)",
             color: "black",
@@ -162,14 +160,10 @@ const Dashboard: React.FC<MainContentProps> = () => {
       scheduledDate: "01/10/24",
       mrn: "MRN786956",
       badges: [
-        { text: "Has shock", variant: "destructive" },
+        { text: "Heart Rate Out Of Range", variant: "destructive" },
         { text: "ATP is true", variant: "destructive" },
         {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "10 Event(s)",
+          text: "4 Event(s)",
           style: {
             backgroundColor: "rgba(245, 245, 245, 0.7)",
             color: "black",
@@ -184,7 +178,11 @@ const Dashboard: React.FC<MainContentProps> = () => {
       scheduledDate: "01/07/24",
       mrn: "MRN012456",
       badges: [
-        { text: "ATP is true", variant: "destructive" },
+        { text: "Battery Low Voltage", variant: "destructive" },
+        {
+          text: "Data Transmission Failed",
+          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
+        },
         {
           text: "5 Event(s)",
           style: {
@@ -201,14 +199,13 @@ const Dashboard: React.FC<MainContentProps> = () => {
       scheduledDate: "01/08/24",
       mrn: "MRN975456",
       badges: [
-        { text: "Has shock", variant: "destructive" },
         { text: "ATP is true", variant: "destructive" },
         {
           text: "Type VT - Untreated only",
           style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
         },
         {
-          text: "15 Event(s)",
+          text: "5 Event(s)",
           style: {
             backgroundColor: "rgba(245, 245, 245, 0.7)",
             color: "black",
@@ -224,11 +221,11 @@ const Dashboard: React.FC<MainContentProps> = () => {
       mrn: "MRN676456",
       badges: [
         {
-          text: "Type VT - Untreated only",
+          text: "Tachycardia Event Recorded",
           style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
         },
         {
-          text: "15 Event(s)",
+          text: "3 Event(s)",
           style: {
             backgroundColor: "rgba(245, 245, 245, 0.7)",
             color: "black",
@@ -264,13 +261,13 @@ const Dashboard: React.FC<MainContentProps> = () => {
       scheduledDate: "01/11/24",
       mrn: "MRN676456",
       badges: [
-        { text: "Has shock", variant: "destructive" },
+        { text: "PAP Man High", variant: "destructive" },
         {
           text: "Type VT - Untreated only",
           style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
         },
         {
-          text: "12 Event(s)",
+          text: "2 Event(s)",
           style: {
             backgroundColor: "rgba(245, 245, 245, 0.7)",
             color: "black",
@@ -327,7 +324,7 @@ const Dashboard: React.FC<MainContentProps> = () => {
       manufacturer: "BSX",
     },
     {
-      patientName: "Isabella Anderson",
+      patientName: "Elli Anderson",
       mrn: "MRN109237",
       scheduledDate: "01/07/24",
       icons: ["type2", "type7"],
@@ -369,7 +366,7 @@ const Dashboard: React.FC<MainContentProps> = () => {
       manufacturer: "STJ",
     },
     {
-      patientName: "Charlotte Young",
+      patientName: "Lee Young",
       mrn: "MRN131238",
       scheduledDate: "01/08/24",
       icons: ["type1", "type6"],

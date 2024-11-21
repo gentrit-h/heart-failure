@@ -8,38 +8,38 @@ export default function EpisodesTable() {
       id: "RVAT-2112",
       hasWave: true,
       date: "Jan 01, 2024 20:28",
-      type: "Other",
-      details: "RV Auto",
+      type: "Periodic EGM",
+      details: "Avg V Rate in ATR: 113 bpm",
       duration: "51 s",
-      rate: "-",
+      rate: "113 bpm",
       assessment: "Appropriate"
     },
     {
       id: "LVAT-2117",
       hasWave: true,
       date: "Jan 01, 2024 18:28",
-      type: "Other",
-      details: "LV Auto",
+      type: "ATAF",
+      details: "-",
       duration: "13 s",
-      rate: "-",
+      rate: "125 bpm",
       assessment: "Not Assessed"
     },
     {
       id: "PMT-82",
       hasWave: true,
       date: "Dec 27, 2023 12:58",
-      type: "PMT - PMT",
-      details: "PMT",
+      type: "VT",
+      details: "Long duration",
       duration: "1 m 5 s",
-      rate: "130 bpm",
+      rate: "128 bpm",
       assessment: "Not Assessed"
     },
     {
       id: "PMT-81",
       hasWave: true,
       date: "Dec 27, 2023 12:29",
-      type: "PMT - PMT",
-      details: "PMT",
+      type: "SVT",
+      details: "-",
       duration: "13 s",
       rate: "130 bpm",
       assessment: "Not Assessed"
@@ -48,28 +48,28 @@ export default function EpisodesTable() {
       id: "PMT-80",
       hasWave: true,
       date: "Dec 27, 2023 11:47",
-      type: "PMT - PMT",
-      details: "PMT",
+      type: "VT",
+      details: "-",
       duration: "41 s",
-      rate: "130 bpm",
+      rate: "127 bpm",
       assessment: "Not Assessed"
     },
     {
       id: "PMT-79",
       hasWave: false,
       date: "Dec 27, 2023 11:47",
-      type: "PMT - PMT",
-      details: "PMT",
+      type: "ATAF",
+      details: "Avg V Rate in ATR: 117 bpm",
       duration: "39 s",
-      rate: "130 bpm",
+      rate: "117 bpm",
       assessment: "Not Assessed"
     },
     {
       id: "PMT-78",
       hasWave: false,
       date: "Dec 27, 2023 10:32",
-      type: "PMT - PMT",
-      details: "PMT",
+      type: "ATAF",
+      details: "Long duration",
       duration: "2 m 4 s",
       rate: "130 bpm",
       assessment: "Not Assessed"
@@ -78,18 +78,18 @@ export default function EpisodesTable() {
       id: "RAAT-59",
       hasWave: true,
       date: "Dec 26, 2023 16:27",
-      type: "Other",
-      details: "RA Auto",
+      type: "VT",
+      details: "Long duration",
       duration: "1 m 42 s",
-      rate: "-",
+      rate: "119 bpm",
       assessment: "Not Assessed"
     },
     {
       id: "PMT-59",
       hasWave: false,
       date: "Dec 22, 2023 12:18",
-      type: "PMT - PMT",
-      details: "PMT",
+      type: "VT",
+      details: "-",
       duration: "40 s",
       rate: "130 bpm",
       assessment: "Not Assessed"
@@ -98,8 +98,8 @@ export default function EpisodesTable() {
       id: "PMT-56",
       hasWave: false,
       date: "Dec 22, 2023 11:53",
-      type: "PMT - PMT",
-      details: "PMT",
+      type: "ATAF",
+      details: "-",
       duration: "12 s",
       rate: "130 bpm",
       assessment: "Not Assessed"
@@ -115,7 +115,7 @@ export default function EpisodesTable() {
             <TableHead className="font-bold text-center">Date</TableHead>
             <TableHead className="font-bold text-center">Type</TableHead>
             <TableHead className="font-bold text-center">Detection Therapy Details</TableHead>
-            <TableHead className="font-bold whitespace-nowrap text-center">Duration hh:mm:ss</TableHead>
+            <TableHead className="font-bold whitespace-nowrap text-center">Duration</TableHead>
             <TableHead className="font-bold text-center">Rate</TableHead>
             <TableHead className="font-bold text-center">Assessment</TableHead>
           </TableRow>

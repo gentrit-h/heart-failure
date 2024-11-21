@@ -518,14 +518,16 @@ export default function Patients() {
           <TableBody>
             {getCurrentPagePatients().map((patient) => (
                 <TableRow key={patient.id} className="h-[72px] relative">
-                  <TableCell>
+                  <TableCell style={{backgroundColor: (selectedPatient && selectedPatient?.patient?.id == patient?.id ? '#f5f5f5' : 'transparent')}}>
                     <Checkbox 
                       className="ml-[5px]"
                       checked={selectedPatients.includes(patient.id)}
                       onCheckedChange={() => togglePatient(patient.id)}
                     />
                   </TableCell>
-                  <TableCell className="cursor-pointer" onClick={() => setSelectedPatient({...{patient}})}>
+                  <TableCell className="cursor-pointer" onClick={() => setSelectedPatient({...{patient}})}
+                    style={{backgroundColor: (selectedPatient && selectedPatient?.patient?.id == patient?.id ? '#f5f5f5' : 'transparent')}}
+                    >
                     <div
                       className="font-medium"
                     >

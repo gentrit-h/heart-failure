@@ -24,6 +24,16 @@ import {
   } from "@/components/ui/table"
   import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ProgressBars } from "./ProgressBars";
+import { WaveForm } from "../CIEDS/WaveForm";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { PopoverClose } from "@radix-ui/react-popover";
+import summary from "./summary.png"
+import symptoms from "./symptom.png"
+import patientActivity from "./patientActivity.png"
 
 // Sample data for the trend graphs
 const trendData = Array.from({ length: 30 }, (_, i) => ({
@@ -97,9 +107,65 @@ export default function Summary() {
       <TableCell className="text-center">5 mmHg</TableCell>
       <TableCell className="text-center">80 bpm</TableCell>
       <TableCell>
-        <div className="flex justify-center">
-        <LineChartIcon className="h-5 w-5 text-blue-500" />
+      <Popover>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            position: "relative",
+          }}
+        >
+          <PopoverTrigger asChild>
+          <div className="flex justify-center">
+            <div
+              className="flex justify-center cursor-pointer items-center"
+              style={{
+                transition: "background-color 0.3s ease",
+                width: "32px",
+                height: "32px",
+                borderRadius: "5px",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor =
+                  "lightgrey")
+              } // Change color on hover
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor =
+                  "white")
+              }
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21 21H4.6C4.03995 21 3.75992 21 3.54601 20.891C3.35785 20.7951 3.20487 20.6422 3.10899 20.454C3 20.2401 3 19.9601 3 19.4V3M20 8L16.0811 12.1827C15.9326 12.3412 15.8584 12.4204 15.7688 12.4614C15.6897 12.4976 15.6026 12.5125 15.516 12.5047C15.4179 12.4958 15.3215 12.4458 15.1287 12.3457L11.8713 10.6543C11.6785 10.5542 11.5821 10.5042 11.484 10.4953C11.3974 10.4875 11.3103 10.5024 11.2312 10.5386C11.1416 10.5796 11.0674 10.6588 10.9189 10.8173L7 15"
+                  stroke="#667085"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+          </PopoverTrigger>
         </div>
+
+        <PopoverContent
+          className="w-86"
+          align="end"
+          style={{
+            width: "29vw",
+          }}
+        >
+          <WaveForm></WaveForm>
+          <PopoverClose asChild>
+          </PopoverClose>
+        </PopoverContent>
+      </Popover>
       </TableCell>
       <TableCell>
         <div className="flex justify-center items-center">
@@ -131,9 +197,48 @@ export default function Summary() {
   </TableBody>
 </Table>
 </div>
-<div className="w-full aspect-[1438/319]">
+{/* <div className="w-full aspect-[1438/319]">
   <img src={img2} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
-</div>
+</div> */}
+      <div className="flex flex-row">
+        <Card className="min-w-[790px] w-full">
+        <CardHeader className="p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
+            <CardTitle className="text-center font-medium">Symptoms</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0 m-0 h-[225px]">
+          <div className="flex justify-center items-center">
+          <div className="pt-[5px] h-[215px] aspect-[812/240]">
+          <img src={symptoms} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
+          </div>
+          </div>
+          </CardContent>
+        </Card>
+        <Card className="ml-2">
+        <CardHeader className="p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
+            <CardTitle className="text-center font-medium">Pt. Activity</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0 m-0">
+          <div className="h-[225px] aspect-[136/275]">
+          <div className="flex justify-center items-center">
+          <img src={patientActivity} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
+          </div>
+          </div>
+          </CardContent>
+        </Card>
+        <Card className=" ml-2">
+        <CardHeader className="p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
+            <CardTitle className="text-center font-medium">CIED Summary</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0 m-0">
+          <div className="h-[225px] aspect-[428/275]">
+          <div className="flex justify-center items-center">
+          <img src={summary} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
+          </div>
+          </div>
+          </CardContent>
+        </Card>
+      </div>
+
         <div>
         <Card>
           <CardHeader className="p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>

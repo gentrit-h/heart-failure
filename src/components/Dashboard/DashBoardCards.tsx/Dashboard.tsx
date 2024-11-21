@@ -306,7 +306,6 @@ export default function Maindashboard({alerts, patients}) {
               "--scrollbar-thumb-hover-color": "#C5C8CE",
               maxWidth: openedCard == 'Alerts' ? '19vw':'100vw',
               minWidth: openedCard == 'Alerts' ? '19vw': "31vw",
-
             }}
           >
             <CardHeader style={{ position: "relative" }}>
@@ -335,7 +334,7 @@ export default function Maindashboard({alerts, patients}) {
                       >
                         <div
                           className="flex justify-between items-start"
-                          style={cardStyle}
+                          style={{...cardStyle, backgroundColor: (selectedPatient?.mrn == alert?.mrn && openedCard != "all" ? '#f5f5f5' : 'transparent')}}
                         >
                           <div
                             className="flex gap-2 mt-0"
@@ -343,7 +342,7 @@ export default function Maindashboard({alerts, patients}) {
                           >
                             <input type="checkbox" className="h-6 w-3" />
                             <div>
-                              <div className="flex gap-2 mt-0">
+                              <div className="flex gap-2 mt-0 cursor-pointer">
                                 <div className="text-base font-medium">
                                   {alert.patientName} - {alert.mrn}
                                 </div>
@@ -584,13 +583,14 @@ export default function Maindashboard({alerts, patients}) {
                       >
                         <div
                           className="flex justify-between items-center"
-                          style={cardStyle}
+                          style={{...cardStyle,
+                            backgroundColor: (selectedPatient?.mrn == _?.mrn && openedCard != "all" ? '#f5f5f5' : 'transparent')}}
                         >
                           <div>
                             <div className="flex gap-2 mt-0">
                               <input type="checkbox" className="h-6 w-3" />
 
-                              <div className="text-base font-medium">
+                              <div className="text-base font-medium cursor-pointer">
                                 {_?.patientName} - {_?.mrn}
                               </div>
                             </div>

@@ -25,6 +25,9 @@ export default function CmemsHistory() {
       meanPap: "34 mmHg",
       pulsPressure: "34 mmHg",
       paHeartRate: "80 bpm",
+      hfIndex: "5",
+      crossing: "+2",
+      symptoms: "4",
     },
     {
       status: "Disconnected",
@@ -35,6 +38,9 @@ export default function CmemsHistory() {
       meanPap: "19 mmHg",
       pulsPressure: "16 mmHg",
       paHeartRate: "97 bpm",
+      hfIndex: "6",
+      crossing: "+1",
+      symptoms: "5",
     },
     {
       status: "Disconnected",
@@ -45,6 +51,9 @@ export default function CmemsHistory() {
       meanPap: "26 mmHg",
       pulsPressure: "18 mmHg",
       paHeartRate: "68 bpm",
+      hfIndex: "8",
+      crossing: "-1",
+      symptoms: "6",
     },
     {
       status: "Connected",
@@ -55,6 +64,9 @@ export default function CmemsHistory() {
       meanPap: "24 mmHg",
       pulsPressure: "16 mmHg",
       paHeartRate: "85 bpm",
+      hfIndex: "12",
+      crossing: "-4",
+      symptoms: "10",
     },
     {
       status: "Connected",
@@ -65,6 +77,9 @@ export default function CmemsHistory() {
       meanPap: "24 mmHg",
       pulsPressure: "16 mmHg",
       paHeartRate: "85 bpm",
+      hfIndex: "10",
+      crossing: "+1",
+      symptoms: "11",
     },
     {
       status: "Disconnected",
@@ -75,6 +90,9 @@ export default function CmemsHistory() {
       meanPap: "19 mmHg",
       pulsPressure: "16 mmHg",
       paHeartRate: "97 bpm",
+      hfIndex: "15",
+      crossing: "-5",
+      symptoms: "12",
     },
   ]
 
@@ -117,6 +135,9 @@ export default function CmemsHistory() {
               <TableHead className="text-center">Mean PAP</TableHead>
               <TableHead className="text-center">Puls Pressure</TableHead>
               <TableHead className="text-center">PA Heart Rate</TableHead>
+              <TableHead className="text-center">HF Index</TableHead>
+              <TableHead className="text-center">Threshold crossing</TableHead>
+              <TableHead className="text-center">Symptoms Score (0-16)</TableHead>
               <TableHead className="w-[70px] text-center">Waveform</TableHead>
             </TableRow>
           </TableHeader>
@@ -150,6 +171,9 @@ export default function CmemsHistory() {
                   {row.pulsPressure}
                 </TableCell>
                 <TableCell className="text-center">{row.paHeartRate}</TableCell>
+                <TableCell className="text-center">{row.hfIndex}</TableCell>
+                <TableCell className="text-center">{row.crossing}</TableCell>
+                <TableCell className="text-center">{row.symptoms}</TableCell>
                 <TableCell>
                   <Popover>
                     <div

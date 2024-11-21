@@ -31,7 +31,7 @@ export default function PatientInfo({selectedPatient, defaultTab, hidePatientInf
   const [embeddedAnalytics, setEmbeddedAnalytics] = useRecoilState(embeddedAnalyticsState);
   return (
       <div>
-        <PatientInfoHeader hidePatientInfo={hidePatientInfo} />
+        <PatientInfoHeader hidePatientInfo={hidePatientInfo} selectedPatient={selectedPatient} />
       {/* <div className="flex gap-4 mb-8">
         <Card className="flex-1 pl-6 pr-6 pb-[13.5px] pt-[13.5px] w-[60%] h-[115px]">
           <div className="grid gap-y-2 divide-x" style={{ gridTemplateColumns: '28% 32% 32% 8%' }}>

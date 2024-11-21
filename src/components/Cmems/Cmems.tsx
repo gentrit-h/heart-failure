@@ -547,14 +547,14 @@ export default function Cmems() {
             {getCurrentPagePatients().map((patient) => (
               <TableRow key={patient.id} className="h-[72px] relative">
                 <div className={`absolute left-0 top-0 bottom-0 w-[5px] ${getPriorityColor(patient.priority)} mt-[6px]  mb-[6px] rounded-tr-[6px] rounded-br-[6px]`} />
-                <TableCell>
+                <TableCell style={{backgroundColor: (selectedPatient && selectedPatient?.patient?.id == patient?.id ? '#f5f5f5' : 'transparent')}}>
                   <Checkbox 
                     className="ml-[5px]"
                     checked={selectedPatients.includes(patient.id)}
                     onCheckedChange={() => togglePatient(patient.id)}
                   />
                 </TableCell>
-                <TableCell className="cursor-pointer" onClick={() => setSelectedPatient({...{patient}})}>
+                <TableCell className="cursor-pointer" onClick={() => setSelectedPatient({...{patient}})} style={{backgroundColor: (selectedPatient && selectedPatient?.patient?.id == patient?.id ? '#f5f5f5' : 'transparent')}}>
                   <div className="font-medium">{patient.name}</div>
                   <div className="text-sm text-muted-foreground">{patient.id}</div>
                 </TableCell>

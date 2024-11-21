@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card"
 import { ChevronDown, Battery, Signal, ExternalLink, FileText } from 'lucide-react'
 import React from "react"
 
-export default function PatientInfoHeader({hidePatientInfo}) {
+export default function PatientInfoHeader({hidePatientInfo, selectedPatient}) {
   return ( hidePatientInfo ? <></> :
     <div className="px-4 pb-6 pt-4 border-t">
  <div className="grid gap-y-2 divide-x" style={{ gridTemplateColumns: '16% 16% 16% 21% 24% 7%' }}>
@@ -12,7 +12,7 @@ export default function PatientInfoHeader({hidePatientInfo}) {
 <div className="space-y-1.5">
   <div className="flex gap-2">
     <span>MRN:</span>
-    <span className="text-gray-500">4885478</span>
+    <span className="text-gray-500">{selectedPatient?.id || selectedPatient?.mrn}</span>
   </div>
   <div className="flex gap-2">
     <span>Gender:</span>
