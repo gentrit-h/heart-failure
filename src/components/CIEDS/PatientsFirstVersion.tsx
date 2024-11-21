@@ -162,7 +162,7 @@ export default function Cieds() {
                 <Wifi className="h-4 w-4" />
                 <span className="text-sm">Enroll Date: {selectedPatient.enrollDate}</span>
               </div>
-              <Button>Notify Patient</Button>
+              <Button>Contact Patient</Button>
             </div>
 
             {/* Tabs */}

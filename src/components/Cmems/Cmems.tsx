@@ -730,11 +730,11 @@ export default function Cmems() {
           </div>
         </div>
         <div className=" pt-1 flex items-center justify-center">
-        <Button className="border rounded-md w-full mr-3" style={{background: "#F1F5FE", borderColor: "#004DE1", color: "#004DE1", fontWeight: 500}}>
+        {/* <Button className="border rounded-md w-full mr-3" style={{background: "#F1F5FE", borderColor: "#004DE1", color: "#004DE1", fontWeight: 500}}>
         Action Plan
-        </Button>
+        </Button> */}
         <Button className="bg-blue-600 hover:bg-blue-700 px-7">
-          Notify Patient
+        Contact Patient
         </Button>
         <span>
         <Button onClick={()=>setSelectedPatient(null)} variant="ghost" size="icon" className="ml-4 h-10 w-10">

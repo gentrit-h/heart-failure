@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dialog"
 import { ChevronDown, ChevronRight, Plus, Star } from 'lucide-react'
 import { Action } from "../ActionPlan/ActionPlanDialog"
+import React from "react"
 
 
 type Action = {
@@ -256,11 +257,11 @@ export default function ActionPlanTable() {
               <option value="high">High</option>
             </select>
 
-            <Button onClick={addNewAction}>Add Action</Button>
+            <Button onClick={addNewAction} className="bg-blue-600 hover:bg-blue-700">Add Action</Button>
           </div>
         </DialogContent>
       </Dialog>
-
+<div className="border rounded-md">
       <Table>
         <TableHeader>
           <TableRow>
@@ -372,6 +373,7 @@ export default function ActionPlanTable() {
           ))}
         </TableBody>
       </Table>
+      </div>
     </div>
   )
 }

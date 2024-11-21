@@ -53,13 +53,42 @@ const symptomData = Array.from({ length: 30 }, (_, i) => ({
 }))
 
 const medications = [
-    { category: "Beta Blockers", otherDrugs: "AAD" },
-    { category: "Diuretics", otherDrugs: "MISC" },
-    { category: "Entresto", otherDrugs: "ADAC" },
-    { category: "ACE-E / AR-B", otherDrugs: "-" },
-    { category: "SGLPT", otherDrugs: "-" },
-    { category: "KT supplements", otherDrugs: "-" },
-  ]
+  {
+    "name": "ARNIs",
+    "meds": ["Entresto"],
+    "doses": ["24/26mg"]
+  },
+  {
+    "name": "ACEi",
+    "meds": ["Enalapril", "Lisinopril", "Ramipril"],
+    "doses": ["2.5mg", "2.5mg", "1.25mg"]
+  },
+  {
+    "name": "ARBs",
+    "meds": ["Losartan", "Valsartan", "Candesartan"],
+    "doses": ["25mg", "40mg", "4mg"]
+  },
+  {
+    "name": "Beta blockers",
+    "meds": ["Carvedilol", "Metoprolol Succinate", "Bisoprolol"],
+    "doses": ["3.125mg", "25mg", "1.25mg"]
+  },
+  {
+    "name": "SGLT2",
+    "meds": ["Dapaglifozin", "Empaglifozin"],
+    "doses": ["10mg", "10mg"]
+  },
+  {
+    "name": "Diuretics",
+    "meds": ["Dapaglifozin", "Empaglifozin"],
+    "doses": ["20mg", "12.5mg"]
+  },
+  {
+    "name": "Ivabradine",
+    "meds": ["Ivabradine"],
+    "doses": ["5mg"]
+  }
+]
 
 export default function Summary() {
   function SelectModified() {
@@ -248,62 +277,42 @@ export default function Summary() {
             <Table>
               <TableHeader>
                 <TableRow className="h-[60px]">
-                  <TableHead className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Category</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Beta Blockers</TableHead>
+                  <TableHead className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Name</TableHead>
+                  {/* <TableHead className="text-center" style={{backgroundColor: "white"}}>Beta Blockers</TableHead>
                   <TableHead className="text-center" style={{backgroundColor: "white"}}>Diuretics</TableHead>
                   <TableHead className="text-center" style={{backgroundColor: "white"}}>ARNIs</TableHead>
                   <TableHead className="text-center" style={{backgroundColor: "white"}}>ACEi / ARBs</TableHead>
                   <TableHead className="text-center" style={{backgroundColor: "white"}}>SGLT2 Inhibitors</TableHead>
                   <TableHead className="text-center" style={{backgroundColor: "white"}}>Ivabradine</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Other Drugs</TableHead>
+                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Other Drugs</TableHead> */}
+                  {medications.map((med, index) => (
+                    <TableHead className="text-center" style={{backgroundColor: "white"}}>{med.name}</TableHead>
+                ))}
                 </TableRow>
                 <TableRow className="h-[60px]">
-                  <TableHead className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Name</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
-                    <div className="flex items-center justify-center">
-                    <SelectModified />
+                  <TableCell className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Name</TableCell>
+                  {medications.map((med, index) => (
+                    <TableCell>
+                      <div className="flex justify-center items-center">
+                    <Select>
+                      <SelectTrigger className="w-32 mt-2">
+                        <SelectValue placeholder={med?.meds?.[0]} />
+                      </SelectTrigger>
+                      <SelectContent>
+                      {med?.meds?.map((e) => (
+                        <SelectItem value={e}>{e}</SelectItem>
+                      ))}
+                      </SelectContent>
+                    </Select>
                     </div>
-                    </TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
-                  <div className="flex items-center justify-center">
-                    <SelectModified />
-                    </div>
-                  </TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
-                  <div className="flex items-center justify-center">
-                    <SelectModified />
-                    </div>
-                  </TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
-                  <div className="flex items-center justify-center">
-                    <SelectModified />
-                    </div>
-                  </TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
-                  <div className="flex items-center justify-center">
-                    <SelectModified />
-                    </div>
-                  </TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
-                  <div className="flex items-center justify-center">
-                    <SelectModified />
-                    </div>
-                  </TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>
-                  <div className="flex items-center justify-center">
-                    <SelectModified />
-                    </div>
-                  </TableHead>
+                  </TableCell>
+                ))}
                 </TableRow>
                 <TableRow className="h-[60px]">
-                  <TableHead className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Dose</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>-</TableHead>
+                  <TableCell className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Dose</TableCell>
+                  {medications.map((med, index) => (
+                    <TableCell className="text-center">{med?.doses?.[0]}</TableCell>
+                  ))}
                 </TableRow>
               </TableHeader>
             </Table>

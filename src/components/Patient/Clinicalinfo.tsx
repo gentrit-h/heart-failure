@@ -18,16 +18,43 @@ import {
 import React from "react"
   
   export default function ClinicalInfo() {
-    const medications = [
-      { category: "Beta Blockers"},
-      { category: "Diuretics" },
-      { category: "Entresto"},
-      { category: "ARNIs" },
-      { category: "ACEi / ARBs" },
-      { category: "SGLT2 Inhibitors" },
-      { category: "Ivabradine" },
-      { category: "Other Drugs" },
-    ]
+const medications = [
+    {
+      "name": "ARNIs",
+      "meds": ["Entresto"],
+      "doses": ["24/26mg"]
+    },
+    {
+      "name": "ACEi",
+      "meds": ["Enalapril", "Lisinopril", "Ramipril"],
+      "doses": ["2.5mg", "2.5mg", "1.25mg"]
+    },
+    {
+      "name": "ARBs",
+      "meds": ["Losartan", "Valsartan", "Candesartan"],
+      "doses": ["25mg", "40mg", "4mg"]
+    },
+    {
+      "name": "Beta blockers",
+      "meds": ["Carvedilol", "Metoprolol Succinate", "Bisoprolol"],
+      "doses": ["3.125mg", "25mg", "1.25mg"]
+    },
+    {
+      "name": "SGLT2",
+      "meds": ["Dapaglifozin", "Empaglifozin"],
+      "doses": ["10mg", "10mg"]
+    },
+    {
+      "name": "Diuretics",
+      "meds": ["Dapaglifozin", "Empaglifozin"],
+      "doses": ["20mg", "12.5mg"]
+    },
+    {
+      "name": "Ivabradine",
+      "meds": ["Ivabradine"],
+      "doses": ["5mg"]
+    }
+  ]
   
     const labWork = [
       {
@@ -54,6 +81,10 @@ import React from "react"
         name: "Troponin:",
         value: "0-14 ng/L",
       },
+      {
+        name: "LDH:",
+        value: "125/220 U/L",
+      },
     ]
   
     return (
@@ -63,7 +94,7 @@ import React from "react"
             <CardTitle className="text-center font-medium">Medication</CardTitle>
           </CardHeader>
           <CardContent className="p-0 m-0">
-            <div className="h-[385px] w-full overflow-y-auto">
+            <div className="h-[433px] w-full overflow-y-auto">
             <Table className="">
               <TableHeader>
                 <TableRow>
@@ -76,20 +107,20 @@ import React from "react"
               <TableBody>
                 {medications.map((med, index) => (
                   <TableRow key={index} className="h-[60px]">
-                    <TableCell className="text-center">{med.category}</TableCell>
+                    <TableCell className="text-center">{med.name}</TableCell>
                     <TableCell className="flex justify-center items-center">
                       <Select>
                         <SelectTrigger className="w-32 mt-2">
-                          <SelectValue placeholder="Option 1" />
+                          <SelectValue placeholder={med?.meds?.[0]} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="option1">Option 1</SelectItem>
-                          <SelectItem value="option2">Option 2</SelectItem>
-                          <SelectItem value="option3">Option 3</SelectItem>
+                        {med?.meds?.map((e) => (
+                          <SelectItem value={e}>{e}</SelectItem>
+                        ))}
                         </SelectContent>
                       </Select>
                     </TableCell>
-                    <TableCell className="text-center">-</TableCell>
+                    <TableCell className="text-center">{med?.doses?.[0]}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -98,7 +129,7 @@ import React from "react"
           </CardContent>
         </Card>
   
-        <Card className="h-[412px]">
+        <Card className="h-[475px]">
         <CardHeader className="p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
             <CardTitle className="text-center font-medium">Lab work</CardTitle>
           </CardHeader>
@@ -117,7 +148,7 @@ import React from "react"
           </CardContent>
         </Card>
 
-        <Card className="h-[412px]">
+        <Card className="h-[475px]">
         <CardHeader className="p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
             <CardTitle className="text-center font-medium">Imaging</CardTitle>
           </CardHeader>

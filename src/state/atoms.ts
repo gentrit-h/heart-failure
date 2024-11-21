@@ -10,7 +10,7 @@ export const openedCardState = atom({
 // Define an atom for tracking active patients
 export const embeddedAnalyticsState = atom({
   key: 'embeddedAnalyticsState',
-  default: true,
+  default: false,
 });
 
 // Define an atom for tracking a counter
