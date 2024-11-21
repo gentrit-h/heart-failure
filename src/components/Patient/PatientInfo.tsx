@@ -25,6 +25,7 @@ import TransmissionSummary from "./TransmissionSummary"
 import { useRecoilState } from "recoil"
 import { embeddedAnalyticsState } from "../../state/atoms"
 import  ActionPlanTable  from "./ActionPlan"
+import TransmissionHistory from "./TransmissionHistory"
 
 export default function PatientInfo({selectedPatient, defaultTab, hidePatientInfo, addPixelsForBiggerScreens, heightFromSummary, isCmemsOrCieds, isDashboard}: 
     {selectedPatient: any, hidePatientInfo: boolean, addPixelsForBiggerScreens: number, heightFromSummary?: number, isCmemsOrCieds?: boolean, defaultTab?: string, isDashboard?: boolean}) {
@@ -194,7 +195,7 @@ export default function PatientInfo({selectedPatient, defaultTab, hidePatientInf
           <ProgressBars />
           </div>
         </div>
-          <div className="mt-6 border rounded-sm">
+          {/* <div className="mt-6 border rounded-sm">
           <Table>
             <TableHeader>
               <TableRow className=''>
@@ -259,7 +260,8 @@ export default function PatientInfo({selectedPatient, defaultTab, hidePatientInf
             <span className="text-sm text-gray-500">Page 1 of 10</span>
             <Button variant="outline">Next</Button>
           </div>
-          </div>
+          </div> */}
+          <TransmissionHistory />
 
           </>
         </TabsContent>
