@@ -24,6 +24,7 @@ import { ProgressBars } from "./ProgressBars"
 import TransmissionSummary from "./TransmissionSummary"
 import { useRecoilState } from "recoil"
 import { embeddedAnalyticsState } from "../../state/atoms"
+import  ActionPlanTable  from "./ActionPlan"
 
 export default function PatientInfo({selectedPatient, defaultTab, hidePatientInfo, addPixelsForBiggerScreens, heightFromSummary, isCmemsOrCieds, isDashboard}: 
     {selectedPatient: any, hidePatientInfo: boolean, addPixelsForBiggerScreens: number, heightFromSummary?: number, isCmemsOrCieds?: boolean, defaultTab?: string, isDashboard?: boolean}) {
@@ -163,6 +164,14 @@ export default function PatientInfo({selectedPatient, defaultTab, hidePatientInf
               4
             </Badge>
           </TabsTrigger>
+
+          <TabsTrigger
+            value="actionplan"
+            className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent"
+          >
+            Action Plan
+          </TabsTrigger>
+
           <TabsTrigger
             value="dynamic"
             className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent"
@@ -265,6 +274,9 @@ export default function PatientInfo({selectedPatient, defaultTab, hidePatientInf
         </TabsContent>
         <TabsContent value="symptoms" className='mt-6'>
           <SymptomsHistory />
+        </TabsContent>
+        <TabsContent value="actionplan" className='mt-6'>
+         <ActionPlanTable />
         </TabsContent>
         <TabsContent value="dynamic" className='mt-6'>
           <TransmissionSummary selectedPatient={selectedPatient} />
