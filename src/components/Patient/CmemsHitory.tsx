@@ -109,9 +109,7 @@ export default function CmemsHistory() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[120px] pl-[18px] text-center">
-                Status
-              </TableHead>
+              {/* <TableHead className="w-[120px] pl-[18px] text-center">Status</TableHead> */}
               <TableHead className="text-center">Date</TableHead>
               <TableHead className="text-center">Goal (+/-)</TableHead>
               <TableHead className="text-center">Systolic PAP</TableHead>
@@ -125,7 +123,7 @@ export default function CmemsHistory() {
           <TableBody>
             {data.map((row, index) => (
               <TableRow key={index}>
-                <TableCell>
+                {/* <TableCell>
                   <div className="flex items-center justify-center">
                     <Badge
                       variant="outline"
@@ -139,8 +137,8 @@ export default function CmemsHistory() {
                         ? "Connected"
                         : "Disconnected"}
                     </Badge>
-                  </div>
-                </TableCell>
+                    </div>
+                </TableCell> */}
                 <TableCell className="text-center">{row.date}</TableCell>
                 <TableCell className="text-center">{row.goal}</TableCell>
                 <TableCell className="text-center">{row.systolicPap}</TableCell>

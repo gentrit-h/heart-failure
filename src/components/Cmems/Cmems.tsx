@@ -67,7 +67,8 @@ const patients = [
     paHeartRate: "75 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "low"
+    priority: "low",
+    manufacturer: "BIO"
   },
   {
     id: "124398596",
@@ -82,7 +83,8 @@ const patients = [
     paHeartRate: "78 bpm",
     waveform: true,
     status: "confirmed",
-    priority: "medium"
+    priority: "medium",
+    manufacturer: "MDT"
   },
   {
     id: "124398597",
@@ -97,7 +99,8 @@ const patients = [
     paHeartRate: "82 bpm",
     waveform: true,
     status: "new",
-    priority: "low"
+    priority: "low",
+    manufacturer: "BIO"
   },
   {
     id: "124398598",
@@ -112,7 +115,8 @@ const patients = [
     paHeartRate: "77 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "high"
+    priority: "high",
+    manufacturer: "STJ"
   },
   {
     id: "124398599",
@@ -127,7 +131,8 @@ const patients = [
     paHeartRate: "83 bpm",
     waveform: true,
     status: "confirmed",
-    priority: "low"
+    priority: "low",
+    manufacturer: "BSX"
   },
   {
     id: "124398600",
@@ -142,7 +147,8 @@ const patients = [
     paHeartRate: "81 bpm",
     waveform: true,
     status: "new",
-    priority: "low"
+    priority: "low",
+    manufacturer: "MDT"
   },
   {
     id: "124398601",
@@ -157,7 +163,8 @@ const patients = [
     paHeartRate: "79 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "high"
+    priority: "high",
+    manufacturer: "STJ"
   },
   {
     id: "124398602",
@@ -172,7 +179,8 @@ const patients = [
     paHeartRate: "76 bpm",
     waveform: true,
     status: "confirmed",
-    priority: "medium"
+    priority: "medium",
+    manufacturer: "BSX"
   },
   {
     id: "124398603",
@@ -187,7 +195,8 @@ const patients = [
     paHeartRate: "78 bpm",
     waveform: true,
     status: "new",
-    priority: "high"
+    priority: "high",
+    manufacturer: "BIO"
   },
   {
     id: "124398604",
@@ -202,7 +211,8 @@ const patients = [
     paHeartRate: "75 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "medium"
+    priority: "medium",
+    manufacturer: "STJ"
   },
   {
     id: "124398605",
@@ -217,7 +227,8 @@ const patients = [
     paHeartRate: "78 bpm",
     waveform: true,
     status: "confirmed",
-    priority: "low"
+    priority: "low",
+    manufacturer: "MDT"
   },
   {
     id: "124398606",
@@ -232,7 +243,8 @@ const patients = [
     paHeartRate: "82 bpm",
     waveform: true,
     status: "new",
-    priority: "medium"
+    priority: "medium",
+    manufacturer: "BSX"
   },
   {
     id: "124398607",
@@ -247,7 +259,8 @@ const patients = [
     paHeartRate: "77 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "high"
+    priority: "high",
+    manufacturer: "MDT"
   },
   {
     id: "124398608",
@@ -262,7 +275,8 @@ const patients = [
     paHeartRate: "83 bpm",
     waveform: true,
     status: "confirmed",
-    priority: "high"
+    priority: "high",
+    manufacturer: "BIO"
   },
   {
     id: "124398609",
@@ -277,7 +291,8 @@ const patients = [
     paHeartRate: "81 bpm",
     waveform: true,
     status: "new",
-    priority: "high"
+    priority: "high",
+    manufacturer: "STJ"
   },
   {
     id: "124398610",
@@ -292,7 +307,8 @@ const patients = [
     paHeartRate: "79 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "medium"
+    priority: "medium",
+    manufacturer: "BSX"
   },
   {
     id: "124398611",
@@ -307,7 +323,8 @@ const patients = [
     paHeartRate: "76 bpm",
     waveform: true,
     status: "confirmed",
-    priority: "low"
+    priority: "low",
+    manufacturer: "MDT"
   },
   {
     id: "124398612",
@@ -322,7 +339,8 @@ const patients = [
     paHeartRate: "78 bpm",
     waveform: true,
     status: "new",
-    priority: "high"
+    priority: "high",
+    manufacturer: "BIO"
   },
   {
     id: "124398613",
@@ -337,7 +355,8 @@ const patients = [
     paHeartRate: "75 bpm",
     waveform: false,
     status: "dismissed",
-    priority: "medium"
+    priority: "medium",
+    manufacturer: "STJ"
   }
 ];
 
@@ -726,7 +745,7 @@ export default function Cmems() {
       </div>
 
       </div>
-      <PatientInfo defaultTab={"summary"} isCmemsOrCieds={true} selectedPatient={selectedPatient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
+      <PatientInfo defaultTab={"summary"} isCmemsOrCieds={true} selectedPatient={selectedPatient?.patient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
       </div>
       </div>
       {/* Add patient details content here */}

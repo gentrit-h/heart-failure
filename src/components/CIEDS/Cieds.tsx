@@ -1,17 +1,8 @@
 "use client";
 
-import * as React from "react";
-import {
-  ArrowUpRight,
-  Calendar as CalendarIcon,
-  ChevronDown,
-  Info,
-  Link,
-  MoreVertical,
-  Search,
-  X,
-} from "lucide-react";
-import { DateRange } from "react-day-picker";
+import * as React from "react"
+import { ArrowUpRight, Badge, Calendar as CalendarIcon, ChevronDown, Download, Info, Link, MoreVertical, Printer, Search, X } from "lucide-react"
+import { DateRange } from "react-day-picker"
 import {
   Table,
   TableBody,
@@ -48,309 +39,312 @@ import PatientInfo from "../Patient/PatientInfo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { WaveForm } from "./WaveForm";
+import opened from "./opened.svg"
+import unopened from "./unopened.svg"
 
 const patients = [
   {
-    id: "124398594",
-    name: "Alice Johnson",
-    source: "Home",
-    date: "01/11/2024 08:30",
-    goal: "34(2)",
-    systolicPAP: "53 mmHg",
-    diastolicPAP: "19 mmHg",
-    meanPAP: "34 mmHg",
-    pulsePressure: "34 mmHg",
-    paHeartRate: "80 bpm",
-    waveform: true,
-    status: "new",
-    priority: "high",
+    id: '1123523',
+    name: "John Doe",
+    status: "New",
+    transmissionDate: "11/20/2024",
+    dateReviewed: "11/20/2024",
+    deviceType: "ICD",
+    transmissionType: "Remote",
+    manufacturer: "BSX",
+    read: true,
+    priority: "red",
+    alert: ['Has shock', 'ATP is true']
   },
   {
-    id: "124398595",
-    name: "Bob Smith",
-    source: "Clinic",
-    date: "01/11/2024 10:15",
-    goal: "40(1)",
-    systolicPAP: "57 mmHg",
-    diastolicPAP: "21 mmHg",
-    meanPAP: "36 mmHg",
-    pulsePressure: "36 mmHg",
-    paHeartRate: "75 bpm",
-    waveform: false,
-    status: "dismissed",
-    priority: "low",
+    id: '1123524',
+    name: "Ermal Ismajli",
+    status: "Archived",
+    transmissionDate: "11/19/2024",
+    dateReviewed: "11/20/2024",
+    deviceType: "ICD",
+    transmissionType: "Remote",
+    manufacturer: "MDT",
+    read: true,
+    priority: "green",
+    alert: ['Has shock', 'ATP is true']
   },
   {
-    id: "124398596",
-    name: "Catherine Lee",
-    source: "Hospital",
-    date: "02/11/2024 14:05",
-    goal: "42(0)",
-    systolicPAP: "60 mmHg",
-    diastolicPAP: "22 mmHg",
-    meanPAP: "38 mmHg",
-    pulsePressure: "38 mmHg",
-    paHeartRate: "78 bpm",
-    waveform: true,
-    status: "confirmed",
-    priority: "medium",
+    id: '1123525',
+    name: "Hashim Thaqi",
+    status: "Reviewed",
+    transmissionDate: "11/20/2024",
+    dateReviewed: "11/20/2024",
+    deviceType: "PPM",
+    transmissionType: "Remote",
+    manufacturer: "BIO",
+    read: false,
+    priority: "yellow",
+    alert: ['ATP is true']
   },
   {
-    id: "124398597",
-    name: "David Brown",
-    source: "Home",
-    date: "03/11/2024 09:45",
-    goal: "38(1)",
-    systolicPAP: "55 mmHg",
-    diastolicPAP: "20 mmHg",
-    meanPAP: "35 mmHg",
-    pulsePressure: "35 mmHg",
-    paHeartRate: "82 bpm",
-    waveform: true,
-    status: "new",
-    priority: "low",
+    id: '1123526',
+    name: "Jane Smith",
+    status: "Archived",
+    transmissionDate: "11/18/2024",
+    dateReviewed: "11/20/2024",
+    deviceType: "CRT-D",
+    transmissionType: "InClinic",
+    manufacturer: "STJ",
+    read: false,
+    priority: "green",
+    alert: ['Lead impedance high']
   },
   {
-    id: "124398598",
-    name: "Emma Wilson",
-    source: "Clinic",
-    date: "03/11/2024 12:30",
-    goal: "39(3)",
-    systolicPAP: "54 mmHg",
-    diastolicPAP: "19 mmHg",
-    meanPAP: "33 mmHg",
-    pulsePressure: "35 mmHg",
-    paHeartRate: "77 bpm",
-    waveform: false,
-    status: "dismissed",
-    priority: "high",
+    id: '1123527',
+    name: "Peter Parker",
+    status: "Reviewed",
+    transmissionDate: "11/20/2024",
+    dateReviewed: "11/20/2024",
+    deviceType: "ICD",
+    transmissionType: "Remote",
+    manufacturer: "MDT",
+    read: true,
+    priority: "green",
+    alert: []
   },
   {
-    id: "124398599",
-    name: "Frank Miller",
-    source: "Hospital",
-    date: "04/11/2024 16:00",
-    goal: "36(2)",
-    systolicPAP: "58 mmHg",
-    diastolicPAP: "20 mmHg",
-    meanPAP: "37 mmHg",
-    pulsePressure: "38 mmHg",
-    paHeartRate: "83 bpm",
-    waveform: true,
-    status: "confirmed",
-    priority: "low",
+    id: '1123528',
+    name: "Bruce Wayne",
+    status: "Reviewed",
+    transmissionDate: "11/19/2024",
+    dateReviewed: "11/19/2024",
+    deviceType: "ILR",
+    transmissionType: "InClinic",
+    manufacturer: "BSX",
+    read: false,
+    priority: "yellow",
+    alert: ['Battery low']
   },
   {
-    id: "124398600",
-    name: "Grace Davis",
-    source: "Home",
-    date: "05/11/2024 11:20",
-    goal: "37(0)",
-    systolicPAP: "56 mmHg",
-    diastolicPAP: "19 mmHg",
-    meanPAP: "36 mmHg",
-    pulsePressure: "37 mmHg",
-    paHeartRate: "81 bpm",
-    waveform: true,
-    status: "new",
-    priority: "low",
+    id: '1123529',
+    name: "Clark Kent",
+    status: "Archived",
+    transmissionDate: "11/17/2024",
+    dateReviewed: "11/18/2024",
+    deviceType: "PPM",
+    transmissionType: "Remote",
+    manufacturer: "BIO",
+    read: true,
+    priority: "red",
+    alert: ['Has shock']
   },
   {
-    id: "124398601",
-    name: "Henry Adams",
-    source: "Clinic",
-    date: "06/11/2024 08:15",
-    goal: "35(1)",
-    systolicPAP: "59 mmHg",
-    diastolicPAP: "21 mmHg",
-    meanPAP: "38 mmHg",
-    pulsePressure: "38 mmHg",
-    paHeartRate: "79 bpm",
-    waveform: false,
-    status: "dismissed",
-    priority: "high",
+    id: '1123530',
+    name: "Diana Prince",
+    status: "New",
+    transmissionDate: "11/16/2024",
+    dateReviewed: "11/19/2024",
+    deviceType: "CRT-P",
+    transmissionType: "InClinic",
+    manufacturer: "STJ",
+    read: true,
+    priority: "green",
+    alert: []
   },
   {
-    id: "124398602",
-    name: "Isabel Moore",
-    source: "Hospital",
-    date: "06/11/2024 15:45",
-    goal: "33(2)",
-    systolicPAP: "61 mmHg",
-    diastolicPAP: "22 mmHg",
-    meanPAP: "39 mmHg",
-    pulsePressure: "39 mmHg",
-    paHeartRate: "76 bpm",
-    waveform: true,
-    status: "confirmed",
-    priority: "medium",
-  },
-  {
-    id: "124398603",
-    name: "Jack Taylor",
-    source: "Home",
-    date: "07/11/2024 07:30",
-    goal: "34(3)",
-    systolicPAP: "54 mmHg",
-    diastolicPAP: "20 mmHg",
-    meanPAP: "34 mmHg",
-    pulsePressure: "34 mmHg",
-    paHeartRate: "78 bpm",
-    waveform: true,
-    status: "new",
-    priority: "high",
-  },
-  {
-    id: "124398604",
-    name: "Katherine White",
-    source: "Clinic",
-    date: "07/11/2024 09:20",
-    goal: "40(1)",
-    systolicPAP: "57 mmHg",
-    diastolicPAP: "21 mmHg",
-    meanPAP: "36 mmHg",
-    pulsePressure: "36 mmHg",
-    paHeartRate: "75 bpm",
-    waveform: false,
-    status: "dismissed",
-    priority: "medium",
-  },
-  {
-    id: "124398605",
-    name: "Liam Harris",
-    source: "Hospital",
-    date: "08/11/2024 14:10",
-    goal: "42(0)",
-    systolicPAP: "60 mmHg",
-    diastolicPAP: "22 mmHg",
-    meanPAP: "38 mmHg",
-    pulsePressure: "38 mmHg",
-    paHeartRate: "78 bpm",
-    waveform: true,
-    status: "confirmed",
-    priority: "low",
-  },
-  {
-    id: "124398606",
-    name: "Maria Clark",
-    source: "Home",
-    date: "08/11/2024 15:30",
-    goal: "38(1)",
-    systolicPAP: "55 mmHg",
-    diastolicPAP: "20 mmHg",
-    meanPAP: "35 mmHg",
-    pulsePressure: "35 mmHg",
-    paHeartRate: "82 bpm",
-    waveform: true,
-    status: "new",
-    priority: "medium",
-  },
-  {
-    id: "124398607",
-    name: "Nathan Robinson",
-    source: "Clinic",
-    date: "09/11/2024 12:05",
-    goal: "39(3)",
-    systolicPAP: "54 mmHg",
-    diastolicPAP: "19 mmHg",
-    meanPAP: "33 mmHg",
-    pulsePressure: "35 mmHg",
-    paHeartRate: "77 bpm",
-    waveform: false,
-    status: "dismissed",
-    priority: "high",
-  },
-  {
-    id: "124398608",
-    name: "Olivia Scott",
-    source: "Hospital",
-    date: "10/11/2024 16:40",
-    goal: "36(2)",
-    systolicPAP: "58 mmHg",
-    diastolicPAP: "20 mmHg",
-    meanPAP: "37 mmHg",
-    pulsePressure: "38 mmHg",
-    paHeartRate: "83 bpm",
-    waveform: true,
-    status: "confirmed",
-    priority: "high",
-  },
-  {
-    id: "124398609",
-    name: "Paul King",
-    source: "Home",
-    date: "11/11/2024 11:00",
-    goal: "37(0)",
-    systolicPAP: "56 mmHg",
-    diastolicPAP: "19 mmHg",
-    meanPAP: "36 mmHg",
-    pulsePressure: "37 mmHg",
-    paHeartRate: "81 bpm",
-    waveform: true,
-    status: "new",
-    priority: "high",
-  },
-  {
-    id: "124398610",
-    name: "Quinn Baker",
-    source: "Clinic",
-    date: "11/11/2024 09:00",
-    goal: "35(1)",
-    systolicPAP: "59 mmHg",
-    diastolicPAP: "21 mmHg",
-    meanPAP: "38 mmHg",
-    pulsePressure: "38 mmHg",
-    paHeartRate: "79 bpm",
-    waveform: false,
-    status: "dismissed",
-    priority: "medium",
-  },
-  {
-    id: "124398611",
-    name: "Rachel Turner",
-    source: "Hospital",
-    date: "12/11/2024 16:50",
-    goal: "33(2)",
-    systolicPAP: "61 mmHg",
-    diastolicPAP: "22 mmHg",
-    meanPAP: "39 mmHg",
-    pulsePressure: "39 mmHg",
-    paHeartRate: "76 bpm",
-    waveform: true,
-    status: "confirmed",
-    priority: "low",
-  },
-  {
-    id: "124398612",
-    name: "Sam Anderson",
-    source: "Home",
-    date: "12/11/2024 08:25",
-    goal: "34(3)",
-    systolicPAP: "54 mmHg",
-    diastolicPAP: "20 mmHg",
-    meanPAP: "34 mmHg",
-    pulsePressure: "34 mmHg",
-    paHeartRate: "78 bpm",
-    waveform: true,
-    status: "new",
-    priority: "high",
-  },
-  {
-    id: "124398613",
-    name: "Tina Carter",
-    source: "Clinic",
-    date: "13/11/2024 10:10",
-    goal: "40(1)",
-    systolicPAP: "57 mmHg",
-    diastolicPAP: "21 mmHg",
-    meanPAP: "36 mmHg",
-    pulsePressure: "36 mmHg",
-    paHeartRate: "75 bpm",
-    waveform: false,
-    status: "dismissed",
-    priority: "medium",
-  },
-];
+      id: '1123531',
+      name: "Alice Wonderland",
+      status: "Reviewed",
+      transmissionDate: "11/20/2024",
+      dateReviewed: "11/20/2024",
+      deviceType: "CRT-D",
+      transmissionType: "InClinic",
+      manufacturer: "MDT",
+      read: false,
+      priority: "red",
+      alert: ['High pacing threshold', 'Arrhythmia detected']
+    },
+    {
+      id: '1123532',
+      name: "Bob Marley",
+      status: "New",
+      transmissionDate: "11/15/2024",
+      dateReviewed: "11/16/2024",
+      deviceType: "ILR",
+      transmissionType: "Remote",
+      manufacturer: "STJ",
+      read: false,
+      priority: "green",
+      alert: []
+    },
+    {
+      id: '1123533',
+      name: "Charlie Chaplin",
+      status: "Reviewed",
+      transmissionDate: "11/14/2024",
+      dateReviewed: "11/16/2024",
+      deviceType: "ICD",
+      transmissionType: "InClinic",
+      manufacturer: "BSX",
+      read: true,
+      priority: "green",
+      alert: ['Noise detected']
+    },
+    {
+      id: '1123534',
+      name: "Debbie Downer",
+      status: "Archived",
+      transmissionDate: "11/12/2024",
+      dateReviewed: "11/13/2024",
+      deviceType: "PPM",
+      transmissionType: "InClinic",
+      manufacturer: "BIO",
+      read: false,
+      priority: "yellow",
+      alert: ['No issues']
+    },
+    {
+      id: '1123535',
+      name: "Ethan Hunt",
+      status: "Reviewed",
+      transmissionDate: "11/11/2024",
+      dateReviewed: "11/13/2024",
+      deviceType: "CRT-P",
+      transmissionType: "Remote",
+      manufacturer: "MDT",
+      read: true,
+      priority: "red",
+      alert: ['Battery low']
+    },
+    {
+      id: '1123536',
+      name: "Fiona Frost",
+      status: "New",
+      transmissionDate: "11/10/2024",
+      dateReviewed: "11/12/2024",
+      deviceType: "ILR",
+      transmissionType: "InClinic",
+      manufacturer: "STJ",
+      read: false,
+      priority: "green",
+      alert: ['Arrhythmia detected']
+    },
+    {
+      id: '1123537',
+      name: "George Orwell",
+      status: "Archived",
+      transmissionDate: "11/09/2024",
+      dateReviewed: "11/10/2024",
+      deviceType: "CRT-D",
+      transmissionType: "Remote",
+      manufacturer: "BSX",
+      read: true,
+      priority: "yellow",
+      alert: ['Lead impedance high']
+    },
+    {
+      id: '1123538',
+      name: "Hannah Montana",
+      status: "Reviewed",
+      transmissionDate: "11/08/2024",
+      dateReviewed: "11/08/2024",
+      deviceType: "ICD",
+      transmissionType: "InClinic",
+      manufacturer: "BIO",
+      read: false,
+      priority: "green",
+      alert: ['No issues detected']
+    }  ,
+    {
+      id: '1123527',
+      name: "Peter Parker",
+      status: "New",
+      transmissionDate: "11/20/2024",
+      dateReviewed: "11/20/2024",
+      deviceType: "ICD",
+      transmissionType: "Remote",
+      manufacturer: "MDT",
+      read: true,
+      priority: "green",
+      alert: []
+    },
+    {
+      id: '1123528',
+      name: "Bruce Wayne",
+      status: "Reviewed",
+      transmissionDate: "11/19/2024",
+      dateReviewed: "11/19/2024",
+      deviceType: "ILR",
+      transmissionType: "InClinic",
+      manufacturer: "BSX",
+      read: false,
+      priority: "yellow",
+      alert: ['Battery low']
+    },
+    {
+      id: '1123529',
+      name: "Clark Kent",
+      status: "Archived",
+      transmissionDate: "11/17/2024",
+      dateReviewed: "11/18/2024",
+      deviceType: "PPM",
+      transmissionType: "Remote",
+      manufacturer: "BIO",
+      read: true,
+      priority: "red",
+      alert: ['Has shock']
+    },
+    {
+      id: '1123530',
+      name: "Diana Prince",
+      status: "New",
+      transmissionDate: "11/16/2024",
+      dateReviewed: "11/19/2024",
+      deviceType: "CRT-P",
+      transmissionType: "InClinic",
+      manufacturer: "STJ",
+      read: true,
+      priority: "green",
+      alert: []
+    },
+    {
+      id: '1123533',
+      name: "Charlie Chaplin",
+      status: "Reviewed",
+      transmissionDate: "11/14/2024",
+      dateReviewed: "11/16/2024",
+      deviceType: "ICD",
+      transmissionType: "InClinic",
+      manufacturer: "BSX",
+      read: true,
+      priority: "green",
+      alert: ['Noise detected']
+    },
+    {
+      id: '1123534',
+      name: "Debbie Downer",
+      status: "Archived",
+      transmissionDate: "11/12/2024",
+      dateReviewed: "11/13/2024",
+      deviceType: "PPM",
+      transmissionType: "InClinic",
+      manufacturer: "BIO",
+      read: false,
+      priority: "yellow",
+      alert: ['Battery low']
+    },
+    {
+      id: '1123535',
+      name: "Ethan Hunt",
+      status: "New",
+      transmissionDate: "11/11/2024",
+      dateReviewed: "11/13/2024",
+      deviceType: "CRT-P",
+      transmissionType: "Remote",
+      manufacturer: "MDT",
+      read: true,
+      priority: "red",
+      alert: ['Battery low']
+    },
+]
+
+
 
 export default function Cieds() {
   const [selectedPatients, setSelectedPatients] = React.useState<string[]>([]);
@@ -365,7 +359,8 @@ export default function Cieds() {
     search: "",
     deviceType: [] as string[],
     connectivity: [] as string[],
-  });
+    status: [] as string[],
+  })
   const parentRef = React.useRef(null);
   const [parentHeight, setParentHeight] = React.useState(0);
 
@@ -412,26 +407,17 @@ export default function Cieds() {
   };
 
   const applyFilters = () => {
-    setFilteredPatients(
-      patients.filter((patient) => {
-        const searchMatch =
-          patient.name.toLowerCase().includes(filters.search.toLowerCase()) ||
-          patient.id.includes(filters.search);
-        const deviceTypeMatch =
-          filters.deviceType.length === 0 ||
-          filters.deviceType.includes(patient.deviceType);
-        const connectivityMatch =
-          filters.connectivity.length === 0 ||
-          filters.connectivity.includes(patient.connectivity);
-        const statusMatch =
-          currentTab === "all" || patient.status === currentTab;
-        return (
-          searchMatch && deviceTypeMatch && connectivityMatch && statusMatch
-        );
-      })
-    );
-    setCurrentPage(1); // Reset to first page when filters change
-  };
+    setFilteredPatients(patients.filter(patient => {
+      const searchMatch = patient.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+                          patient.id.includes(filters.search)
+      const deviceTypeMatch = filters.deviceType.length === 0 || filters.deviceType.includes(patient.deviceType)
+      // const connectivityMatch = filters.connectivity.length === 0 || filters.connectivity.includes(patient.connectivity)
+      const statusMatch = filters.status.length === 0 || filters.status.includes(patient.status)
+      const tabMatch = currentTab === "all" || patient.status === currentTab
+      return searchMatch && deviceTypeMatch && statusMatch && tabMatch
+    }))
+    setCurrentPage(1) // Reset to first page when filters change
+  }
 
   React.useEffect(() => {
     applyFilters();
@@ -445,12 +431,12 @@ export default function Cieds() {
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case "high":
-        return "bg-red-500";
-      case "medium":
-        return "bg-yellow-500";
-      case "low":
-        return "bg-green-500";
+      case "red":
+        return "bg-red-500"
+      case "yellow":
+        return "bg-yellow-500"
+      case "green":
+        return "bg-green-500"
       default:
         return "bg-gray-500";
     }
@@ -468,7 +454,7 @@ export default function Cieds() {
     <div className="w-full space-y-4 h-[88vh]" ref={parentRef}>
       <div className="flex flex-col space-y-4">
         <div className="flex space-x-1 border-b">
-          {["all", "new", "confirmed", "dismissed"].map((tab) => (
+          {["all", "New", "Reviewed", "Archived"].map((tab) => (
             <button
               key={tab}
               className={`px-4 py-2 text-sm font-medium ${
@@ -532,372 +518,172 @@ export default function Cieds() {
       </div>
 
       <div className="rounded-t-md border">
-        <div className="flex flex-row">
-          <div className={` ${selectedPatient ? "w-[273px]" : "w-full"}`}>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <div
-                    className={`absolute left-0 top-0 bottom-0 w-[5px] mt-[6px] mb-[6px] rounded-tr-[6px] rounded-br-[6px]`}
-                  />
-                  <TableHead className="w-12">
-                    <Checkbox
-                      className="ml-[5px]"
-                      checked={getCurrentPagePatients().every((patient) =>
-                        selectedPatients.includes(patient.id)
-                      )}
-                      onCheckedChange={toggleAll}
-                    />
-                  </TableHead>
-                  <TableHead>Patients</TableHead>
-                  {!selectedPatient && (
-                    <>
-                      <TableHead className="text-center">Source</TableHead>
-                      <TableHead className="text-center">Date</TableHead>
-                      <TableHead className="text-center">Goal (+/-)</TableHead>
-                      <TableHead className="text-center">
-                        Systolic PAP
-                      </TableHead>
-                      <TableHead className="text-center">
-                        Diastolic PAP
-                      </TableHead>
-                      <TableHead className="text-center">Mean PAP</TableHead>
-                      <TableHead className="text-center">
-                        Pulse Pressure
-                      </TableHead>
-                      <TableHead className="text-center">
-                        PA Heart Rate
-                      </TableHead>
-                      <TableHead className="text-center">Waveform</TableHead>
-                      <TableHead className="text-center">Status</TableHead>
-                      <TableHead className="text-center">View</TableHead>
-                      <TableHead className="w-[100px]"></TableHead>
-                    </>
-                  )}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {getCurrentPagePatients().map((patient) => (
-                  <TableRow key={patient.id} className="h-[72px] relative">
-                    <div
-                      className={`absolute left-0 top-0 bottom-0 w-[5px] ${getPriorityColor(
-                        patient.priority
-                      )} mt-[6px]  mb-[6px] rounded-tr-[6px] rounded-br-[6px]`}
-                    />
-                    <TableCell>
-                      <Checkbox
-                        className="ml-[5px]"
-                        checked={selectedPatients.includes(patient.id)}
-                        onCheckedChange={() => togglePatient(patient.id)}
-                      />
-                    </TableCell>
-                    <TableCell
-                      className="cursor-pointer"
-                      onClick={() => setSelectedPatient({ ...{ patient } })}
-                    >
-                      <div className="font-medium">{patient.name}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {patient.id}
-                      </div>
-                    </TableCell>
-                    {!selectedPatient && (
-                      <>
-                        <TableCell className="text-center">
-                          {patient.source}
-                        </TableCell>
-                        <TableCell className="text-center">
-                          {patient.date}
-                        </TableCell>
-                        <TableCell className="text-center">
-                          {patient.goal}
-                        </TableCell>
-                        <TableCell className="text-center">
-                          {patient.systolicPAP}
-                        </TableCell>
-                        <TableCell className="text-center">
-                          {patient.diastolicPAP}
-                        </TableCell>
-                        <TableCell className="text-center">
-                          {patient.meanPAP}
-                        </TableCell>
-                        <TableCell className="text-center">
-                          {patient.pulsePressure}
-                        </TableCell>
-                        <TableCell className="text-center">
-                          {patient.paHeartRate}
-                        </TableCell>
-                        <TableCell>
-                          <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
-                            <div
-                              style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                position: "relative",
-                              }}
-                            >
-                              <PopoverTrigger asChild>
-                              <div className="flex justify-center">
-                                <div
-                                  className="flex justify-center cursor-pointer items-center"
-                                  style={{
-                                    transition: "background-color 0.3s ease",
-                                    width: "32px",
-                                    height: "32px",
-                                    borderRadius: "5px",
-                                  }}
-                                  onMouseEnter={(e) =>
-                                    (e.currentTarget.style.backgroundColor =
-                                      "lightgrey")
-                                  } // Change color on hover
-                                  onMouseLeave={(e) =>
-                                    (e.currentTarget.style.backgroundColor =
-                                      "white")
-                                  }
-                                >
-                                  <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      d="M21 21H4.6C4.03995 21 3.75992 21 3.54601 20.891C3.35785 20.7951 3.20487 20.6422 3.10899 20.454C3 20.2401 3 19.9601 3 19.4V3M20 8L16.0811 12.1827C15.9326 12.3412 15.8584 12.4204 15.7688 12.4614C15.6897 12.4976 15.6026 12.5125 15.516 12.5047C15.4179 12.4958 15.3215 12.4458 15.1287 12.3457L11.8713 10.6543C11.6785 10.5542 11.5821 10.5042 11.484 10.4953C11.3974 10.4875 11.3103 10.5024 11.2312 10.5386C11.1416 10.5796 11.0674 10.6588 10.9189 10.8173L7 15"
-                                      stroke="#667085"
-                                      stroke-width="2"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                    />
-                                  </svg>
-                                </div>
-                              </div>
-                              </PopoverTrigger>
-                              
-                            </div>
+      <div className="flex flex-row">
 
-                            <PopoverContent
-                              className="w-86"
-                              align="end"
-                              style={{
-                                width: "29vw",
-                              }}
-                            >
-                              <WaveForm></WaveForm>
-                              <PopoverClose asChild>
-                              </PopoverClose>
-                            </PopoverContent>
-                          </Popover>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex justify-center">
-                            <Select>
-                              <SelectTrigger className="w-[130px]">
-                                <SelectValue placeholder="Select Status" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="new">New</SelectItem>
-                                <SelectItem value="confirmed">
-                                  Confirmed
-                                </SelectItem>
-                                <SelectItem value="dismissed">
-                                  Dismissed
-                                </SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex justify-center">
-                            <Button
-                              className="border rounded-md w-full mr-3"
-                              style={{
-                                background: "#F1F5FE",
-                                borderColor: "#004DE1",
-                                color: "#004DE1",
-                                fontWeight: 500,
-                              }}
-                            >
-                              View Summary
-                            </Button>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex justify-center">
-                            <div className="flex space-x-2">
-                              <Button variant="ghost" size="icon">
-                                <svg
-                                  width="24"
-                                  height="24"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M20 6L9 17L4 12"
-                                    stroke="#667085"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                  />
-                                </svg>
-                              </Button>
-                              <Button variant="ghost" size="icon">
-                                <svg
-                                  width="24"
-                                  height="24"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M18 6L6 18M6 6L18 18"
-                                    stroke="#667085"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                  />
-                                </svg>
-                              </Button>
-                              <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                  <Button variant="ghost" size="icon">
-                                    <svg
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                      <path
-                                        d="M12 16V12M12 8H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
-                                        stroke="#667085"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                      />
-                                    </svg>
-                                  </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end">
-                                  <DropdownMenuItem>
-                                    View details
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem>
-                                    Export data
-                                  </DropdownMenuItem>
-                                </DropdownMenuContent>
-                              </DropdownMenu>
-                            </div>
-                          </div>
-                        </TableCell>
-                      </>
-                    )}
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            <div
-              className={`flex items-center border-t justify-between space-x-2 py-3 mt-0 pl-3 pr-3`}
-              style={{ marginTop: 0 }}
-            >
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                disabled={currentPage === 1}
-              >
-                Previous
-              </Button>
-              <span className="text-sm text-muted-foreground">
-                Page {currentPage} of {totalPages}
-              </span>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() =>
-                  setCurrentPage((p) => Math.min(totalPages, p + 1))
-                }
-                disabled={currentPage === totalPages}
-              >
-                Next
-              </Button>
-            </div>
-          </div>
-
-          {selectedPatient && (
-            <div className="w-[calc(100%-273px)] border-l">
-              {/* Right-side div for patient data */}
-              <div style={{ overflowX: "auto", height: "100%" }}>
-                <div
-                  className=" mx-auto px-6 pt-4 pb-3"
-                  style={{ minWidth: "1370px" }}
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="flex items-center gap-3">
-                      <Avatar className="h-12 w-12">
-                        <AvatarImage alt="Patient avatar" src={"./er.png"} />
-                        <AvatarFallback>PA</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-lg">
-                            {selectedPatient.patient.name}
-                          </span>
-                          <Button
-                            onClick={() => setHidePatientInfo(!hidePatientInfo)}
-                            variant="ghost"
-                            size="icon"
-                            className="ml-1 h-10 w-10"
-                          >
-                            <ChevronDown
-                              className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${
-                                hidePatientInfo ? "rotate-180" : "rotate-0"
-                              }`}
-                            />
-                          </Button>{" "}
-                        </div>
-                        <div className="text-sm text-gray-500">Age 21</div>
-                      </div>
-                    </div>
-                    <div className=" pt-1 flex items-center justify-center">
-                      <Button
-                        className="border rounded-md w-full mr-3"
-                        style={{
-                          background: "#F1F5FE",
-                          borderColor: "#004DE1",
-                          color: "#004DE1",
-                          fontWeight: 500,
-                        }}
-                      >
-                        Action Plan
-                      </Button>
-                      <Button className="bg-blue-600 hover:bg-blue-700 px-7">
-                        Notify Patient
-                      </Button>
-                      <span>
-                        <Button
-                          onClick={() => setSelectedPatient(null)}
-                          variant="ghost"
-                          size="icon"
-                          className="ml-4 h-10 w-10"
-                        >
-                          <X />
-                        </Button>
-                      </span>
-                    </div>
-                  </div>
-                  <PatientInfo
-                    isCmemsOrCieds={true}
-                    selectedPatient={selectedPatient}
-                    hidePatientInfo={hidePatientInfo}
-                    addPixelsForBiggerScreens={addPixelsForBiggerScreens}
+      <div className={` ${selectedPatient ? "w-[273px]" : "w-full"}`}>        
+        <Table>
+          <TableHeader>
+            <TableRow>
+            <div className={`absolute left-0 top-0 bottom-0 w-[5px] mt-[6px] mb-[6px] rounded-tr-[6px] rounded-br-[6px]`} />
+              <TableHead className="w-12">
+                <Checkbox
+                  className="ml-[5px]"
+                  checked={getCurrentPagePatients().every(patient => selectedPatients.includes(patient.id))}
+                  onCheckedChange={toggleAll}
+                />
+              </TableHead>
+              <TableHead className="pl-8">Patients</TableHead>
+              {!selectedPatient && (
+                <>
+              <TableHead className="text-center">Read</TableHead>
+              <TableHead className="text-center">Processed</TableHead>
+              <TableHead className="text-center">Transmission Date</TableHead>
+              <TableHead className="text-center">Status</TableHead>
+              <TableHead className="text-center">Date Reviewed</TableHead>
+              <TableHead className="text-center">Device Type</TableHead>
+              <TableHead className="text-center">Transmission Type</TableHead>
+              <TableHead className="w-[100px]">Actions</TableHead>
+              </>
+              )}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {getCurrentPagePatients().map((patient) => (
+              <TableRow key={patient.id} className="h-[72px] relative">
+                <div className={`absolute left-0 top-0 bottom-0 w-[5px] ${getPriorityColor(patient.priority)} mt-[6px]  mb-[6px] rounded-tr-[6px] rounded-br-[6px]`} />
+                <TableCell>
+                  <Checkbox 
+                    className="ml-[5px]"
+                    checked={selectedPatients.includes(patient.id)}
+                    onCheckedChange={() => togglePatient(patient.id)}
                   />
+                </TableCell>
+                <TableCell className="cursor-pointer pl-7" onClick={() => setSelectedPatient({...{patient}})}>
+                  <div className="font-medium">{patient.name}</div>
+                  <div className="text-sm text-muted-foreground">{patient.id}</div>
+                </TableCell>
+                {!selectedPatient && (
+                <>
+                <TableCell>
+                  <div className="flex justify-center cursor-pointer gap-3">
+                  {patient.alert.length>1 ? <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="23"
+        height="23"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={{color: "#357ABD"}}
+      >
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+        <line x1="12" y1="9" x2="12" y2="13" />
+        <line x1="12" y1="17" x2="12.01" y2="17" />
+      </svg> : <></>}
+                  {patient.read ? 
+                    <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.9955 1.75218L22.2763 7.12803C22.5689 7.31799 22.7152 7.41297 22.8212 7.53966C22.9151 7.65181 22.9856 7.78153 23.0286 7.92122C23.0771 8.07903 23.0771 8.25331 23.0771 8.60186V16.6567C23.0771 18.5026 23.0771 19.4255 22.7175 20.1306C22.4011 20.7507 21.8963 21.255 21.2753 21.5709C20.5694 21.9302 19.6453 21.9302 17.7971 21.9302H6.35715C4.50898 21.9302 3.58489 21.9302 2.87898 21.5709C2.25804 21.255 1.75321 20.7507 1.43683 20.1306C1.07715 19.4255 1.07715 18.5026 1.07715 16.6567V8.60186C1.07715 8.25331 1.07715 8.07903 1.12574 7.92122C1.16875 7.78153 1.23923 7.65181 1.33306 7.53966C1.43906 7.41297 1.58536 7.31799 1.87797 7.12803L10.1588 1.75218M13.9955 1.75218C13.3011 1.3014 12.954 1.07601 12.5799 0.988314C12.2492 0.910796 11.9051 0.910796 11.5744 0.988314C11.2003 1.07601 10.8532 1.3014 10.1588 1.75218M13.9955 1.75218L20.8069 6.17409C21.5635 6.66529 21.9419 6.91089 22.0729 7.22235C22.1874 7.49454 22.1874 7.8013 22.0729 8.07349C21.9419 8.38495 21.5635 8.63055 20.8069 9.12175L13.9955 13.5437C13.3011 13.9944 12.954 14.2198 12.5799 14.3075C12.2492 14.385 11.9051 14.385 11.5744 14.3075C11.2003 14.2198 10.8532 13.9944 10.1588 13.5437L3.3474 9.12175C2.59076 8.63055 2.21245 8.38495 2.08142 8.07349C1.96691 7.8013 1.96691 7.49454 2.08142 7.22235C2.21245 6.91089 2.59076 6.66529 3.3474 6.17409L10.1588 1.75218M22.5271 19.7329L15.22 13.1411M8.93425 13.1411L1.62715 19.7329" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>                    
+                    : 
+                    <div className="pt-[2px]">
+                    <svg width="24" height="19" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.4302 15.8052L15.1231 9.43018M8.83737 9.43018L1.53026 15.8052M1.10519 4.26709L9.96164 10.1903C10.6889 10.6821 11.0526 10.928 11.4481 11.0232C11.7975 11.1073 12.1629 11.1073 12.5123 11.0232C12.9079 10.928 13.2715 10.6821 13.9988 10.1903L22.6205 4.26709M6.26022 17.9302H17.7002C19.5484 17.9302 20.4725 17.9302 21.1784 17.5828C21.7993 17.2772 22.3042 16.7895 22.6205 16.1898C22.9802 15.5079 22.9802 14.6153 22.9802 12.8302V6.03018C22.9802 4.24501 22.9802 3.35242 22.6205 2.67058C22.3042 2.07081 21.7993 1.58319 21.1784 1.27759C20.4725 0.930176 19.5484 0.930176 17.7002 0.930176H6.26022C4.41205 0.930176 3.48796 0.930176 2.78206 1.27759C2.16112 1.58319 1.65629 2.07081 1.3399 2.67058C0.980225 3.35242 0.980225 4.24501 0.980225 6.03018V12.8302C0.980225 14.6153 0.980225 15.5079 1.3399 16.1898C1.65629 16.7895 2.16112 17.2772 2.78206 17.5828C3.48796 17.9302 4.41205 17.9302 6.26022 17.9302Z" stroke="#28AC62" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </div>
+                  }
                 </div>
-              </div>
-              {/* Add patient details content here */}
-            </div>
-          )}
+                </TableCell>
+                <TableCell>
+                  <div className="flex justify-center">
+                <Checkbox style={{backgroundColor: (patient.status == "Reviewed" || patient.priority == "red" ? "#4A90E2" : ""), border: (patient.status == "Reviewed" || patient.priority == "red" ? "none" : "")}} checked={patient.status == "Reviewed" || patient.priority == "red"} />
+                </div>
+              </TableCell>
+              <TableCell className="text-center">{patient.transmissionDate}</TableCell>
+              <TableCell className="text-center">{patient.status}</TableCell>
+              <TableCell className="text-center">{patient.dateReviewed}</TableCell>
+              <TableCell className="text-center">{patient.manufacturer} - {patient.deviceType}</TableCell>
+              <TableCell className="text-center">{patient.transmissionType}</TableCell>
+              <TableCell>
+                <div className="flex space-x-3">
+                  <Download className="h-5 w-5 text-gray-500 cursor-pointer" />
+                  <Printer className="h-5 w-5 text-gray-500 cursor-pointer" />
+                </div>
+              </TableCell>
+                </>
+                )}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <div className={`flex items-center border-t justify-between space-x-2 py-3 mt-0 pl-3 pr-3`} style={{ marginTop: 0 }}>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </Button>
+        <span className="text-sm text-muted-foreground">
+          Page {currentPage} of {totalPages}
+        </span>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </Button>
+      </div>
+      </div>
+
+      {selectedPatient && (
+    <div className="w-[calc(100%-273px)] border-l">
+      {/* Right-side div for patient data */}
+      <div style={{overflowX: 'auto', height: '100%'}}>
+    <div className=" mx-auto px-6 pt-4 pb-3" style={{ minWidth: '1370px' }}>
+    <div className="flex justify-between items-start mb-4">
+        <div className="flex items-center gap-3">
+          <Avatar className="h-12 w-12">
+            <AvatarImage alt="Patient avatar" src={'./er.png'} />
+            <AvatarFallback>PA</AvatarFallback>
+          </Avatar>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-lg">{selectedPatient.patient.name}</span>
+              <Button onClick={()=>setHidePatientInfo(!hidePatientInfo)} variant="ghost" size="icon" className="ml-1 h-10 w-10">
+                <ChevronDown className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${hidePatientInfo ? 'rotate-180' : 'rotate-0'}`} />
+              </Button>            </div>
+            <div className="text-sm text-gray-500">Age 21</div>
+          </div>
         </div>
+        <div className=" pt-1 flex items-center justify-center">
+        <Button className="border rounded-md w-full mr-3" style={{background: "#F1F5FE", borderColor: "#004DE1", color: "#004DE1", fontWeight: 500}}>
+        Action Plan
+        </Button>
+        <Button className="bg-blue-600 hover:bg-blue-700 px-7">
+          Notify Patient
+        </Button>
+        <span>
+        <Button onClick={()=>setSelectedPatient(null)} variant="ghost" size="icon" className="ml-4 h-10 w-10">
+         <X />
+        </Button>
+        </span>
+
+      </div>
+
+      </div>
+      <PatientInfo isCmemsOrCieds={true} selectedPatient={selectedPatient?.patient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
+      </div>
+      </div>
+      {/* Add patient details content here */}
+    </div>
+  )}
+</div>
+
       </div>
     </div>
   );

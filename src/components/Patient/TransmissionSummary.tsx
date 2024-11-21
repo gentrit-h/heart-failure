@@ -4,12 +4,21 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import React from "react"
 import { ProgressBars } from "./ProgressBars"
 import EpisodesTable from "./EpisodesTable"
+import { Heart } from "lucide-react"
+import HeartFailure from "./HeartFailure"
+import leads from "./Leads.png"
+import atBurden from "./atBurden.png"
+import vtRate from "./vtRate.png"
+import pacing from "./pacing.png"
 
-export default function TransmissionSummary() {
+export default function TransmissionSummary({selectedPatient}) {
   return (
     <div className="">
-        <ProgressBars />
-
+        <div className="flex justify-center ">
+          <div className="w-full max-w-[1600px]">
+          <ProgressBars />
+          </div>
+        </div>
       <div className="flex justify-between items-center mb-6 mt-6 w-full">
         <Tabs defaultValue="summary" className="w-full">
         <div className="flex justify-between items-center">
@@ -132,32 +141,27 @@ export default function TransmissionSummary() {
         </TabsContent>
 
         <TabsContent value="heart-failure" className="mt-6">
-            <div>
-                <div className="text-lg py-1 pl-8 rounded-md" style={{backgroundColor: "#E4ECFF", color: "#004DE1", fontWeight: 700}}>Heart Failure Index</div>
-                <div className="w-full"></div>
+          <div className="flex justify-center">
+          <div className="w-[65%] min-w-[1250px]">
+            <HeartFailure selectedPatient={selectedPatient}/>
             </div>
-            <div>
-                <div className="text-lg py-1 pl-8 rounded-md" style={{backgroundColor: "#E4ECFF", color: "#004DE1", fontWeight: 700}}>Thoracic Impedance</div>
-                <div className="w-full"></div>
-            </div>
-            <div>
-                <div className="text-lg py-1 pl-8 rounded-md" style={{backgroundColor: "#E4ECFF", color: "#004DE1", fontWeight: 700}}>Resp. Rate</div>
-                <div className="w-full"></div>
-            </div>
-            <div>
-                <div className="text-lg py-1 pl-8 rounded-md" style={{backgroundColor: "#E4ECFF", color: "#004DE1", fontWeight: 700}}>Heart Rate Variability</div>
-                <div className="w-full"></div>
             </div>
         </TabsContent>
 
         <TabsContent value="heart-rhythm" className="mt-6">
+        <div className="flex justify-center">
+        <div className="w-[65%] min-w-[1250px]">
             <div>
                 <div className="text-lg py-1 pl-8 rounded-md" style={{backgroundColor: "#E4ECFF", color: "#004DE1", fontWeight: 700}}>Atrial Burden</div>
-                <div className="w-full"></div>
-            </div>
+                <div className="flex justify-center">
+                  <img src={atBurden} className="w-[900px]"/>
+                </div>
+                </div>
             <div>
                 <div className="text-lg py-1 pl-8 rounded-md" style={{backgroundColor: "#E4ECFF", color: "#004DE1", fontWeight: 700}}>RV Rate During AT/AF</div>
-                <div className="w-full"></div>
+                <div className="flex justify-center">
+                  <img src={vtRate} className="w-[900px]"/>
+                </div>
             </div>
             <div>
                 <div className="text-lg py-1 pl-8 rounded-md" style={{backgroundColor: "#E4ECFF", color: "#004DE1", fontWeight: 700}}>Episodes Summary</div>
@@ -165,14 +169,32 @@ export default function TransmissionSummary() {
                     <EpisodesTable />
                 </div>
             </div>
-            <div>
-                <div className="text-lg py-1 pl-8 rounded-md text-center" style={{backgroundColor: "#E4ECFF", color: "#004DE1", fontWeight: 700}}>Pacing</div>
-                <div className="w-full"></div>
+            <div className="flex">
+              <div style={{ flex: "1", padding: "0.5rem" }}>
+                <div
+                  className="text-lg py-1 pl-8 rounded-md text-center pb-2"
+                  style={{ backgroundColor: "#E4ECFF", color: "#004DE1", fontWeight: 700 }}
+                >
+                  Pacing
+                </div>
+                <div className="flex justify-center">
+                  <img src={pacing} />
+                </div>
+              </div>
+              <div style={{ flex: "1", padding: "0.5rem" }}>
+                <div
+                  className="text-lg py-1 pl-8 rounded-md text-center pb-2"
+                  style={{ backgroundColor: "#E4ECFF", color: "#004DE1", fontWeight: 700 }}
+                >
+                  Leads
+                </div>
+                <div className="flex justify-center">
+                  <img src={leads} />
+                </div>
+              </div>
             </div>
-            <div>
-                <div className="text-lg py-1 pl-8 rounded-md text-center" style={{backgroundColor: "#E4ECFF", color: "#004DE1", fontWeight: 700}}>Leads</div>
-                <div className="w-full"></div>
-            </div>
+          </div>
+          </div>
         </TabsContent>
         </Tabs>
       </div>

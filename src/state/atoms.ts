@@ -12,3 +12,9 @@ export const embeddedAnalyticsState = atom({
   key: 'embeddedAnalyticsState',
   default: true,
 });
+
+// Define an atom for tracking a counter
+export const selectedPatientDashboard = atom({
+  key: 'selectedPatientDashboard', // Unique ID (with respect to other atoms/selectors)
+  default: null, // Default value of the atom
+});

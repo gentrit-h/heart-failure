@@ -32,7 +32,7 @@ import LowBatteries from "./analytics/LowBatteries";
 import "./scrollbarStyles.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { openedCardState, embeddedAnalyticsState } from "../../../state/atoms";
+import { openedCardState, embeddedAnalyticsState, selectedPatientDashboard } from "../../../state/atoms";
 
 
 import {
@@ -41,6 +41,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { PopoverClose } from "@radix-ui/react-popover";
+import React from "react";
 
 const cardStyle = {
   border: "1px solid rgba(0, 0, 0, 0.06)", // Thin grey border
@@ -225,9 +226,10 @@ case "type7":
   }
 };
 
-export default function Maindashboard() {
+export default function Maindashboard({alerts, patients}) {
   const [zoomLevel, setZoomLevel] = useState(1);
   const [openedCard, setOpenedCard] = useRecoilState(openedCardState);
+  const [selectedPatient, setSelectedPatient] = useRecoilState(selectedPatientDashboard);
 
   // Detect zoom level
   const detectZoom = () => {
@@ -246,310 +248,7 @@ export default function Maindashboard() {
       window.removeEventListener("resize", detectZoom);
     };
   }, []);
-
-  const alerts = [
-    {
-      patientName: "Chris Green",
-      scheduledDate: "01/10/24",
-      badges: [
-        { text: "Has shock", variant: "destructive" },
-        { text: "ATP is true", variant: "destructive" },
-        {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "10 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type1"],
-    },
-    {
-      patientName: "John Doe",
-      scheduledDate: "01/07/24",
-      badges: [
-        { text: "ATP is true", variant: "destructive" },
-        {
-          text: "5 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type3", "type2"],
-    },
-    {
-      patientName: "Jane Smith",
-      scheduledDate: "01/08/24",
-      badges: [
-        { text: "Has shock", variant: "destructive" },
-        { text: "ATP is true", variant: "destructive" },
-        {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "15 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type2"],
-    },
-    {
-      patientName: "Alex Brown",
-      scheduledDate: "01/09/24",
-      badges: [
-        {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "15 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type1"],
-    },
-    {
-      patientName: "Chris Green",
-      scheduledDate: "01/10/24",
-      badges: [
-        { text: "Has shock", variant: "destructive" },
-        {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "8 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type4", "type2"],
-    },
-    {
-      patientName: "Taylor White",
-      scheduledDate: "01/11/24",
-      badges: [
-        { text: "Has shock", variant: "destructive" },
-        {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "12 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type2"],
-    },
-    {
-      patientName: "Chris Green",
-      scheduledDate: "01/10/24",
-      badges: [
-        { text: "Has shock", variant: "destructive" },
-        { text: "ATP is true", variant: "destructive" },
-        {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "10 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type2"],
-    },
-    {
-      patientName: "John Doe",
-      scheduledDate: "01/07/24",
-      badges: [
-        { text: "ATP is true", variant: "destructive" },
-        {
-          text: "5 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type4", "type2"],
-    },
-    {
-      patientName: "Jane Smith",
-      scheduledDate: "01/08/24",
-      badges: [
-        { text: "Has shock", variant: "destructive" },
-        { text: "ATP is true", variant: "destructive" },
-        {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "15 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type2"],
-    },
-    {
-      patientName: "Alex Brown",
-      scheduledDate: "01/09/24",
-      badges: [
-        {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "15 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type1"],
-    },
-    {
-      patientName: "Chris Green",
-      scheduledDate: "01/10/24",
-      badges: [
-        { text: "Has shock", variant: "destructive" },
-        {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "8 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type4"],
-    },
-    {
-      patientName: "Taylor White",
-      scheduledDate: "01/11/24",
-      badges: [
-        { text: "Has shock", variant: "destructive" },
-        {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "12 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
-      ],
-      icons: ["type2"],
-    },
-  ];
-
-  const patients = [
-    {
-      patientName: "Chris Green",
-      scheduledDate: "01/10/24",
-      icons: ["type1","type6"],
-    },
-    {
-      patientName: "John Doe",
-      scheduledDate: "01/07/24",
-      icons: ["type2", "type7"],
-    },
-    {
-      patientName: "Jane Smith",
-      scheduledDate: "01/08/24",
-      icons: ["type1","type6"],
-    },
-    {
-      patientName: "Alex Brown",
-      scheduledDate: "01/09/24",
-      icons: ["type2", "type7"],
-    },
-    {
-      patientName: "Taylor White",
-      scheduledDate: "01/11/24",
-      icons: ["type1", "type6"],
-    },
-    {
-      patientName: "Chris Green",
-      scheduledDate: "01/10/24",
-      icons: ["type1","type6"],
-    },
-    {
-      patientName: "John Doe",
-      scheduledDate: "01/07/24",
-      icons: ["type2", "type7"],
-    },
-    {
-      patientName: "Jane Smith",
-      scheduledDate: "01/08/24",
-      icons: ["type1","type6"],
-    },
-    {
-      patientName: "Alex Brown",
-      scheduledDate: "01/09/24",
-      icons: ["type1", "type7"],
-    },
-    {
-      patientName: "Taylor White",
-      scheduledDate: "01/11/24",
-      icons: ["type1", "type6"],
-    },
-    {
-      patientName: "Chris Green",
-      scheduledDate: "01/10/24",
-      icons: ["type1","type6"],
-    },
-    {
-      patientName: "John Doe",
-      scheduledDate: "01/07/24",
-      icons: ["type2", "type7"],
-    },
-    {
-      patientName: "Jane Smith",
-      scheduledDate: "01/08/24",
-      icons: ["type1","type6"],
-    },
-    {
-      patientName: "Alex Brown",
-      scheduledDate: "01/09/24",
-      icons: ["type1", "type7"],
-    },
-    {
-      patientName: "Taylor White",
-      scheduledDate: "01/11/24",
-      icons: ["type1", "type6"],
-    },
-    
-  ];
+  
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -624,12 +323,13 @@ export default function Maindashboard() {
                       <TableCell
                         style={smallFontStyle}
                         onClick={() => {
+                          setSelectedPatient(alert)
                           if (openedCard != "Alerts") {
                             setOpenedCard("Alerts");
                             sessionStorage.setItem("openedCard", "Alerts");
                           } else {
-                            setOpenedCard("all");
-                            sessionStorage.setItem("openedCard", "all");
+                            // setOpenedCard("all");
+                            // sessionStorage.setItem("openedCard", "all");
                           }
                         }}
                       >
@@ -645,11 +345,11 @@ export default function Maindashboard() {
                             <div>
                               <div className="flex gap-2 mt-0">
                                 <div className="text-base font-medium">
-                                  {alert.patientName}
+                                  {alert.patientName} - {alert.mrn}
                                 </div>
                               </div>
                               <div className="text-[10px] text-muted-foreground">
-                                Scheduled - {alert.scheduledDate}
+                                Remote - {alert?.manufacturer}
                               </div>
                               {openedCard=='all' && <div className="flex gap-1 mt-1">
                                 {alert.badges.map((badge, idx) => (
@@ -872,12 +572,13 @@ export default function Maindashboard() {
                       <TableCell
                         style={smallFontStyle}
                         onClick={() => {
+                          setSelectedPatient(_)
                           if (openedCard != "Scheduled") {
                             setOpenedCard("Scheduled");
                             sessionStorage.setItem("openedCard", "Scheduled");
                           } else {
-                            setOpenedCard("all");
-                            sessionStorage.setItem("openedCard", "all");
+                            // setOpenedCard("all");
+                            // sessionStorage.setItem("openedCard", "all");
                           }
                         }}
                       >
@@ -890,11 +591,11 @@ export default function Maindashboard() {
                               <input type="checkbox" className="h-6 w-3" />
 
                               <div className="text-base font-medium">
-                                {_.patientName} - CMEMS/CIED
+                                {_?.patientName} - {_?.mrn}
                               </div>
                             </div>
                             <div className="text-[12px] text-muted-foreground">
-                              Scheduled - {_.scheduledDate}
+                              Scheduled - {_.scheduledDate} - {_?.manufacturer}
                             </div>
                           </div>
                           <div className="flex" style={{position:'relative'}}>

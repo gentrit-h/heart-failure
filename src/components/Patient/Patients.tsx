@@ -43,6 +43,7 @@ interface Patient {
   monitoring: string
   communicationHistory: boolean
   note: boolean
+  manufacturer: string
 }
 
 const patients: Patient[] = [
@@ -55,7 +56,8 @@ const patients: Patient[] = [
     lastConnection: "14/05/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: false
+    note: false,
+    manufacturer: "MDT"
   },
   {
     id: "124398595",
@@ -66,7 +68,8 @@ const patients: Patient[] = [
     lastConnection: "13/05/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: true
+    note: true,
+    manufacturer: "BSX"
   },
   {
     id: "124398596",
@@ -77,7 +80,8 @@ const patients: Patient[] = [
     lastConnection: "31/05/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: true
+    note: true,
+    manufacturer: "BIO"
   },
   {
     id: "124398597",
@@ -88,7 +92,8 @@ const patients: Patient[] = [
     lastConnection: "19/04/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: false
+    note: false,
+    manufacturer: "STJ"
   },
   {
     id: "124398598",
@@ -99,7 +104,8 @@ const patients: Patient[] = [
     lastConnection: "16/07/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: true
+    note: true,
+    manufacturer: "MDT"
   },
   {
     id: "124398599",
@@ -110,7 +116,8 @@ const patients: Patient[] = [
     lastConnection: "04/08/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: true
+    note: true,
+    manufacturer: "BSX"
   },
   {
     id: "124398600",
@@ -121,7 +128,8 @@ const patients: Patient[] = [
     lastConnection: "09/09/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: false
+    note: false,
+    manufacturer: "BIO"
   },
   {
     id: "124398601",
@@ -132,7 +140,8 @@ const patients: Patient[] = [
     lastConnection: "20/05/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: false
+    note: false,
+    manufacturer: "STJ"
   },
   {
     id: "124398602",
@@ -143,7 +152,8 @@ const patients: Patient[] = [
     lastConnection: "10/06/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: false
+    note: false,
+    manufacturer: "MDT"
   },
   {
     id: "124398603",
@@ -154,7 +164,8 @@ const patients: Patient[] = [
     lastConnection: "06/07/2023",
     monitoring: "CardioMonitor",
     communicationHistory: false,
-    note: true
+    note: true,
+    manufacturer: "BSX"
   },
   {
     id: "124398604",
@@ -165,7 +176,8 @@ const patients: Patient[] = [
     lastConnection: "14/05/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: true
+    note: true,
+    manufacturer: "BIO"
   },
   {
     id: "124398605",
@@ -176,7 +188,8 @@ const patients: Patient[] = [
     lastConnection: "01/04/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: false
+    note: false,
+    manufacturer: "STJ"
   },
   {
     id: "124398606",
@@ -187,7 +200,8 @@ const patients: Patient[] = [
     lastConnection: "17/08/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: false
+    note: false,
+    manufacturer: "MDT"
   },
   {
     id: "124398607",
@@ -198,7 +212,8 @@ const patients: Patient[] = [
     lastConnection: "18/09/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: true
+    note: true,
+    manufacturer: "BSX"
   },
   {
     id: "124398608",
@@ -209,7 +224,8 @@ const patients: Patient[] = [
     lastConnection: "11/07/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: true
+    note: true,
+    manufacturer: "BIO"
   },
   {
     id: "124398609",
@@ -220,7 +236,8 @@ const patients: Patient[] = [
     lastConnection: "07/05/2023",
     monitoring: "CardioMonitor",
     communicationHistory: false,
-    note: false
+    note: false,
+    manufacturer: "STJ"
   },
   {
     id: "124398610",
@@ -231,7 +248,8 @@ const patients: Patient[] = [
     lastConnection: "24/05/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: true
+    note: true,
+    manufacturer: "MDT"
   },
   {
     id: "124398611",
@@ -242,7 +260,8 @@ const patients: Patient[] = [
     lastConnection: "13/06/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: false
+    note: false,
+    manufacturer: "BSX"
   },
   {
     id: "124398612",
@@ -253,7 +272,8 @@ const patients: Patient[] = [
     lastConnection: "22/03/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: true
+    note: true,
+    manufacturer: "BIO"
   },
   {
     id: "124398613",
@@ -264,7 +284,8 @@ const patients: Patient[] = [
     lastConnection: "29/07/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: true
+    note: true,
+    manufacturer: "STJ"
   },
   {
     id: "124398614",
@@ -275,7 +296,8 @@ const patients: Patient[] = [
     lastConnection: "03/09/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: false
+    note: false,
+    manufacturer: "MDT"
   },
   {
     id: "124398615",
@@ -286,7 +308,8 @@ const patients: Patient[] = [
     lastConnection: "11/05/2023",
     monitoring: "CardioMonitor",
     communicationHistory: false,
-    note: true
+    note: true,
+    manufacturer: "BSX"
   },
   {
     id: "124398616",
@@ -297,7 +320,8 @@ const patients: Patient[] = [
     lastConnection: "02/10/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: true
+    note: true,
+    manufacturer: "BIO"
   },
   {
     id: "124398617",
@@ -308,7 +332,8 @@ const patients: Patient[] = [
     lastConnection: "20/04/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: false
+    note: false,
+    manufacturer: "STJ"
   },
   {
     id: "124398618",
@@ -319,7 +344,8 @@ const patients: Patient[] = [
     lastConnection: "09/11/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: false
+    note: false,
+    manufacturer: "MDT"
   },
   {
     id: "124398619",
@@ -330,7 +356,8 @@ const patients: Patient[] = [
     lastConnection: "24/12/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: true
+    note: true,
+    manufacturer: "BSX"
   },
   {
     id: "124398620",
@@ -341,7 +368,8 @@ const patients: Patient[] = [
     lastConnection: "14/08/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: true
+    note: true,
+    manufacturer: "BIO"
   },
   {
     id: "124398621",
@@ -352,7 +380,8 @@ const patients: Patient[] = [
     lastConnection: "04/03/2023",
     monitoring: "CardioMonitor",
     communicationHistory: false,
-    note: false
+    note: false,
+    manufacturer: "STJ"
   },
   {
     id: "124398622",
@@ -363,7 +392,8 @@ const patients: Patient[] = [
     lastConnection: "27/09/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: true
+    note: true,
+    manufacturer: "MDT"
   },
   {
     id: "124398623",
@@ -374,7 +404,8 @@ const patients: Patient[] = [
     lastConnection: "15/10/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: true
+    note: true,
+    manufacturer: "BSX"
   }
 ];
 
@@ -607,7 +638,7 @@ export default function Patients() {
       </div>
 
       </div>
-      <PatientInfo defaultTab={'summary'} selectedPatient={selectedPatient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
+      <PatientInfo defaultTab={'summary'} selectedPatient={selectedPatient?.patient} hidePatientInfo={hidePatientInfo} addPixelsForBiggerScreens={addPixelsForBiggerScreens} />
       </div>
       </div>
       {/* Add patient details content here */}
