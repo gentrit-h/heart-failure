@@ -271,7 +271,7 @@ export default function ActionPlanTable() {
             <TableHead>Status</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Priority</TableHead>
-            <TableHead className="text-right">Change Status</TableHead>
+            <TableHead className="text-center">Change Status</TableHead>
           </TableRow>
         </TableHeader>
 
@@ -303,7 +303,7 @@ export default function ActionPlanTable() {
                 <TableCell>
                   <Star className={`h-4 w-4 ${getPriorityColor(action.priority)}`} />
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell className="text-center">
                 <Button 
                   className="text-xs px-2 py-1 h-7 border rounded-md mb-2"
                   style={{  
@@ -311,7 +311,7 @@ export default function ActionPlanTable() {
                     borderColor: "#004DE1", // Deep blue border
                     color: "#004DE1", // Deep blue text
                     fontWeight: 500,
-                    fontSize: '0.65rem'
+                    fontSize: '0.8rem'
                         }}
                       onClick={() => handleStatusChange(action.id)}
                     >

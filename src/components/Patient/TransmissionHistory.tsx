@@ -472,7 +472,7 @@ export default function TransmissionHistory() {
           </TableHeader>
           <TableBody>
             {getCurrentPagePatients().map((patient) => (
-              <TableRow key={patient.id} className="h-[50px] relative">
+              <TableRow key={patient.id} className="h-[46px] relative">
                 <div className={`absolute left-0 top-0 bottom-0 w-[5px] ${getPriorityColor(patient.priority)} mt-[6px]  mb-[6px] rounded-tr-[6px] rounded-br-[6px]`} />
                 <TableCell>
                   <div className="flex justify-center cursor-pointer gap-3">

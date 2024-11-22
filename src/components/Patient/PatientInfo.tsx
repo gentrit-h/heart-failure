@@ -30,6 +30,7 @@ import TransmissionHistory from "./TransmissionHistory"
 export default function PatientInfo({selectedPatient, defaultTab, hidePatientInfo, addPixelsForBiggerScreens, heightFromSummary, isCmemsOrCieds, isDashboard}: 
     {selectedPatient: any, hidePatientInfo: boolean, addPixelsForBiggerScreens: number, heightFromSummary?: number, isCmemsOrCieds?: boolean, defaultTab?: string, isDashboard?: boolean}) {
   const [embeddedAnalytics, setEmbeddedAnalytics] = useRecoilState(embeddedAnalyticsState);
+  const [pb, setPb] = React.useState(true)
   return (
       <div>
         <PatientInfoHeader hidePatientInfo={hidePatientInfo} selectedPatient={selectedPatient} />
@@ -177,7 +178,7 @@ export default function PatientInfo({selectedPatient, defaultTab, hidePatientInf
             value="dynamic"
             className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:bg-transparent"
           >
-            20/11/2024 - Transmission Summary
+            22/11/2024 - Transmission Summary
           </TabsTrigger>
         </TabsList>
         <div
@@ -190,10 +191,17 @@ export default function PatientInfo({selectedPatient, defaultTab, hidePatientInf
         >
         <TabsContent value="transmission" className="mt-6">
           <>
-          <div className="flex justify-center ">
+          <div className="flex justify-center items-center">
           <div className="w-full max-w-[1600px]">
-          <ProgressBars />
-          </div>
+      <div className="flex items-center justify-center">
+        <Button onClick={()=>setPb(!pb)} variant="ghost" size="icon" className="ml-1 h-5 w-10 p-0 m-0">
+          <ChevronDown className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${pb ? 'rotate-180' : 'rotate-0'}`} />
+        </Button>            
+      </div>
+      <div className="flex items-center justify-center">
+      {pb ? <ProgressBars />:<></>}
+      </div>
+      </div>
         </div>
           {/* <div className="mt-6 border rounded-sm">
           <Table>

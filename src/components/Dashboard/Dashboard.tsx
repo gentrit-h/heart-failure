@@ -54,7 +54,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
           },
         },
       ],
-      icons: ["type3", "type2"],
+      priority: "High",
+      icons: ["type3", "type2", "type6"],
       manufacturer: "BSX",
     },
     {
@@ -62,7 +63,6 @@ const Dashboard: React.FC<MainContentProps> = () => {
       scheduledDate: "01/10/24",
       mrn: "MRN123456",
       badges: [
-        { text: "PAP Mean High", variant: "destructive" },
         {
           text: "Type VT - Untreated only",
           style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
@@ -75,7 +75,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
           },
         },
       ],
-      icons: ["type1"],
+      priority: "Medium",
+      icons: ["type1", "type6"],
       manufacturer: "MDT",
     },
     {
@@ -93,7 +94,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
           },
         },
       ],
-      icons: ["type2"],
+      priority: "High",
+      icons: ["type2", "type7"],
       manufacturer: "BIO",
     },
     {
@@ -102,8 +104,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
       mrn: "MRN676456",
       badges: [
         {
-          text: "TachyCardia Event Recorded",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
+          text: "PAP Diastolic Normal",
+          style: { backgroundColor: "#067647" },
         },
         {
           text: "2 Event(s)",
@@ -113,11 +115,12 @@ const Dashboard: React.FC<MainContentProps> = () => {
           },
         },
       ],
-      icons: ["type1"],
+      priority: "Low",
+      icons: ["type1", "type6"],
       manufacturer: "STJ",
     },
     {
-      patientName: "James Martinez",
+      patientName: "James Brown",
       scheduledDate: "01/10/24",
       mrn: "MRN679856",
       badges: [
@@ -134,7 +137,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
           },
         },
       ],
-      icons: ["type4", "type2"],
+      priority: "Medium",
+      icons: ["type4", "type2", "type7"],
       manufacturer: "MDT",
     },
     {
@@ -143,8 +147,12 @@ const Dashboard: React.FC<MainContentProps> = () => {
       mrn: "MRN098756",
       badges: [
         {
-          text: "Battery Voltage Below Threshold",
+          text: "Battery Below Threshold",
           style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
+        },
+        {
+          text: "PAP Mean Normal",
+          style: { backgroundColor: "#067647" },
         },
         {
           text: "2 Event(s)",
@@ -154,11 +162,12 @@ const Dashboard: React.FC<MainContentProps> = () => {
           },
         },
       ],
-      icons: ["type2"],
+      priority: "Low",
+      icons: ["type2", "type7"],
       manufacturer: "BSX",
     },
     {
-      patientName: "William Anderson",
+      patientName: "William Lee",
       scheduledDate: "01/10/24",
       mrn: "MRN786956",
       badges: [
@@ -172,7 +181,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
           },
         },
       ],
-      icons: ["type2"],
+      priority: "High",
+      icons: ["type2", "type6"],
       manufacturer: "BIO",
     },
     {
@@ -180,20 +190,24 @@ const Dashboard: React.FC<MainContentProps> = () => {
       scheduledDate: "01/07/24",
       mrn: "MRN012456",
       badges: [
-        { text: "Battery Low Voltage", variant: "destructive" },
         {
-          text: "Data Transmission Failed",
+          text: "Tachycardia Recorded",
           style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
         },
         {
-          text: "5 Event(s)",
+          text: "Data Transmission Successful",
+          style: { backgroundColor: "#067647" },
+        },
+        {
+          text: "2 Event(s)",
           style: {
             backgroundColor: "rgba(245, 245, 245, 0.7)",
             color: "black",
           },
         },
       ],
-      icons: ["type4", "type2"],
+      priority: "Low",
+      icons: ["type4", "type2", "type7"],
       manufacturer: "STJ",
     },
     {
@@ -214,7 +228,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
           },
         },
       ],
-      icons: ["type2"],
+      priority: "High",
+      icons: ["type2", "type7"],
       manufacturer: "MDT",
     },
     {
@@ -234,7 +249,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
           },
         },
       ],
-      icons: ["type1"],
+      priority: "Medium",
+      icons: ["type1", "type7"],
       manufacturer: "BSX",
     },
     {
@@ -255,7 +271,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
           },
         },
       ],
-      icons: ["type4"],
+      priority: "Medium",
+      icons: ["type4", "type7"],
       manufacturer: "BIO",
     },
     {
@@ -276,7 +293,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
           },
         },
       ],
-      icons: ["type2"],
+      priority: "High",
+      icons: ["type2", "type7"],
       manufacturer: "STJ",
     },
   ];

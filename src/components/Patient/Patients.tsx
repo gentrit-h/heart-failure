@@ -620,7 +620,8 @@ export default function Patients() {
               <span className="font-semibold text-lg">{selectedPatient.patient.name}</span>
               <Button onClick={()=>setHidePatientInfo(!hidePatientInfo)} variant="ghost" size="icon" className="ml-1 h-10 w-10">
                 <ChevronDown className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${hidePatientInfo ? 'rotate-180' : 'rotate-0'}`} />
-              </Button>            </div>
+              </Button>            
+              </div>
             <div className="text-sm text-gray-500">Age 21</div>
           </div>
         </div>

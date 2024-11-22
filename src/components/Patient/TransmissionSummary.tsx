@@ -4,7 +4,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import React from "react"
 import { ProgressBars } from "./ProgressBars"
 import EpisodesTable from "./EpisodesTable"
-import { Heart } from "lucide-react"
+import { ChevronDown, Heart } from "lucide-react"
 import HeartFailure from "./HeartFailure"
 import leads from "./Leads.png"
 import atBurden from "./atBurden.png"
@@ -12,12 +12,20 @@ import vtRate from "./vtRate.png"
 import pacing from "./pacing.png"
 
 export default function TransmissionSummary({selectedPatient}) {
+  const [pb, setPb] = React.useState(true)
   return (
     <div className="">
         <div className="flex justify-center ">
-          <div className="w-full max-w-[1600px]">
-          <ProgressBars />
-          </div>
+        <div className="w-full max-w-[1600px]">
+      <div className="flex items-center justify-center">
+        <Button onClick={()=>setPb(!pb)} variant="ghost" size="icon" className="ml-1 h-5 w-10 p-0 m-0">
+          <ChevronDown className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${pb ? 'rotate-180' : 'rotate-0'}`} />
+        </Button>            
+      </div>
+      <div className="flex items-center justify-center">
+      {pb ? <ProgressBars />:<></>}
+      </div>
+      </div>
         </div>
       <div className="flex justify-between items-center mb-6 mt-6 w-full">
         <Tabs defaultValue="summary" className="w-full">

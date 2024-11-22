@@ -1,7 +1,7 @@
 "use client"
 
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Legend } from "recharts"
-import { FileText, LineChartIcon } from 'lucide-react'
+import { ChevronDown, FileText, LineChartIcon } from 'lucide-react'
 import { Progress } from "@/components/ui/progress"
 import React from "react";
 import img1 from "./img1.png"
@@ -23,6 +23,7 @@ import {
     TableRow,
   } from "@/components/ui/table"
   import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+  import { Button } from "@/components/ui/button"
 import { ProgressBars } from "./ProgressBars";
 import { WaveForm } from "../CIEDS/WaveForm";
 import {
@@ -32,8 +33,20 @@ import {
 } from "@/components/ui/popover"
 import { PopoverClose } from "@radix-ui/react-popover";
 import summary from "./summary.png"
-import symptoms from "./symptom.png"
+import symptomsImg from "./symptom.png"
 import patientActivity from "./patientActivity.png"
+const symptoms = [
+  { name: "Swelling", value: 4, color: "text-pink-500" },
+  { name: "Weight Gain", value: 1, color: "text-purple-500" },
+  { name: "Palpitations", value: 3, color: "text-green-500" },
+  { name: "Shortness of breath", value: 2, color: "text-orange-500" },
+]
+const tGraphs = [
+  { name: "Heart Rate", value: 3, color: "text-green-500" },
+  { name: "PA Diastolic", value: 2, color: "text-blue-500" },
+  { name: "PA Mean", value: 4, color: "text-pink-500" },
+  { name: "PA Systolic", value: 1, color: "text-purple-500" },
+]
 
 // Sample data for the trend graphs
 const trendData = Array.from({ length: 30 }, (_, i) => ({
@@ -103,14 +116,40 @@ export default function Summary() {
               </SelectContent>
             </Select></>)
   }
+    const [isOpen, setIsOpen] = React.useState(false)
+    const [pb, setPb] = React.useState(true)
+    const [isFirstImage, setIsFirstImage] = React.useState(false)
+    const [position, setPosition] = React.useState({ x: 0, y: 0 })
+  
+    const handleMouseMove = (e: React.MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY })
+    }
+      
+    const handleMouseEnter1 = () => {
+      setIsOpen(true)
+      setIsFirstImage(true)
+    }
+    const handleMouseEnter = () => {
+      setIsOpen(true)
+      setIsFirstImage(false)
+    }
+    const handleMouseLeave = () => setIsOpen(false)
   return (
     <div className="flex items-center justify-center">
     <div className="pr-3  max-w-[1600px]">
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Measurements Grid */}
+      <div className="w-full max-w-[1600px]">
       <div className="flex items-center justify-center">
-<ProgressBars />
+        <Button onClick={()=>setPb(!pb)} variant="ghost" size="icon" className="ml-1 h-5 w-10 p-0 m-0">
+          <ChevronDown className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${pb ? 'rotate-180' : 'rotate-0'}`} />
+        </Button>            
       </div>
+      <div className="flex items-center justify-center">
+      {pb ? <ProgressBars />:<></>}
+      </div>
+      </div>
+
       <div className="rounded-md border">
       <Table>
   <TableHeader>
@@ -216,9 +255,49 @@ export default function Summary() {
     <TableRow className="hover:bg-transparent">
       <TableCell className="text-center px-3 py-2">
         <div className=" flex justify-center items-center ">
+<div
+      className="relative"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter1}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="w-full max-w-[1400px] aspect-[1385/240]">
   <img src={img3} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
 </div>
+          <Popover open={isOpen && isFirstImage}>
+        <PopoverContent
+          className="w-[220px] p-0"
+          style={{
+            position: "fixed",
+            left: `${position.x}px`,
+            top: `${position.y}px`,
+            transform: "translate(-50%, -100%)",
+            margin: "0",
+            marginTop: "-10px",
+          }}
+        >
+          <Card className="p-2 border-none">
+            <h3 className="font-semibold mb-3">Trend Graphs</h3>
+            <div className="space-y-1">
+              {tGraphs.map((symptom) => (
+                <div key={symptom.name} className="flex justify-between items-center">
+                  <span className={`${symptom.color}`}>
+                    {symptom.name}:
+                  </span>
+                  <span className="">
+                    {symptom.name==='PA Systolic'?(Math.random() * (20 - 0) + 0).toFixed(1):
+                    symptom.name==='PA Mean'?(Math.random() * (50 - 30) + 30).toFixed(1):
+                    symptom.name==='PA Diastolic'?(Math.random() * (70 - 60) + 60).toFixed(1):
+                    symptom.name==='Heart Rate'?(Math.random() * (90 - 70) + 70).toFixed(1):''}
+                    </span>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </PopoverContent>
+      </Popover>
+      </div>
+
 </div>
         {/* <img src={img3} className="w-[100%] cursor-pointer" style={{height: addPixelsForBiggerScreens>0 ? "400px":""}} alt="placeholder" /> */}
       </TableCell>
@@ -236,9 +315,49 @@ export default function Summary() {
           </CardHeader>
           <CardContent className="p-0 m-0 h-[225px]">
           <div className="flex justify-center items-center">
+          <div
+      className="relative"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+
+    >
           <div className="pt-[5px] h-[215px] aspect-[812/240]">
-          <img src={symptoms} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
+          <img src={symptomsImg} className="w-full h-full object-cover cursor-pointer" alt="placeholder" />
           </div>
+          <Popover open={isOpen && !isFirstImage}>
+        <PopoverContent
+          className="w-[220px] p-0"
+          style={{
+            position: "fixed",
+            left: `${position.x}px`,
+            top: `${position.y}px`,
+            transform: "translate(-50%, -100%)",
+            margin: "0",
+            marginTop: "-10px",
+          }}
+        >
+          <Card className="p-2 border-none">
+            <h3 className="font-semibold mb-3">Symptoms</h3>
+            <div className="space-y-1">
+              {symptoms.map((symptom) => (
+                <div key={symptom.name} className="flex justify-between items-center">
+                  <span className={`${symptom.color}`}>
+                    {symptom.name}:
+                  </span>
+                  <span className="">
+                    {symptom.name==='Shortness of breath'?(Math.random() * (1 - 0) + 0).toFixed(1):
+                    symptom.name==='Palpitations'?(Math.random() * (2 - 1) + 1).toFixed(1):
+                    symptom.name==='Weight Gain'?(Math.random() * (3 - 2) + 2).toFixed(1):
+                    symptom.name==='Swelling'?(Math.random() * (4 - 3) + 3).toFixed(1):''}
+                    </span>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </PopoverContent>
+      </Popover>
+      </div>
           </div>
           </CardContent>
         </Card>

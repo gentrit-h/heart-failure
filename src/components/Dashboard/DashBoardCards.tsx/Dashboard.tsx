@@ -42,6 +42,7 @@ import {
 } from "@/components/ui/popover";
 import { PopoverClose } from "@radix-ui/react-popover";
 import React from "react";
+import { getPriorityColor } from "../../CIEDS/Cieds";
 
 const cardStyle = {
   border: "1px solid rgba(0, 0, 0, 0.06)", // Thin grey border
@@ -203,7 +204,6 @@ case "type7":
     <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M13.3569 2.15043L20.8849 7.04364C21.1509 7.21654 21.2839 7.30299 21.3803 7.41831C21.4656 7.52039 21.5296 7.63846 21.5687 7.76561C21.6129 7.90926 21.6129 8.06789 21.6129 8.38515V15.7168C21.6129 17.397 21.6129 18.2371 21.2859 18.8788C20.9983 19.4433 20.5394 19.9022 19.9749 20.1899C19.3332 20.5168 18.4931 20.5168 16.8129 20.5168H6.41292C4.73276 20.5168 3.89268 20.5168 3.25094 20.1899C2.68646 19.9022 2.22752 19.4433 1.9399 18.8788C1.61292 18.2371 1.61292 17.397 1.61292 15.7168V8.38515C1.61292 8.06789 1.61292 7.90926 1.65709 7.76561C1.69619 7.63846 1.76026 7.52039 1.84556 7.41831C1.94193 7.30299 2.07493 7.21654 2.34093 7.04364L9.86895 2.15043M13.3569 2.15043C12.7256 1.74012 12.41 1.53496 12.0699 1.45514C11.7693 1.38458 11.4565 1.38458 11.1559 1.45514C10.8158 1.53496 10.5002 1.74012 9.86895 2.15043M13.3569 2.15043L20.581 6.84609C20.9249 7.06964 21.0969 7.18142 21.1564 7.32317C21.2085 7.44704 21.2085 7.58666 21.1564 7.71053C21.0969 7.85228 20.9249 7.96405 20.581 8.1876L13.3569 12.8833C12.7256 13.2936 12.41 13.4987 12.0699 13.5786C11.7693 13.6491 11.4565 13.6491 11.1559 13.5786C10.8158 13.4987 10.5002 13.2936 9.86895 12.8833L2.64485 8.1876C2.30092 7.96405 2.12896 7.85228 2.0694 7.71053C2.01735 7.58666 2.01735 7.44704 2.0694 7.32317C2.12896 7.18142 2.30092 7.06965 2.64485 6.84609L9.86895 2.15043" stroke="#798294" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
-
   )
     default:
       return (
@@ -312,14 +312,15 @@ export default function Maindashboard({alerts, patients}) {
             <CardHeader style={{ position: "relative" }}>
               <div className="flex gap-2 mt-0">
                 <input type="checkbox" className="h-3 w-3" />
-                <CardTitle>Alerts</CardTitle>
+                <CardTitle>Alerts ({alerts?.length || 0})</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
               <Table style={tableStyle}>
                 <TableBody>
                   {alerts.map((alert, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} className="relative">
+                      <div className={`absolute left-0 top-0 bottom-0 w-[0.4vh] ${getPriorityColor(alert?.priority)} mt-[1.2vh]  mb-[1.7vh] rounded-tr-[1vh] rounded-br-[1vh]`} />
                       <TableCell
                         style={smallFontStyle}
                         onClick={() => {
@@ -430,7 +431,7 @@ export default function Maindashboard({alerts, patients}) {
                                   top: 45,
                                   right: 7,
                                   display: "flex",
-                                  flexDirection: "row",
+                                  flexDirection: "row"
                                 }}
                               >
                                 {(alert.icons || []).map((item) => {
@@ -441,9 +442,10 @@ export default function Maindashboard({alerts, patients}) {
                                       style={{
                                         display: "flex",
                                         flexDirection: "row",
+                                        marginTop: item =='type7' ? '-0.3vh' : '' 
                                       }}
                                     >
-                                      <div style={{ width: "0.5vw" }}></div>
+                                      <div style={{ width: "0.5vw"}}></div>
                                       {getSvg(item)}
                                     </div>
                                   );
@@ -566,7 +568,7 @@ export default function Maindashboard({alerts, patients}) {
             <CardHeader style={{ position: "relative" }}>
               <div className="flex gap-2 mt-0">
                 <input type="checkbox" className="h-3 w-3" />
-                <CardTitle>Scheduled</CardTitle>
+                <CardTitle>Scheduled  ({patients?.length || 0})</CardTitle>
               </div>
             </CardHeader>
             <CardContent>

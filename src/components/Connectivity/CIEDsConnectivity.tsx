@@ -264,7 +264,7 @@ const [currentTab, setCurrentTab] = React.useState("Cmems");
       {/* Original table view */}
       <div
         className="rounded-md border scroll-container"
-        style={{ height: "77vh", 
+        style={{
             maxHeight:"77vh", 
             overflow: "auto" }}
       >
