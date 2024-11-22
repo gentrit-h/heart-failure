@@ -54,7 +54,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "15/05/2023",
     lastConnection: "14/05/2023",
-    monitoring: "Synopse",
+    monitoring: "Palpitations",
     communicationHistory: true,
     note: false,
     manufacturer: "MDT"
@@ -66,7 +66,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "14/05/2023",
     lastConnection: "13/05/2023",
-    monitoring: "Synopse",
+    monitoring: "Palpitations",
     communicationHistory: false,
     note: true,
     manufacturer: "BSX"
@@ -78,7 +78,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "01/06/2023",
     lastConnection: "31/05/2023",
-    monitoring: "RemoteView",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: true,
     note: true,
     manufacturer: "BIO"
@@ -90,7 +90,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "20/04/2023",
     lastConnection: "19/04/2023",
-    monitoring: "RemoteView",
+    monitoring: "Syncope",
     communicationHistory: false,
     note: false,
     manufacturer: "STJ"
@@ -102,7 +102,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "17/07/2023",
     lastConnection: "16/07/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "Ventricular Tachycardia",
     communicationHistory: true,
     note: true,
     manufacturer: "MDT"
@@ -114,7 +114,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "05/08/2023",
     lastConnection: "04/08/2023",
-    monitoring: "Synopse",
+    monitoring: "AF Management",
     communicationHistory: false,
     note: true,
     manufacturer: "BSX"
@@ -126,7 +126,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "10/09/2023",
     lastConnection: "09/09/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "Post AF Ablation",
     communicationHistory: true,
     note: false,
     manufacturer: "BIO"
@@ -138,7 +138,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "21/05/2023",
     lastConnection: "20/05/2023",
-    monitoring: "RemoteView",
+    monitoring: "Syncope",
     communicationHistory: false,
     note: false,
     manufacturer: "STJ"
@@ -150,7 +150,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "11/06/2023",
     lastConnection: "10/06/2023",
-    monitoring: "Synopse",
+    monitoring: "Palpitations",
     communicationHistory: true,
     note: false,
     manufacturer: "MDT"
@@ -162,7 +162,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "07/07/2023",
     lastConnection: "06/07/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "AF Management",
     communicationHistory: false,
     note: true,
     manufacturer: "BSX"
@@ -174,7 +174,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "15/05/2023",
     lastConnection: "14/05/2023",
-    monitoring: "RemoteView",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: true,
     note: true,
     manufacturer: "BIO"
@@ -186,7 +186,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "02/04/2023",
     lastConnection: "01/04/2023",
-    monitoring: "Synopse",
+    monitoring: "Syncope",
     communicationHistory: false,
     note: false,
     manufacturer: "STJ"
@@ -198,7 +198,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "18/08/2023",
     lastConnection: "17/08/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "Ventricular Tachycardia",
     communicationHistory: true,
     note: false,
     manufacturer: "MDT"
@@ -210,7 +210,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "19/09/2023",
     lastConnection: "18/09/2023",
-    monitoring: "RemoteView",
+    monitoring: "AF Management",
     communicationHistory: false,
     note: true,
     manufacturer: "BSX"
@@ -222,7 +222,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "12/07/2023",
     lastConnection: "11/07/2023",
-    monitoring: "Synopse",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: true,
     note: true,
     manufacturer: "BIO"
@@ -234,7 +234,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "08/05/2023",
     lastConnection: "07/05/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "AF Management",
     communicationHistory: false,
     note: false,
     manufacturer: "STJ"
@@ -246,7 +246,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "25/05/2023",
     lastConnection: "24/05/2023",
-    monitoring: "RemoteView",
+    monitoring: "Syncope",
     communicationHistory: true,
     note: true,
     manufacturer: "MDT"
@@ -258,7 +258,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "14/06/2023",
     lastConnection: "13/06/2023",
-    monitoring: "Synopse",
+    monitoring: "AF Management",
     communicationHistory: false,
     note: false,
     manufacturer: "BSX"
@@ -270,7 +270,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "23/03/2023",
     lastConnection: "22/03/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "Ventricular Tachycardia",
     communicationHistory: true,
     note: true,
     manufacturer: "BIO"
@@ -282,7 +282,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "30/07/2023",
     lastConnection: "29/07/2023",
-    monitoring: "RemoteView",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: false,
     note: true,
     manufacturer: "STJ"
@@ -294,7 +294,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "04/09/2023",
     lastConnection: "03/09/2023",
-    monitoring: "Synopse",
+    monitoring: "Post AF Ablation",
     communicationHistory: true,
     note: false,
     manufacturer: "MDT"
@@ -306,7 +306,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "12/05/2023",
     lastConnection: "11/05/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "Palpitations",
     communicationHistory: false,
     note: true,
     manufacturer: "BSX"
@@ -318,7 +318,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "03/10/2023",
     lastConnection: "02/10/2023",
-    monitoring: "RemoteView",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: true,
     note: true,
     manufacturer: "BIO"
@@ -330,7 +330,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "21/04/2023",
     lastConnection: "20/04/2023",
-    monitoring: "Synopse",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: false,
     note: false,
     manufacturer: "STJ"
@@ -342,7 +342,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "10/11/2023",
     lastConnection: "09/11/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "AF Management",
     communicationHistory: true,
     note: false,
     manufacturer: "MDT"
@@ -354,7 +354,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "25/12/2023",
     lastConnection: "24/12/2023",
-    monitoring: "RemoteView",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: false,
     note: true,
     manufacturer: "BSX"
@@ -366,7 +366,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "15/08/2023",
     lastConnection: "14/08/2023",
-    monitoring: "Synopse",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: true,
     note: true,
     manufacturer: "BIO"
@@ -378,7 +378,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "05/03/2023",
     lastConnection: "04/03/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "AF Management",
     communicationHistory: false,
     note: false,
     manufacturer: "STJ"
@@ -390,7 +390,7 @@ const patients: Patient[] = [
     status: "Disconnected",
     lastTransmission: "28/09/2023",
     lastConnection: "27/09/2023",
-    monitoring: "RemoteView",
+    monitoring: "AF Management",
     communicationHistory: true,
     note: true,
     manufacturer: "MDT"
@@ -402,7 +402,7 @@ const patients: Patient[] = [
     status: "Connected",
     lastTransmission: "16/10/2023",
     lastConnection: "15/10/2023",
-    monitoring: "Synopse",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: false,
     note: true,
     manufacturer: "BSX"

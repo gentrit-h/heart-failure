@@ -83,7 +83,7 @@ export default function Cieds() {
     status: "Connected",
     lastTransmission: "15/05/2023",
     lastConnection: "14/05/2023",
-    monitoring: "Synopse",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: true,
     note: 'RRT'
   },
@@ -94,7 +94,7 @@ export default function Cieds() {
     status: "Disconnected",
     lastTransmission: "14/05/2023",
     lastConnection: "13/05/2023",
-    monitoring: "Synopse",
+    monitoring: "Post AF Ablation",
     communicationHistory: false,
     note: 'EOS'
   },
@@ -105,7 +105,7 @@ export default function Cieds() {
     status: "Connected",
     lastTransmission: "01/06/2023",
     lastConnection: "31/05/2023",
-    monitoring: "RemoteView",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: true,
     note: 'EOS'
   },
@@ -116,7 +116,7 @@ export default function Cieds() {
     status: "Disconnected",
     lastTransmission: "20/04/2023",
     lastConnection: "19/04/2023",
-    monitoring: "RemoteView",
+    monitoring: "Syncope",
     communicationHistory: false,
     note: 'RRT'
   },
@@ -127,7 +127,7 @@ export default function Cieds() {
     status: "Connected",
     lastTransmission: "17/07/2023",
     lastConnection: "16/07/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "Ventricular Tachycardia",
     communicationHistory: true,
     note: 'EOS'
   },
@@ -138,7 +138,7 @@ export default function Cieds() {
     status: "Disconnected",
     lastTransmission: "05/08/2023",
     lastConnection: "04/08/2023",
-    monitoring: "Synopse",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: false,
     note: 'EOS'
   },
@@ -149,7 +149,7 @@ export default function Cieds() {
     status: "Connected",
     lastTransmission: "10/09/2023",
     lastConnection: "09/09/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "AF Management",
     communicationHistory: true,
     note: 'RRT'
   },
@@ -160,7 +160,7 @@ export default function Cieds() {
     status: "Disconnected",
     lastTransmission: "21/05/2023",
     lastConnection: "20/05/2023",
-    monitoring: "RemoteView",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: false,
     note: 'RRT'
   },
@@ -171,7 +171,7 @@ export default function Cieds() {
     status: "Connected",
     lastTransmission: "11/06/2023",
     lastConnection: "10/06/2023",
-    monitoring: "Synopse",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: true,
     note: 'RRT'
   },
@@ -182,7 +182,7 @@ export default function Cieds() {
     status: "Connected",
     lastTransmission: "07/07/2023",
     lastConnection: "06/07/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "Ventricular Tachycardia",
     communicationHistory: false,
     note: 'EOS'
   },
@@ -193,7 +193,7 @@ export default function Cieds() {
     status: "Disconnected",
     lastTransmission: "15/05/2023",
     lastConnection: "14/05/2023",
-    monitoring: "RemoteView",
+    monitoring: "AF Management",
     communicationHistory: true,
     note: 'EOS'
   },
@@ -204,7 +204,7 @@ export default function Cieds() {
     status: "Connected",
     lastTransmission: "02/04/2023",
     lastConnection: "01/04/2023",
-    monitoring: "Synopse",
+    monitoring: "Post AF Ablation",
     communicationHistory: false,
     note: 'RRT'
   },
@@ -215,7 +215,7 @@ export default function Cieds() {
     status: "Disconnected",
     lastTransmission: "18/08/2023",
     lastConnection: "17/08/2023",
-    monitoring: "CardioMonitor",
+    monitoring: "Palpitations",
     communicationHistory: true,
     note: 'RRT'
   },
@@ -226,7 +226,7 @@ export default function Cieds() {
     status: "Connected",
     lastTransmission: "19/09/2023",
     lastConnection: "18/09/2023",
-    monitoring: "RemoteView",
+    monitoring: "AF Management",
     communicationHistory: false,
     note: 'EOS'
   },
@@ -237,7 +237,7 @@ export default function Cieds() {
     status: "Disconnected",
     lastTransmission: "12/07/2023",
     lastConnection: "11/07/2023",
-    monitoring: "Synopse",
+    monitoring: "Cryptogenic Stroke",
     communicationHistory: true,
     note: 'EOS'
   }
