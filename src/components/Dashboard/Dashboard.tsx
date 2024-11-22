@@ -57,11 +57,13 @@ const Dashboard: React.FC<MainContentProps> = () => {
       priority: "High",
       icons: ["type3", "type2", "type6"],
       manufacturer: "BSX",
+      sessionDate:'07/11/2024',
     },
     {
       patientName: "Oliver Johnson",
       scheduledDate: "01/10/24",
-      mrn: "MRN123456",
+      mrn: "MRN123456",      sessionDate:'07/11/2024',
+
       badges: [
         {
           text: "Type VT - Untreated only",
@@ -82,7 +84,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
     {
       patientName: "Liam Davis",
       scheduledDate: "01/08/24",
-      mrn: "MRN16756",
+      mrn: "MRN16756",      sessionDate:'07/11/2024',
+
       badges: [
         { text: "Has shock", variant: "destructive" },
         { text: "Battery Voltage Low", variant: "destructive" },
@@ -101,7 +104,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
     {
       patientName: "Sophia Brown",
       scheduledDate: "01/09/24",
-      mrn: "MRN676456",
+      mrn: "MRN676456",      sessionDate:'07/11/2024',
+
       badges: [
         {
           text: "PAP Diastolic Normal",
@@ -122,7 +126,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
     {
       patientName: "James Brown",
       scheduledDate: "01/10/24",
-      mrn: "MRN679856",
+      mrn: "MRN679856",      sessionDate:'07/11/2024',
+
       badges: [
         { text: "PAP Diastolic High", variant: "destructive" },
         {
@@ -144,7 +149,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
     {
       patientName: "Ava Taylor",
       scheduledDate: "01/11/24",
-      mrn: "MRN098756",
+      mrn: "MRN098756",      sessionDate:'07/11/2024',
+
       badges: [
         {
           text: "Battery Below Threshold",
@@ -169,7 +175,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
     {
       patientName: "William Lee",
       scheduledDate: "01/10/24",
-      mrn: "MRN786956",
+      mrn: "MRN786956",      sessionDate:'07/11/2024',
+
       badges: [
         { text: "Heart Rate Out Of Range", variant: "destructive" },
         { text: "ATP is true", variant: "destructive" },
@@ -188,7 +195,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
     {
       patientName: "Mia Thomas",
       scheduledDate: "01/07/24",
-      mrn: "MRN012456",
+      mrn: "MRN012456",      sessionDate:'07/11/2024',
+
       badges: [
         {
           text: "Tachycardia Recorded",
@@ -213,7 +221,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
     {
       patientName: "Elijah Moore",
       scheduledDate: "01/08/24",
-      mrn: "MRN975456",
+      mrn: "MRN975456",      sessionDate:'07/11/2024',
+
       badges: [
         { text: "ATP is true", variant: "destructive" },
         {
@@ -235,7 +244,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
     {
       patientName: "Isabella Harris",
       scheduledDate: "01/09/24",
-      mrn: "MRN676456",
+      mrn: "MRN676456",      sessionDate:'07/11/2024',
+
       badges: [
         {
           text: "Tachycardia Event Recorded",
@@ -256,7 +266,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
     {
       patientName: "Henry Clark",
       scheduledDate: "01/10/24",
-      mrn: "MRN1216456",
+      mrn: "MRN1216456",      sessionDate:'07/11/2024',
+
       badges: [
         { text: "Has shock", variant: "destructive" },
         {
@@ -278,7 +289,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
     {
       patientName: "Charlotte Lee",
       scheduledDate: "01/11/24",
-      mrn: "MRN676456",
+      mrn: "MRN676456",      sessionDate:'07/11/2024',
+
       badges: [
         { text: "PAP Man High", variant: "destructive" },
         {

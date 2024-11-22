@@ -1,4 +1,4 @@
-import { Bell, ChevronDown, Mail, MoreVertical, FileText } from "lucide-react";
+import { Bell, ChevronDown, Mail, MoreVertical, FileText, Filter } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button";
 import {
@@ -35,6 +35,23 @@ import { useRecoilState } from "recoil";
 import { openedCardState, embeddedAnalyticsState, selectedPatientDashboard, selectedAnalytics } from "../../../state/atoms";
 
 
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  DropdownMenuCheckboxItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu"
+
+interface Alert {
+  id: string
+  type: 'info' | 'warning' | 'error'
+  // Add other alert properties as needed
+}
+
+interface AlertsCardHeaderProps {
+  alerts: Alert[]
+}
+
 import {
   Popover,
   PopoverContent,
@@ -43,6 +60,75 @@ import {
 import { PopoverClose } from "@radix-ui/react-popover";
 import React from "react";
 import { getPriorityColor } from "../../CIEDS/Cieds";
+
+export function AlertsCardHeader({ alerts, togglePriority }: AlertsCardHeaderProps) {
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([])
+
+  const handleFilterChange = (value: string) => {
+    let level=value
+    if(value=='All'){
+      togglePriority(['High','Medium','Low'])
+
+    }else{
+    togglePriority([value])
+    }
+  }
+
+  return (
+    <CardHeader className="relative">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+        <input type="checkbox" className="h-3 w-3" />
+                  <CardTitle className="flex items-center gap-2">
+            {/* <Bell className="h-5 w-5" /> */}
+            Alerts ({alerts?.length || 0})
+          </CardTitle>
+        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="sm" className="ml-auto">
+              <Filter className="mr-2 h-4 w-4" />
+              Filters
+              {selectedFilters.length > 0 && (
+                <span className="ml-1 rounded-full bg-primary w-5 h-5 text-xs flex items-center justify-center text-primary-foreground">
+                  {selectedFilters.length}
+                </span>
+              )}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56">
+            {/* <DropdownMenuLabel>Filter by priority</DropdownMenuLabel> */}
+            {/* <DropdownMenuSeparator /> */}
+            <DropdownMenuCheckboxItem
+              checked={selectedFilters.includes('High')}
+              onCheckedChange={() => handleFilterChange('High')}
+            >
+              High
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem
+              checked={selectedFilters.includes('Medium')}
+              onCheckedChange={() => handleFilterChange('Medium')}
+            >
+              Yellow
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem
+              checked={selectedFilters.includes('Low')}
+              onCheckedChange={() => handleFilterChange('Low')}
+            >
+              Green
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem
+              checked={selectedFilters.includes('All')}
+              onCheckedChange={() => handleFilterChange('All')}
+            >
+              All
+            </DropdownMenuCheckboxItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </CardHeader>
+  )
+}
 
 const cardStyle = {
   border: "1px solid rgba(0, 0, 0, 0.06)", // Thin grey border
@@ -231,12 +317,17 @@ export default function Maindashboard({alerts, patients}) {
   const [openedCard, setOpenedCard] = useRecoilState(openedCardState);
   const [selectedPatient, setSelectedPatient] = useRecoilState(selectedPatientDashboard);
 
+  const [alertsState, setAlertsState]=useState(alerts)
+  const [alertsState0, setAlertsState0]=useState(alerts)
+
+  const [selectedPriority, setSelectedPriority]=useState(['High','Medium','Low'])
   // Detect zoom level
   const detectZoom = () => {
     const zoom = window.devicePixelRatio * 100;
     console.log("zoom", zoom);
     setZoomLevel(zoom);
   };
+  console.log("selectedPriority",selectedPriority)
 
   // Add event listener to detect zoom changes
   useEffect(() => {
@@ -261,6 +352,13 @@ export default function Maindashboard({alerts, patients}) {
   const [embeddedAnalytics, setEmbeddedAnalytics] = useRecoilState(embeddedAnalyticsState);
   const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selectedAnalytics)
 
+  const togglePriority=((level)=>{
+    console.log('level',level)
+    setSelectedPriority(level)
+    setAlertsState(prev=>alertsState0?.filter((item)=>{
+      return level?.includes(item?.priority)
+    }))
+  })
 
   return (
     <div
@@ -309,18 +407,13 @@ export default function Maindashboard({alerts, patients}) {
               minWidth: openedCard == 'Alerts' ? '19vw': "31vw",
             }}
           >
-            <CardHeader style={{ position: "relative" }}>
-              <div className="flex gap-2 mt-0">
-                <input type="checkbox" className="h-3 w-3" />
-                <CardTitle>Alerts ({alerts?.length || 0})</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
+            <AlertsCardHeader alerts={alertsState} togglePriority={togglePriority}></AlertsCardHeader>
+            <CardContent style={{cursor:'pointer'}}>
               <Table style={tableStyle}>
                 <TableBody>
-                  {alerts.map((alert, index) => (
+                  {alertsState.map((alert, index) => (
                     <TableRow key={index} className="relative">
-                      <div className={`absolute left-0 top-0 bottom-0 w-[0.4vh] ${getPriorityColor(alert?.priority)} mt-[1.2vh]  mb-[1.7vh] rounded-tr-[1vh] rounded-br-[1vh]`} />
+                      <div className={`absolute left-0 top-0 bottom-0 w-[0.4vh] ${getPriorityColor(alert?.priority)} mt-[3px]  mb-[8px] rounded-tl-[1vh] rounded-bl-[1vh]`} style={{paddingLeft:'4px'}}/>
                       <TableCell
                         style={smallFontStyle}
                         onClick={() => {
@@ -351,11 +444,11 @@ export default function Maindashboard({alerts, patients}) {
                             <div>
                               <div className="flex gap-2 mt-0 cursor-pointer">
                                 <div className="text-base font-medium">
-                                  {alert.patientName} - {alert.mrn}
+                                  {alert.patientName} - {alert.sessionDate}
                                 </div>
                               </div>
                               <div className="text-[10px] text-muted-foreground">
-                                Remote - {alert?.manufacturer}
+                                Remote - {alert?.manufacturer} - {alert?.mrn}
                               </div>
                               {openedCard=='all' && <div className="flex gap-1 mt-1">
                                 {alert.badges.map((badge, idx) => (
@@ -423,6 +516,7 @@ export default function Maindashboard({alerts, patients}) {
                                   }}
                                 >
                                   <MoreVertical className="h-3 w-3" />
+                                  
                                 </Button>
                               </PopoverTrigger>
                               <div
