@@ -13,6 +13,11 @@ export const embeddedAnalyticsState = atom({
   default: false,
 });
 
+export const selectedAnalytics = atom({
+  key: 'selectedAnalyticsState',
+  default: 'all',
+});
+
 // Define an atom for tracking a counter
 export const selectedPatientDashboard = atom({
   key: 'selectedPatientDashboard', // Unique ID (with respect to other atoms/selectors)

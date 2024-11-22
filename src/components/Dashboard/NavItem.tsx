@@ -2,7 +2,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { openedCardState } from "../../state/atoms";
+import { openedCardState, selectedAnalytics } from "../../state/atoms";
 
 interface NavItemProps {
   svg: any;
@@ -13,6 +13,7 @@ interface NavItemProps {
 const NavItem: React.FC<NavItemProps> = ({ svg, active, pageName }) => {
   const location = useLocation();
   const [openedCard, setOpenedCard] = useRecoilState(openedCardState);
+  const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selectedAnalytics)
 
   return (
     <div
@@ -20,6 +21,8 @@ const NavItem: React.FC<NavItemProps> = ({ svg, active, pageName }) => {
       onClick={() => {
         if (true) {
           setOpenedCard("all");
+          setSelectedAnalytictsState('all')
+
           sessionStorage.setItem('openedCard', 'all');
         }
       }}

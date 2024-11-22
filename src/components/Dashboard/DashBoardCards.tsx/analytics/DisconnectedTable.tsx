@@ -1,7 +1,7 @@
 /* eslint-disable */
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -23,8 +23,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import "../scrollbarStyles.css";
-import { embeddedAnalyticsState, selectedAnalytics } from "../../../../state/atoms";
-import { useRecoilState } from "recoil";
+import { embeddedAnalyticsState } from "../../../../state/atoms";
 
 
 interface Patient {
@@ -72,7 +71,7 @@ const scrollbarStyles = `
   }
 `;
 
-export default function Cieds() {
+export default function DisconnectedTable() {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
 
  const patients: Patient[] = [
@@ -85,7 +84,7 @@ export default function Cieds() {
     lastConnection: "14/05/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398595",
@@ -96,7 +95,7 @@ export default function Cieds() {
     lastConnection: "13/05/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398596",
@@ -107,7 +106,7 @@ export default function Cieds() {
     lastConnection: "31/05/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398597",
@@ -118,7 +117,7 @@ export default function Cieds() {
     lastConnection: "19/04/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398598",
@@ -129,7 +128,7 @@ export default function Cieds() {
     lastConnection: "16/07/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398599",
@@ -140,7 +139,7 @@ export default function Cieds() {
     lastConnection: "04/08/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398600",
@@ -151,7 +150,7 @@ export default function Cieds() {
     lastConnection: "09/09/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398601",
@@ -162,7 +161,7 @@ export default function Cieds() {
     lastConnection: "20/05/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398602",
@@ -173,7 +172,7 @@ export default function Cieds() {
     lastConnection: "10/06/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398603",
@@ -184,7 +183,7 @@ export default function Cieds() {
     lastConnection: "06/07/2023",
     monitoring: "CardioMonitor",
     communicationHistory: false,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398604",
@@ -195,7 +194,7 @@ export default function Cieds() {
     lastConnection: "14/05/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398605",
@@ -206,7 +205,7 @@ export default function Cieds() {
     lastConnection: "01/04/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398606",
@@ -217,7 +216,7 @@ export default function Cieds() {
     lastConnection: "17/08/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398607",
@@ -228,7 +227,7 @@ export default function Cieds() {
     lastConnection: "18/09/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398608",
@@ -239,10 +238,9 @@ export default function Cieds() {
     lastConnection: "11/07/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: 'EOS'
+    note: true
   }
 ];
-const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selectedAnalytics)
 
   return (
     <div
@@ -279,11 +277,12 @@ const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selected
               <TableHead>Last Transmission</TableHead>
               <TableHead>Last Connection</TableHead>
               <TableHead>Monitoring</TableHead>
-              <TableHead>Battery Status</TableHead>
+              <TableHead>Communication History</TableHead>
+              <TableHead>Note</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className='scroll-container'>
-            {patients.reverse().map((patient) => (
+            {patients.map((patient) => (
               <TableRow
                 key={patient.id}
                 className="cursor-pointer"
@@ -302,16 +301,30 @@ const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selected
                 </TableCell>
                 <TableCell>{patient.deviceInfo}</TableCell>
                 <TableCell>
-                  <span className={(patient.status =="Disconnected") ? "inline-flex rounded-md px-2 py-1 text-xs font-medium bg-red-50 text-red-700":'inline-flex rounded-md px-2 py-1 text-xs font-medium bg-green-50 text-green-700'}>
-                    {patient.status}
+                  <span className="inline-flex rounded-md px-2 py-1 text-xs font-medium bg-red-50 text-red-700">
+                    Disconnected
                   </span>
                 </TableCell>
                 <TableCell>{patient.lastTransmission}</TableCell>
                 <TableCell>{patient.lastConnection}</TableCell>
                 <TableCell>{patient.monitoring}</TableCell>
-
                 <TableCell>
-             {patient.note}
+                  <div className="flex justify-center cursor-pointer">
+                  {/* <Button variant="ghost" size="icon"> */}
+                    <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.5 5V11L15.5 13M21.5 11C21.5 16.5228 17.0228 21 11.5 21C5.97715 21 1.5 16.5228 1.5 11C1.5 5.47715 5.97715 1 11.5 1C17.0228 1 21.5 5.47715 21.5 11Z" stroke={patient?.note ? "#004DE1" : "#D1D2D5"} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </div>
+                  {/* </Button> */}
+                </TableCell>
+                <TableCell>
+                <div className="flex justify-center pr-5 cursor-pointer">
+                    {/* <Button variant="ghost" size="icon"> */}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 2.26953V6.40007C14 6.96012 14 7.24015 14.109 7.45406C14.2049 7.64222 14.3578 7.7952 14.546 7.89108C14.7599 8.00007 15.0399 8.00007 15.6 8.00007H19.7305M16 13H8M16 17H8M10 9H8M14 2H8.8C7.11984 2 6.27976 2 5.63803 2.32698C5.07354 2.6146 4.6146 3.07354 4.32698 3.63803C4 4.27976 4 5.11984 4 6.8V17.2C4 18.8802 4 19.7202 4.32698 20.362C4.6146 20.9265 5.07354 21.3854 5.63803 21.673C6.27976 22 7.11984 22 8.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9265 19.673 20.362C20 19.7202 20 18.8802 20 17.2V8L14 2Z" stroke={patient?.communicationHistory ? "#004DE1" : "#D1D2D5"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      </div>
+                    {/* </Button> */}
                   </TableCell>
               </TableRow>
             ))}

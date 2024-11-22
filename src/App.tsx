@@ -11,6 +11,8 @@ import Cieds from './components/CIEDS/Cieds';
 import Patients from './components/Patient/Patients';
 // import PatientSummary from './components/PatientSummary/PatientSummary';
 import NewLoginPage from './pages/NewLoginPage';
+import { RecoilRoot } from 'recoil';
+import Connectivity from './components/Connectivity/Connectivity';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
@@ -34,12 +36,17 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
+                    <RecoilRoot>
+
               <MainLayout />
+              </RecoilRoot>
+
             </ProtectedRoute>
           }
         >
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="connectivity" element={<Connectivity />} />
           <Route path="patients" element={<Patients />} />
           <Route path="cmems" element={<Cmems />} />
           <Route path="cieds" element={<Cieds />} />

@@ -1,7 +1,7 @@
 /* eslint-disable */
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -22,12 +22,13 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import "../scrollbarStyles.css";
-import { embeddedAnalyticsState, selectedAnalytics } from "../../../../state/atoms";
-import { useRecoilState } from "recoil";
+import "../Dashboard/DashBoardCards.tsx/scrollbarStyles.css";
+import { embeddedAnalyticsState } from "../../state/atoms";
+import React from "react";
 
 
 interface Patient {
+    summaryDate?:any;
   id?: string;
   name?: string;
   subId?: string;
@@ -72,7 +73,7 @@ const scrollbarStyles = `
   }
 `;
 
-export default function Cieds() {
+export default function CIEDConnectivity() {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
 
  const patients: Patient[] = [
@@ -85,7 +86,8 @@ export default function Cieds() {
     lastConnection: "14/05/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: 'RRT'
+    note: false,
+    summaryDate:'16/05/2023',
   },
   {
     id: "124398595",
@@ -96,7 +98,7 @@ export default function Cieds() {
     lastConnection: "13/05/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: 'EOS'
+    note: true,summaryDate:'16/05/2023',
   },
   {
     id: "124398596",
@@ -107,7 +109,7 @@ export default function Cieds() {
     lastConnection: "31/05/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: 'EOS'
+    note: true,summaryDate:'16/05/2023',
   },
   {
     id: "124398597",
@@ -118,7 +120,7 @@ export default function Cieds() {
     lastConnection: "19/04/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: 'RRT'
+    note: false,summaryDate:'16/05/2023',
   },
   {
     id: "124398598",
@@ -129,7 +131,7 @@ export default function Cieds() {
     lastConnection: "16/07/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: 'EOS'
+    note: true,summaryDate:'16/05/2023',
   },
   {
     id: "124398599",
@@ -140,7 +142,7 @@ export default function Cieds() {
     lastConnection: "04/08/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: 'EOS'
+    note: true,summaryDate:'16/05/2023',
   },
   {
     id: "124398600",
@@ -151,7 +153,7 @@ export default function Cieds() {
     lastConnection: "09/09/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: 'RRT'
+    note: false,summaryDate:'16/05/2023',
   },
   {
     id: "124398601",
@@ -162,7 +164,7 @@ export default function Cieds() {
     lastConnection: "20/05/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: 'RRT'
+    note: false,summaryDate:'16/05/2023',
   },
   {
     id: "124398602",
@@ -173,7 +175,7 @@ export default function Cieds() {
     lastConnection: "10/06/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: 'RRT'
+    note: false,summaryDate:'16/05/2023',
   },
   {
     id: "124398603",
@@ -184,7 +186,7 @@ export default function Cieds() {
     lastConnection: "06/07/2023",
     monitoring: "CardioMonitor",
     communicationHistory: false,
-    note: 'EOS'
+    note: true,summaryDate:'16/05/2023',
   },
   {
     id: "124398604",
@@ -195,7 +197,7 @@ export default function Cieds() {
     lastConnection: "14/05/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: 'EOS'
+    note: true,summaryDate:'16/05/2023',
   },
   {
     id: "124398605",
@@ -206,7 +208,7 @@ export default function Cieds() {
     lastConnection: "01/04/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: 'RRT'
+    note: false,summaryDate:'16/05/2023',
   },
   {
     id: "124398606",
@@ -217,7 +219,7 @@ export default function Cieds() {
     lastConnection: "17/08/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: 'RRT'
+    note: false,summaryDate:'16/05/2023',
   },
   {
     id: "124398607",
@@ -228,7 +230,7 @@ export default function Cieds() {
     lastConnection: "18/09/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: 'EOS'
+    note: true,summaryDate:'16/05/2023',
   },
   {
     id: "124398608",
@@ -239,25 +241,32 @@ export default function Cieds() {
     lastConnection: "11/07/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: 'EOS'
+    note: true,summaryDate:'16/05/2023',
   }
 ];
-const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selectedAnalytics)
+
+const [currentTab, setCurrentTab] = React.useState("Cmems");
+
 
   return (
-    <div
+
+<div
       className="w-full scroll-container"
       style={{ 
         height: "82vh", 
-        maxHeight: embeddedAnalyticsState?"77vh":"82vh",
-        overflow: "auto" }}
+        overflow: "auto",
+        maxWidth:'60vw',
+        minWidth:'60vw',
+        overflowX:'auto',
+        overflowY:'auto' 
+    }}
     >
       {/* Original table view */}
       <div
         className="rounded-md border scroll-container"
-        style={{ height: "76vh", 
-          maxHeight: embeddedAnalyticsState?"71vh":"76vh", 
-          overflow: "auto" }}
+        style={{ height: "77vh", 
+            maxHeight:"77vh", 
+            overflow: "auto" }}
       >
         <Table className='scroll-container'>
           <TableHeader
@@ -279,11 +288,11 @@ const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selected
               <TableHead>Last Transmission</TableHead>
               <TableHead>Last Connection</TableHead>
               <TableHead>Monitoring</TableHead>
-              <TableHead>Battery Status</TableHead>
+              <TableHead>Summary Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className='scroll-container'>
-            {patients.reverse().map((patient) => (
+            {patients.map((patient) => (
               <TableRow
                 key={patient.id}
                 className="cursor-pointer"
@@ -309,10 +318,9 @@ const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selected
                 <TableCell>{patient.lastTransmission}</TableCell>
                 <TableCell>{patient.lastConnection}</TableCell>
                 <TableCell>{patient.monitoring}</TableCell>
-
                 <TableCell>
-             {patient.note}
-                  </TableCell>
+                  {patient.summaryDate}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -337,5 +345,6 @@ const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selected
         </Button>
       </div>
     </div>
+    
   );
 }

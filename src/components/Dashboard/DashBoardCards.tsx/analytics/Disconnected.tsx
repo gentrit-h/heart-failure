@@ -18,6 +18,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useRecoilState } from "recoil";
+import { openedCardState, selectedAnalytics } from "../../../../state/atoms";
 const chartData = [
   { type: "ILR", count: 275, fill: "var(--color-ILR)" },
   { type: "ICD", count: 200, fill: "var(--color-ICD)" },
@@ -49,12 +51,38 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export default function Disconnected() {
+  const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selectedAnalytics)
+  const [openedCard, setOpenedCard] = useRecoilState(openedCardState);
+
   const totalcount = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.count, 0);
   }, []);
 
+
+  // DisconnectedTable
+
   return (
-    <Card className="flex flex-col" style={{ height: "100%" }}>
+    <div style={{cursor:'pointer'}}
+    onClick={() => {
+      if (openedCard != "Analytics") {
+        setOpenedCard("Analytics");
+        setSelectedAnalytictsState('DisconnectedTable')
+        
+        sessionStorage.setItem('openedCard', 'Analytics');
+      } else {
+        // setOpenedCard("all");
+        // setSelectedAnalytictsState('all')
+        setSelectedAnalytictsState('DisconnectedTable')
+
+        // sessionStorage.setItem('openedCard', 'all');
+
+      }
+    }}
+    
+    >
+    <Card className="flex flex-col"
+
+    style={{ height: "100%", ...selctedAnalyticsState=='DisconnectedTable'&&({backgroundColor:'rgba(0,0,0,0.05)'}) }}>
       <CardHeader
         className="items-center pb-0"
         style={{
@@ -122,5 +150,6 @@ export default function Disconnected() {
         </div>
       </CardFooter>
     </Card>
+    </div>
   );
 }

@@ -18,13 +18,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useRecoilState } from "recoil";
-import { openedCardState, selectedAnalytics } from "../../../../state/atoms";
 const chartData = [
-  { type: "ILR", count: 275, fill: "var(--color-ILR)" },
-  { type: "ICD", count: 200, fill: "var(--color-ICD)" },
-  { type: "PPM", count: 287, fill: "var(--color-PPM)" },
-  { type: "other", count: 190, fill: "var(--color-other)" },
+  { type: "ILR", count: 4, fill: "var(--color-ILR)" },
+  { type: "ICD", count: 2, fill: "var(--color-ICD)" },
+  { type: "PPM", count: 5, fill: "var(--color-PPM)" },
+  { type: "other", count: 8, fill: "var(--color-other)" },
 ];
 
 const chartConfig = {
@@ -50,36 +48,13 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function LowBatteries() {
+export default function DisconnectedCount() {
   const totalcount = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.count, 0);
   }, []);
 
-  const [openedCard, setOpenedCard] = useRecoilState(openedCardState);
-  const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selectedAnalytics)
-
-
   return (
-    <div style={{cursor:'pointer'}}
-    onClick={() => {
-      if (openedCard != "Analytics") {
-        setOpenedCard("Analytics");
-        setSelectedAnalytictsState(prev => 'LowBatteries')
-        
-        sessionStorage.setItem('openedCard', 'Analytics');
-      } else {
-        // setOpenedCard("all");
-        // setSelectedAnalytictsState('all')
-        setSelectedAnalytictsState(prev => 'LowBatteries')
-
-        // sessionStorage.setItem('openedCard', 'all');
-
-      }
-    }}
-    
-    >
-    <Card className="flex flex-col" style={{ height: "100%",...selctedAnalyticsState=='LowBatteries'&& openedCard=='Analytics'&&({backgroundColor:selctedAnalyticsState=='LowBatteries'?'rgba(0,0,0,0.05)':'white'}) }}
-    >
+    <Card className="flex flex-col" style={{ height: "100%" }}>
       <CardHeader
         className="items-center pb-0"
         style={{
@@ -89,11 +64,7 @@ export default function LowBatteries() {
           paddingLeft: "0.5rem",
         }}
       >
-        <CardTitle
-          className="text-sm"
-        >
-          Low Battery Devices
-        </CardTitle>
+        <CardTitle className="text-sm">Disconnected</CardTitle>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -147,10 +118,8 @@ export default function LowBatteries() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
       </CardFooter>
     </Card>
-    </div>
   );
 }

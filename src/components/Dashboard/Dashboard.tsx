@@ -7,13 +7,14 @@ import TotalPatients from "./TotalPatients";
 import PatientsTable from "./PatientsTable";
 import MainDashboard from "./DashBoardCards.tsx/Dashboard";
 import { useRecoilState } from "recoil";
-import { embeddedAnalyticsState, openedCardState, selectedPatientDashboard } from "../../state/atoms";
+import { embeddedAnalyticsState, openedCardState, selectedPatientDashboard, selectedAnalytics } from "../../state/atoms";
 import LowBatteryTable from "./DashBoardCards.tsx/analytics/LowBatteryTable";
 import Component from "./DashBoardCards.tsx/embeddedAnalytics/EmbeddedAnalytics";
 import PatientInfo from "../Patient/PatientInfo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ChevronDown, Battery, Signal, ExternalLink, FileText, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
+import DisconnectedTable from "./DashBoardCards.tsx/analytics/DisconnectedTable";
 
 
 
@@ -24,11 +25,13 @@ const Dashboard: React.FC<MainContentProps> = () => {
   const [openedCard, setOpenedCard] = useRecoilState(openedCardState);
   const [embeddedAnalytics, setEmbeddedAnalytics]=useRecoilState(embeddedAnalyticsState)
   const [hidePatientInfo, setHidePatientInfo] = useState(false);
+  const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selectedAnalytics)
 
   useEffect(() => {
     const helper = sessionStorage.getItem("openedCard");
     if (helper) {
       setOpenedCard(helper);
+      
     }
   });
 
@@ -389,6 +392,25 @@ const Dashboard: React.FC<MainContentProps> = () => {
 
   const [selectedPatient, setSelectedPatient] = useRecoilState(selectedPatientDashboard);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setOpenedCard("all");
+        setSelectedAnalytictsState('all')
+        sessionStorage.setItem("openedCard", "all");      }
+    };
+
+    // Add event listener for keydown
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {embeddedAnalytics&&
@@ -406,8 +428,12 @@ const Dashboard: React.FC<MainContentProps> = () => {
       >
         <MainDashboard alerts={alerts} patients={patients}/>
         {(openedCard == "Analytics" ||
-          sessionStorage.getItem("openedCard") == "Analytics") && (
+          sessionStorage.getItem("openedCard") == "Analytics")&&selctedAnalyticsState=='LowBatteries' && (
           <LowBatteryTable />
+        )}
+        {(openedCard == "Analytics" ||
+          sessionStorage.getItem("openedCard") == "Analytics")&&selctedAnalyticsState=='DisconnectedTable' && (
+          <DisconnectedTable />
         )}
         {(openedCard == "Alerts" ||
           sessionStorage.getItem("openedCard") == "Alerts") && (
@@ -453,6 +479,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
         <span>
         <Button onClick={() => {
           setOpenedCard("all");
+          setSelectedAnalytictsState('all')
+
           sessionStorage.setItem("openedCard", "all");
         }} variant="ghost" size="icon" className="ml-4 h-10 w-10">
          <X />
@@ -502,6 +530,8 @@ const Dashboard: React.FC<MainContentProps> = () => {
         <span>
         <Button onClick={() => {
           setOpenedCard("all");
+          setSelectedAnalytictsState('all')
+
           sessionStorage.setItem("openedCard", "all");
         }} variant="ghost" size="icon" className="ml-4 h-10 w-10">
          <X />

@@ -48,6 +48,8 @@ const Header: React.FC<DashboardProps> = () => {
       return "CMEMS";
     } else if (location.pathname.startsWith("/cieds")) {
       return "CIEDS";
+    } else if (location.pathname.startsWith("/connectivity")) {
+      return "Connectivity";
     } else if (location.pathname.startsWith("/settings")) {
       return "Settings";
     } else {

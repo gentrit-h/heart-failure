@@ -2,7 +2,6 @@ import { Outlet } from "react-router-dom";
 // import { useAuth } from '../../context/AuthContext';
 import Header from "../Header/Header";
 import Sidebar from "../Dashboard/Sidebar";
-import { RecoilRoot } from "recoil";
 import React from "react";
 
 const MainLayout = () => {
@@ -16,7 +15,6 @@ const MainLayout = () => {
 
   return (
     <div className="min-h-screen flex">
-      <RecoilRoot>
         <div>
           <Sidebar />
         </div>
@@ -49,7 +47,7 @@ const MainLayout = () => {
             </div>
           </main>
         </div>
-      </RecoilRoot>
+      
     </div>
   );
 };

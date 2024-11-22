@@ -31,6 +31,12 @@ const Sidebar: React.FC<SidebarProps> = () => {
     <path d="M12.5833 6.16663L7.38785 12.4012C7.18438 12.6454 7.08264 12.7675 7.08109 12.8706C7.07974 12.9602 7.11968 13.0455 7.1894 13.1018C7.2696 13.1666 7.42852 13.1666 7.74635 13.1666H12L11.4167 17.8333L16.6122 11.5987C16.8156 11.3545 16.9174 11.2325 16.9189 11.1294C16.9203 11.0397 16.8803 10.9544 16.8106 10.8981C16.7304 10.8333 16.5715 10.8333 16.2536 10.8333H12L12.5833 6.16663Z" stroke={ selected ? "#FFFFFF" : "#648EDF" } stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>    
   )
+  const analyticsSVG = (selected: boolean) => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8.9707 22H14.9707C19.9707 22 21.9707 20 21.9707 15V9C21.9707 4 19.9707 2 14.9707 2H8.9707C3.9707 2 1.9707 4 1.9707 9V15C1.9707 20 3.9707 22 8.9707 22Z" stroke={ selected ? "#FFFFFF" : "#648EDF" } stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1.9707 12.7001L7.9707 12.6801C8.7207 12.6801 9.5607 13.2501 9.8407 13.9501L10.9807 16.8301C11.2407 17.4801 11.6507 17.4801 11.9107 16.8301L14.2007 11.0201C14.4207 10.4601 14.8307 10.4401 15.1107 10.9701L16.1507 12.9401C16.4607 13.5301 17.2607 14.0101 17.9207 14.0101H21.9807" stroke={ selected ? "#FFFFFF" : "#648EDF" } stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>   
+  )
   const settingsSvg = (selected: boolean) => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_115_4060)">
@@ -83,6 +89,11 @@ const Sidebar: React.FC<SidebarProps> = () => {
       pageName: "cieds",
     },
     {
+      svg: analyticsSVG,
+      active: false,
+      pageName: "connectivity",
+    },
+    {
       svg: settingsSvg,
       active: false,
       pageName: "settings",
@@ -116,14 +127,14 @@ const Sidebar: React.FC<SidebarProps> = () => {
             </svg>
           </div>
           <div data-layername="navigation" className="flex flex-col px-4 mt-6 w-full">
-            {navItems.slice(0, 4).map((item, index) => (
+            {navItems.slice(0, 5).map((item, index) => (
               <NavItem key={index} svg={item.svg} active={location.pathname.includes('/'+item.pageName)} pageName={item.pageName || ""} />
             ))}
           </div>
         </nav>
       </div>
       <footer data-layername="footer" className="flex flex-col items-center px-4 pb-6 w-full">
-        <NavItem svg={navItems[4].svg} active={location.pathname.includes('/'+navItems[4].pageName)}  pageName={navItems[4].pageName || ""} />
+        {/* <NavItem svg={navItems[5].svg} active={location.pathname.includes('/'+navItems[4].pageName)}  pageName={navItems[4].pageName || ""} /> */}
         <div style={{padding:'10px 0px 7px 0px', cursor:'pointer'}} onClick={()=>{
                 data.logout()
 

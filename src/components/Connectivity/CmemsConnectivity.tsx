@@ -1,7 +1,7 @@
 /* eslint-disable */
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -22,12 +22,14 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import "../scrollbarStyles.css";
-import { embeddedAnalyticsState, selectedAnalytics } from "../../../../state/atoms";
-import { useRecoilState } from "recoil";
+import "../Dashboard/DashBoardCards.tsx/scrollbarStyles.css";
+import { embeddedAnalyticsState } from "../../state/atoms";
+import React from "react";
 
 
 interface Patient {
+    serialNumber?:any;
+    readings90?:any;
   id?: string;
   name?: string;
   subId?: string;
@@ -72,64 +74,71 @@ const scrollbarStyles = `
   }
 `;
 
-export default function Cieds() {
+export default function CmemsConnectivity() {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
 
  const patients: Patient[] = [
   {
     id: "124398594",
     name: "Ermal Ismajli",
+    serialNumber:'X83CBA',
     deviceInfo: "MDT - ICD",
     status: "Connected",
     lastTransmission: "15/05/2023",
     lastConnection: "14/05/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: 'RRT'
+    note: false,
+    readings90:5,
   },
   {
     id: "124398595",
     name: "Jane Smith",
+    serialNumber:'X83CBA',
     deviceInfo: "BSX - PPM",
     status: "Disconnected",
     lastTransmission: "14/05/2023",
     lastConnection: "13/05/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: 'EOS'
+    note: true,    readings90:3,
+
   },
   {
     id: "124398596",
     name: "John Doe",
+    serialNumber:'X83CBA',
     deviceInfo: "BIO - CRT",
     status: "Connected",
     lastTransmission: "01/06/2023",
     lastConnection: "31/05/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: 'EOS'
+    note: true,    readings90:6,
   },
   {
     id: "124398597",
     name: "Alice Johnson",
     deviceInfo: "STJ - ILR",
     status: "Disconnected",
+    serialNumber:'X83CBA',
     lastTransmission: "20/04/2023",
     lastConnection: "19/04/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: 'RRT'
+    note: false,    readings90:8,
   },
   {
     id: "124398598",
     name: "Robert Brown",
     deviceInfo: "MDT - PPM",
     status: "Connected",
+    serialNumber:'X83CBA',
     lastTransmission: "17/07/2023",
     lastConnection: "16/07/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: 'EOS'
+    note: true,    readings90:5,
   },
   {
     id: "124398599",
@@ -139,8 +148,9 @@ export default function Cieds() {
     lastTransmission: "05/08/2023",
     lastConnection: "04/08/2023",
     monitoring: "Synopse",
+    serialNumber:'X83CBA',
     communicationHistory: false,
-    note: 'EOS'
+    note: true,    readings90:5,
   },
   {
     id: "124398600",
@@ -149,9 +159,10 @@ export default function Cieds() {
     status: "Connected",
     lastTransmission: "10/09/2023",
     lastConnection: "09/09/2023",
+    serialNumber:'S83CBA',
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: 'RRT'
+    note: false,    readings90:7,
   },
   {
     id: "124398601",
@@ -160,9 +171,10 @@ export default function Cieds() {
     status: "Disconnected",
     lastTransmission: "21/05/2023",
     lastConnection: "20/05/2023",
+    serialNumber:'X83SBA',
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: 'RRT'
+    note: false,    readings90:5,
   },
   {
     id: "124398602",
@@ -170,32 +182,34 @@ export default function Cieds() {
     deviceInfo: "MDT - ICD",
     status: "Connected",
     lastTransmission: "11/06/2023",
+    serialNumber:'H8BCBA',
     lastConnection: "10/06/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: 'RRT'
+    note: false,    readings90:6,
   },
   {
     id: "124398603",
     name: "Sarah Brown",
     deviceInfo: "BSX - ILR",
+    serialNumber:'WW3CBA',
     status: "Connected",
     lastTransmission: "07/07/2023",
     lastConnection: "06/07/2023",
     monitoring: "CardioMonitor",
     communicationHistory: false,
-    note: 'EOS'
+    note: true,    readings90:5,
   },
   {
     id: "124398604",
     name: "Chris Black",
     deviceInfo: "BIO - CRT",
     status: "Disconnected",
-    lastTransmission: "15/05/2023",
+    lastTransmission: "15/05/2023",serialNumber:'W83CBA',
     lastConnection: "14/05/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: 'EOS'
+    note: true,    readings90:6,
   },
   {
     id: "124398605",
@@ -205,19 +219,19 @@ export default function Cieds() {
     lastTransmission: "02/04/2023",
     lastConnection: "01/04/2023",
     monitoring: "Synopse",
-    communicationHistory: false,
-    note: 'RRT'
+    communicationHistory: false,serialNumber:'W53CBA',
+    note: false,    readings90:5,
   },
   {
     id: "124398606",
     name: "Peter Clark",
     deviceInfo: "MDT - ICD",
-    status: "Disconnected",
+    status: "Disconnected",serialNumber:'X33CCC',
     lastTransmission: "18/08/2023",
     lastConnection: "17/08/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: 'RRT'
+    note: false,    readings90:5,
   },
   {
     id: "124398607",
@@ -225,10 +239,10 @@ export default function Cieds() {
     deviceInfo: "BSX - CRT",
     status: "Connected",
     lastTransmission: "19/09/2023",
-    lastConnection: "18/09/2023",
+    lastConnection: "18/09/2023",serialNumber:'V83CBA',
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: 'EOS'
+    note: true,    readings90:5,
   },
   {
     id: "124398608",
@@ -236,27 +250,35 @@ export default function Cieds() {
     deviceInfo: "BIO - ICD",
     status: "Disconnected",
     lastTransmission: "12/07/2023",
-    lastConnection: "11/07/2023",
+    lastConnection: "11/07/2023",serialNumber:'X93CBA',
     monitoring: "Synopse",
     communicationHistory: true,
-    note: 'EOS'
-  }
+    note: true,    readings90:8,
+  },
+  
 ];
-const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selectedAnalytics)
+
+const [currentTab, setCurrentTab] = React.useState("Cmems");
+
 
   return (
-    <div
+
+<div
       className="w-full scroll-container"
       style={{ 
-        height: "82vh", 
-        maxHeight: embeddedAnalyticsState?"77vh":"82vh",
-        overflow: "auto" }}
+        height: "83vh", 
+        overflow: "auto",
+        maxWidth:'60vw',
+        minWidth:'60vw',
+        overflowX:'auto',
+        overflowY:'auto' 
+    }}
     >
       {/* Original table view */}
       <div
         className="rounded-md border scroll-container"
-        style={{ height: "76vh", 
-          maxHeight: embeddedAnalyticsState?"71vh":"76vh", 
+        style={{ height: "77vh", 
+          maxHeight:"77vh", 
           overflow: "auto" }}
       >
         <Table className='scroll-container'>
@@ -273,13 +295,12 @@ const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selected
               <TableHead className="w-[50px] scroll-container">
                 <Checkbox />
               </TableHead>
-              <TableHead>Patients</TableHead>
-              <TableHead>Device Info</TableHead>
+              <TableHead>Patient</TableHead>
+              <TableHead>Serial Number</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead>Last Transmission</TableHead>
-              <TableHead>Last Connection</TableHead>
-              <TableHead>Monitoring</TableHead>
-              <TableHead>Battery Status</TableHead>
+              <TableHead>Billing Cycle Reset Date</TableHead>
+              <TableHead>Last Reading Date</TableHead>
+              <TableHead>Total Readings (90d)</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className='scroll-container'>
@@ -300,7 +321,7 @@ const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selected
                     </span>
                   </div>
                 </TableCell>
-                <TableCell>{patient.deviceInfo}</TableCell>
+                <TableCell>{patient.serialNumber}</TableCell>
                 <TableCell>
                   <span className={(patient.status =="Disconnected") ? "inline-flex rounded-md px-2 py-1 text-xs font-medium bg-red-50 text-red-700":'inline-flex rounded-md px-2 py-1 text-xs font-medium bg-green-50 text-green-700'}>
                     {patient.status}
@@ -308,11 +329,8 @@ const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selected
                 </TableCell>
                 <TableCell>{patient.lastTransmission}</TableCell>
                 <TableCell>{patient.lastConnection}</TableCell>
-                <TableCell>{patient.monitoring}</TableCell>
-
-                <TableCell>
-             {patient.note}
-                  </TableCell>
+                <TableCell>{patient.readings90}</TableCell>
+                
               </TableRow>
             ))}
           </TableBody>
@@ -337,5 +355,6 @@ const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selected
         </Button>
       </div>
     </div>
+    
   );
 }

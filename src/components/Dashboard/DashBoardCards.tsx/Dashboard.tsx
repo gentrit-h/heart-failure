@@ -32,7 +32,7 @@ import LowBatteries from "./analytics/LowBatteries";
 import "./scrollbarStyles.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { openedCardState, embeddedAnalyticsState, selectedPatientDashboard } from "../../../state/atoms";
+import { openedCardState, embeddedAnalyticsState, selectedPatientDashboard, selectedAnalytics } from "../../../state/atoms";
 
 
 import {
@@ -259,6 +259,7 @@ export default function Maindashboard({alerts, patients}) {
   };
 
   const [embeddedAnalytics, setEmbeddedAnalytics] = useRecoilState(embeddedAnalyticsState);
+  const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selectedAnalytics)
 
 
   return (
@@ -325,8 +326,13 @@ export default function Maindashboard({alerts, patients}) {
                           setSelectedPatient(alert)
                           if (openedCard != "Alerts") {
                             setOpenedCard("Alerts");
+                            setSelectedAnalytictsState('all')
+
                             sessionStorage.setItem("openedCard", "Alerts");
                           } else {
+                            setSelectedAnalytictsState('all')
+
+                            // setOpenedCard("all");
                             // setOpenedCard("all");
                             // sessionStorage.setItem("openedCard", "all");
                           }
@@ -574,9 +580,13 @@ export default function Maindashboard({alerts, patients}) {
                           setSelectedPatient(_)
                           if (openedCard != "Scheduled") {
                             setOpenedCard("Scheduled");
+                            setSelectedAnalytictsState('all')
+
                             sessionStorage.setItem("openedCard", "Scheduled");
                           } else {
                             // setOpenedCard("all");
+                            setSelectedAnalytictsState('all')
+
                             // sessionStorage.setItem("openedCard", "all");
                           }
                         }}
@@ -670,7 +680,10 @@ export default function Maindashboard({alerts, patients}) {
                   <div className="flex-1">
                     <CMEMSAlerts />
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-1" onClick={()=>{
+                                          setSelectedAnalytictsState('LowBatteries')
+
+                  }}>
                     <LowBatteries />
                   </div>
                 </div>

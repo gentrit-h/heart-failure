@@ -1,7 +1,7 @@
 /* eslint-disable */
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -22,9 +22,12 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import "../scrollbarStyles.css";
-import { embeddedAnalyticsState, selectedAnalytics } from "../../../../state/atoms";
-import { useRecoilState } from "recoil";
+import "../Dashboard/DashBoardCards.tsx/scrollbarStyles.css";
+import { embeddedAnalyticsState } from "../../state/atoms";
+import React from "react";
+import CmemsConnectivity from "./CmemsConnectivity";
+import CIEDConnectivity from "./CIEDsConnectivity";
+import ConnectivityAnalytics from "./Analytics";
 
 
 interface Patient {
@@ -72,7 +75,7 @@ const scrollbarStyles = `
   }
 `;
 
-export default function Cieds() {
+export default function CmemsCon() {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
 
  const patients: Patient[] = [
@@ -85,7 +88,7 @@ export default function Cieds() {
     lastConnection: "14/05/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398595",
@@ -96,7 +99,7 @@ export default function Cieds() {
     lastConnection: "13/05/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398596",
@@ -107,7 +110,7 @@ export default function Cieds() {
     lastConnection: "31/05/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398597",
@@ -118,7 +121,7 @@ export default function Cieds() {
     lastConnection: "19/04/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398598",
@@ -129,7 +132,7 @@ export default function Cieds() {
     lastConnection: "16/07/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398599",
@@ -140,7 +143,7 @@ export default function Cieds() {
     lastConnection: "04/08/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398600",
@@ -151,7 +154,7 @@ export default function Cieds() {
     lastConnection: "09/09/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398601",
@@ -162,7 +165,7 @@ export default function Cieds() {
     lastConnection: "20/05/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398602",
@@ -173,7 +176,7 @@ export default function Cieds() {
     lastConnection: "10/06/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398603",
@@ -184,7 +187,7 @@ export default function Cieds() {
     lastConnection: "06/07/2023",
     monitoring: "CardioMonitor",
     communicationHistory: false,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398604",
@@ -195,7 +198,7 @@ export default function Cieds() {
     lastConnection: "14/05/2023",
     monitoring: "RemoteView",
     communicationHistory: true,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398605",
@@ -206,7 +209,7 @@ export default function Cieds() {
     lastConnection: "01/04/2023",
     monitoring: "Synopse",
     communicationHistory: false,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398606",
@@ -217,7 +220,7 @@ export default function Cieds() {
     lastConnection: "17/08/2023",
     monitoring: "CardioMonitor",
     communicationHistory: true,
-    note: 'RRT'
+    note: false
   },
   {
     id: "124398607",
@@ -228,7 +231,7 @@ export default function Cieds() {
     lastConnection: "18/09/2023",
     monitoring: "RemoteView",
     communicationHistory: false,
-    note: 'EOS'
+    note: true
   },
   {
     id: "124398608",
@@ -239,103 +242,40 @@ export default function Cieds() {
     lastConnection: "11/07/2023",
     monitoring: "Synopse",
     communicationHistory: true,
-    note: 'EOS'
+    note: true
   }
 ];
-const [selctedAnalyticsState,setSelectedAnalytictsState]=useRecoilState(selectedAnalytics)
+
+
+const [currentTab, setCurrentTab] = React.useState("Cmems");
+
 
   return (
-    <div
-      className="w-full scroll-container"
-      style={{ 
-        height: "82vh", 
-        maxHeight: embeddedAnalyticsState?"77vh":"82vh",
-        overflow: "auto" }}
-    >
-      {/* Original table view */}
-      <div
-        className="rounded-md border scroll-container"
-        style={{ height: "76vh", 
-          maxHeight: embeddedAnalyticsState?"71vh":"76vh", 
-          overflow: "auto" }}
-      >
-        <Table className='scroll-container'>
-          <TableHeader
-            style={{
-              height: "4vh",
-              maxHeight: "4vh",
-              overflow: "auto",
-              paddingTop: "0vh",
-              paddingBottom: "0vh",
-            }}
-          >
-            <TableRow className='scroll-container'>
-              <TableHead className="w-[50px] scroll-container">
-                <Checkbox />
-              </TableHead>
-              <TableHead>Patients</TableHead>
-              <TableHead>Device Info</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Last Transmission</TableHead>
-              <TableHead>Last Connection</TableHead>
-              <TableHead>Monitoring</TableHead>
-              <TableHead>Battery Status</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody className='scroll-container'>
-            {patients.reverse().map((patient) => (
-              <TableRow
-                key={patient.id}
-                className="cursor-pointer"
-                onClick={() => setSelectedPatient(patient)}
-              >
-                <TableCell>
-                  <Checkbox />
-                </TableCell>
-                <TableCell>
-                  <div className="flex flex-col">
-                    <span className="font-medium">{patient.name}</span>
-                    <span className="text-sm text-muted-foreground">
-                      {patient.subId}
-                    </span>
-                  </div>
-                </TableCell>
-                <TableCell>{patient.deviceInfo}</TableCell>
-                <TableCell>
-                  <span className={(patient.status =="Disconnected") ? "inline-flex rounded-md px-2 py-1 text-xs font-medium bg-red-50 text-red-700":'inline-flex rounded-md px-2 py-1 text-xs font-medium bg-green-50 text-green-700'}>
-                    {patient.status}
-                  </span>
-                </TableCell>
-                <TableCell>{patient.lastTransmission}</TableCell>
-                <TableCell>{patient.lastConnection}</TableCell>
-                <TableCell>{patient.monitoring}</TableCell>
-
-                <TableCell>
-             {patient.note}
-                  </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-      <div
-        className="flex items-center justify-between px-2 py-4"
-        style={{
-          height: "6vh",
-          maxHeight: "6vh",
-          overflow: "auto",
-          paddingTop: "0vh",
-          paddingBottom: "0vh",
-        }}
-      >
-        <Button variant="outline" size="sm" disabled={true}>
-          Previous
-        </Button>
-        <span className="text-sm text-muted-foreground">Page 1 of 1</span>
-        <Button variant="outline" size="sm" disabled={true}>
-          Next
-        </Button>
-      </div>
+    <div style={{display:'flex', flexDirection:'row'}}>
+        <div>
+        <div className="flex space-x-1 border-b">
+          {["Cmems", "Cied"].map((tab) => (
+            <button
+              key={tab}
+              className={`px-4 py-2 text-sm font-medium ${
+                currentTab === tab
+                  ? "border-b-2 border-blue-500 text-blue-600"
+                  : "text-gray-500 hover:text-gray-700"
+              }`}
+              onClick={() => setCurrentTab(tab)}
+            >
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </button>
+          ))}
+        </div>
+        {currentTab=='Cmems'&&<CmemsConnectivity></CmemsConnectivity>}
+        {currentTab=='Cied'&&<CIEDConnectivity></CIEDConnectivity>}
+        </div>
+        <div style={{width:'1vw'}}></div>
+        <div style={{width:'33vw', paddingTop:'36px'}}>
+        <ConnectivityAnalytics></ConnectivityAnalytics>
+        </div>
     </div>
+    
   );
 }
