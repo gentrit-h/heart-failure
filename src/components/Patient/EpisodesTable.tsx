@@ -5,17 +5,17 @@ import React from "react"
 export default function EpisodesTable() {
   const events = [
     {
-      id: "RVAT-2112",
+      id: "2112",
       hasWave: true,
       date: "Jan 01, 2024 20:28",
-      type: "Periodic EGM",
+      type: "ATAF",
       details: "Avg V Rate in ATR: 113 bpm",
       duration: "51 s",
       rate: "113 bpm",
       assessment: "Appropriate"
     },
     {
-      id: "LVAT-2117",
+      id: "2117",
       hasWave: true,
       date: "Jan 01, 2024 18:28",
       type: "ATAF",
@@ -25,37 +25,37 @@ export default function EpisodesTable() {
       assessment: "Not Assessed"
     },
     {
-      id: "PMT-82",
+      id: "82",
       hasWave: true,
       date: "Dec 27, 2023 12:58",
-      type: "VT",
+      type: "ATAF",
       details: "Long duration",
       duration: "1 m 5 s",
       rate: "128 bpm",
       assessment: "Not Assessed"
     },
     {
-      id: "PMT-81",
+      id: "81",
       hasWave: true,
       date: "Dec 27, 2023 12:29",
-      type: "SVT",
+      type: "ATAF",
       details: "-",
       duration: "13 s",
       rate: "130 bpm",
       assessment: "Not Assessed"
     },
     {
-      id: "PMT-80",
+      id: "80",
       hasWave: true,
       date: "Dec 27, 2023 11:47",
-      type: "VT",
+      type: "ATAF",
       details: "-",
       duration: "41 s",
       rate: "127 bpm",
       assessment: "Not Assessed"
     },
     {
-      id: "PMT-79",
+      id: "79",
       hasWave: false,
       date: "Dec 27, 2023 11:47",
       type: "ATAF",
@@ -65,7 +65,7 @@ export default function EpisodesTable() {
       assessment: "Not Assessed"
     },
     {
-      id: "PMT-78",
+      id: "78",
       hasWave: false,
       date: "Dec 27, 2023 10:32",
       type: "ATAF",
@@ -75,30 +75,440 @@ export default function EpisodesTable() {
       assessment: "Not Assessed"
     },
     {
-      id: "RAAT-59",
+      id: "59",
       hasWave: true,
       date: "Dec 26, 2023 16:27",
-      type: "VT",
+      type: "ATAF",
       details: "Long duration",
       duration: "1 m 42 s",
       rate: "119 bpm",
       assessment: "Not Assessed"
     },
     {
-      id: "PMT-59",
+      id: "59",
       hasWave: false,
       date: "Dec 22, 2023 12:18",
-      type: "VT",
+      type: "ATAF",
       details: "-",
       duration: "40 s",
       rate: "130 bpm",
       assessment: "Not Assessed"
     },
     {
-      id: "PMT-56",
+      id: "56",
       hasWave: false,
       date: "Dec 22, 2023 11:53",
       type: "ATAF",
+      details: "-",
+      duration: "12 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "2112",
+      hasWave: true,
+      date: "Jan 01, 2024 20:28",
+      type: "ATAF",
+      details: "Avg V Rate in ATR: 113 bpm",
+      duration: "51 s",
+      rate: "113 bpm",
+      assessment: "Appropriate"
+    },
+    {
+      id: "2117",
+      hasWave: true,
+      date: "Jan 01, 2024 18:28",
+      type: "ATAF",
+      details: "-",
+      duration: "13 s",
+      rate: "125 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "82",
+      hasWave: true,
+      date: "Dec 27, 2023 12:58",
+      type: "ATAF",
+      details: "Long duration",
+      duration: "1 m 5 s",
+      rate: "128 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "81",
+      hasWave: true,
+      date: "Dec 27, 2023 12:29",
+      type: "ATAF",
+      details: "-",
+      duration: "13 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "80",
+      hasWave: true,
+      date: "Dec 27, 2023 11:47",
+      type: "ATAF",
+      details: "-",
+      duration: "41 s",
+      rate: "127 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "79",
+      hasWave: false,
+      date: "Dec 27, 2023 11:47",
+      type: "ATAF",
+      details: "Avg V Rate in ATR: 117 bpm",
+      duration: "39 s",
+      rate: "117 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "78",
+      hasWave: false,
+      date: "Dec 27, 2023 10:32",
+      type: "ATAF",
+      details: "Long duration",
+      duration: "2 m 4 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "59",
+      hasWave: true,
+      date: "Dec 26, 2023 16:27",
+      type: "ATAF",
+      details: "Long duration",
+      duration: "1 m 42 s",
+      rate: "119 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "59",
+      hasWave: false,
+      date: "Dec 22, 2023 12:18",
+      type: "ATAF",
+      details: "-",
+      duration: "40 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "56",
+      hasWave: false,
+      date: "Dec 22, 2023 11:53",
+      type: "ATAF",
+      details: "-",
+      duration: "12 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "2112",
+      hasWave: true,
+      date: "Jan 01, 2024 20:28",
+      type: "ATAF",
+      details: "Avg V Rate in ATR: 113 bpm",
+      duration: "51 s",
+      rate: "113 bpm",
+      assessment: "Appropriate"
+    },
+    {
+      id: "2117",
+      hasWave: true,
+      date: "Jan 01, 2024 18:28",
+      type: "ATAF",
+      details: "-",
+      duration: "13 s",
+      rate: "125 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "82",
+      hasWave: true,
+      date: "Dec 27, 2023 12:58",
+      type: "ATAF",
+      details: "Long duration",
+      duration: "1 m 5 s",
+      rate: "128 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "81",
+      hasWave: true,
+      date: "Dec 27, 2023 12:29",
+      type: "ATAF",
+      details: "-",
+      duration: "13 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "80",
+      hasWave: true,
+      date: "Dec 27, 2023 11:47",
+      type: "ATAF",
+      details: "-",
+      duration: "41 s",
+      rate: "127 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "79",
+      hasWave: false,
+      date: "Dec 27, 2023 11:47",
+      type: "ATAF",
+      details: "Avg V Rate in ATR: 117 bpm",
+      duration: "39 s",
+      rate: "117 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "78",
+      hasWave: false,
+      date: "Dec 27, 2023 10:32",
+      type: "ATAF",
+      details: "Long duration",
+      duration: "2 m 4 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "59",
+      hasWave: true,
+      date: "Dec 26, 2023 16:27",
+      type: "ATAF",
+      details: "Long duration",
+      duration: "1 m 42 s",
+      rate: "119 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "59",
+      hasWave: false,
+      date: "Dec 22, 2023 12:18",
+      type: "ATAF",
+      details: "-",
+      duration: "40 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "56",
+      hasWave: false,
+      date: "Dec 22, 2023 11:53",
+      type: "ATAF",
+      details: "-",
+      duration: "12 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "2112",
+      hasWave: true,
+      date: "Jan 01, 2024 20:28",
+      type: "ATAF",
+      details: "Avg V Rate in ATR: 113 bpm",
+      duration: "51 s",
+      rate: "113 bpm",
+      assessment: "Appropriate"
+    },
+    {
+      id: "2117",
+      hasWave: true,
+      date: "Jan 01, 2024 18:28",
+      type: "ATAF",
+      details: "-",
+      duration: "13 s",
+      rate: "125 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "82",
+      hasWave: true,
+      date: "Dec 27, 2023 12:58",
+      type: "ATAF",
+      details: "Long duration",
+      duration: "1 m 5 s",
+      rate: "128 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "81",
+      hasWave: true,
+      date: "Dec 27, 2023 12:29",
+      type: "ATAF",
+      details: "-",
+      duration: "13 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "80",
+      hasWave: true,
+      date: "Dec 27, 2023 11:47",
+      type: "ATAF",
+      details: "-",
+      duration: "41 s",
+      rate: "127 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "79",
+      hasWave: false,
+      date: "Dec 27, 2023 11:47",
+      type: "ATAF",
+      details: "Avg V Rate in ATR: 117 bpm",
+      duration: "39 s",
+      rate: "117 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "78",
+      hasWave: false,
+      date: "Dec 27, 2023 10:32",
+      type: "ATAF",
+      details: "Long duration",
+      duration: "2 m 4 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "59",
+      hasWave: true,
+      date: "Dec 26, 2023 16:27",
+      type: "ATAF",
+      details: "Long duration",
+      duration: "1 m 42 s",
+      rate: "119 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "59",
+      hasWave: false,
+      date: "Dec 22, 2023 12:18",
+      type: "ATAF",
+      details: "-",
+      duration: "40 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "56",
+      hasWave: false,
+      date: "Dec 22, 2023 11:53",
+      type: "ATAF",
+      details: "-",
+      duration: "12 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "2112",
+      hasWave: true,
+      date: "Jan 01, 2024 20:28",
+      type: "ATAF",
+      details: "Avg V Rate in ATR: 113 bpm",
+      duration: "51 s",
+      rate: "113 bpm",
+      assessment: "Appropriate"
+    },
+    {
+      id: "2117",
+      hasWave: true,
+      date: "Jan 01, 2024 18:28",
+      type: "ATAF",
+      details: "-",
+      duration: "13 s",
+      rate: "125 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "82",
+      hasWave: true,
+      date: "Dec 27, 2023 12:58",
+      type: "ATAF",
+      details: "Long duration",
+      duration: "1 m 5 s",
+      rate: "128 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "81",
+      hasWave: true,
+      date: "Dec 27, 2023 12:29",
+      type: "ATAF",
+      details: "-",
+      duration: "13 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "80",
+      hasWave: true,
+      date: "Dec 27, 2023 11:47",
+      type: "ATAF",
+      details: "-",
+      duration: "41 s",
+      rate: "127 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "79",
+      hasWave: false,
+      date: "Dec 27, 2023 11:47",
+      type: "ATAF",
+      details: "Avg V Rate in ATR: 117 bpm",
+      duration: "39 s",
+      rate: "117 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "78",
+      hasWave: false,
+      date: "Dec 27, 2023 10:32",
+      type: "ATAF",
+      details: "Long duration",
+      duration: "2 m 4 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "59",
+      hasWave: true,
+      date: "Dec 26, 2023 16:27",
+      type: "ATAF",
+      details: "Long duration",
+      duration: "1 m 42 s",
+      rate: "119 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "59",
+      hasWave: false,
+      date: "Dec 22, 2023 12:18",
+      type: "ATAF",
+      details: "-",
+      duration: "40 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "56",
+      hasWave: false,
+      date: "Dec 22, 2023 11:53",
+      type: "ATAF",
+      details: "-",
+      duration: "12 s",
+      rate: "130 bpm",
+      assessment: "Not Assessed"
+    },
+    {
+      id: "3",
+      hasWave: false,
+      date: "Dec 22, 2023 11:53",
+      type: "VT",
       details: "-",
       duration: "12 s",
       rate: "130 bpm",

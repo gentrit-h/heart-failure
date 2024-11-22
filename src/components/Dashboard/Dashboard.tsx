@@ -41,20 +41,9 @@ const Dashboard: React.FC<MainContentProps> = () => {
       scheduledDate: "01/07/24",
       mrn: "MRN119457",
       badges: [
-        { text: "ATP is true", variant: "destructive" },
-        {
-          text: "Pacing Mode Abnormal",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
-        },
-        {
-          text: "2 Event(s)",
-          style: {
-            backgroundColor: "rgba(245, 245, 245, 0.7)",
-            color: "black",
-          },
-        },
+        { text: "HF Index increased 19", style: { backgroundColor: "rgba(255, 165, 0, 0.7)" } },
       ],
-      priority: "High",
+      priority: "Medium",
       icons: ["type3", "type2", "type6"],
       manufacturer: "BSX",
       sessionDate:'07/11/2024',
@@ -66,8 +55,12 @@ const Dashboard: React.FC<MainContentProps> = () => {
 
       badges: [
         {
-          text: "Type VT - Untreated only",
-          style: { backgroundColor: "rgba(255, 165, 0, 0.7)" },
+          text: "1 VT episode",
+          variant: "destructive",
+        },
+        {
+          text: "51 ATAF episodes",
+          variant: "destructive",
         },
         {
           text: "3 Event(s)",
@@ -77,7 +70,7 @@ const Dashboard: React.FC<MainContentProps> = () => {
           },
         },
       ],
-      priority: "Medium",
+      priority: "High",
       icons: ["type1", "type6"],
       manufacturer: "MDT",
     },

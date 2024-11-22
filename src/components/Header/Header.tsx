@@ -88,7 +88,7 @@ const Header: React.FC<DashboardProps> = () => {
             : {}),
         }}
       >
-        {tabName == "Dashboard" ? "Inbox" : tabName}
+        {tabName == "Dashboard" ? "Dashboard" : tabName}
       </h1>
       <div className="flex gap-2 w-[25vw] max-w-3xl mx-auto px-4">
       <div className="relative flex-1">
