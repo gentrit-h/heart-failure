@@ -139,41 +139,32 @@ export default function Summary() {
     <div className="pr-3  max-w-[1600px]">
     <div className="space-y-5">
       {/* Measurements Grid */}
-      <div className="w-full max-w-[1600px]">
-      <div className="flex items-center justify-center">
-        <Button onClick={()=>setPb(!pb)} variant="ghost" size="icon" className="ml-1 h-5 w-10 p-0 m-0">
-          <ChevronDown className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${pb ? 'rotate-180' : 'rotate-0'}`} />
-        </Button>            
-      </div>
-      <div className="flex items-center justify-center">
-      {pb ? <ProgressBars />:<></>}
-      </div>
-      </div>
-
       <div className="rounded-md border">
       <Table>
   <TableHeader>
     <TableRow  className="">
-      <TableHead className="text-center">Last Measurement</TableHead>
-      <TableHead className="text-center">Goal</TableHead>
-      <TableHead className="text-center">Last Systolic PAP</TableHead>
-      <TableHead className="text-center">Last Diastolic PAP</TableHead>
-      <TableHead className="text-center">Last Mean PAP</TableHead>
-      <TableHead className="text-center">Pulse Pressure</TableHead>
-      <TableHead className="text-center">PA Heart Rate</TableHead>
-      <TableHead className="text-center">Waveform</TableHead>
-      <TableHead className="text-center">Note</TableHead>
+    <div className={`absolute left-0 top-0 bottom-0 w-[5px] mt-[46px] mb-[6px] rounded-tr-[6px] rounded-br-[6px]`} />
+      <TableHead className="text-center" style={{fontSize: "15px"}}>Last Measurement</TableHead>
+      <TableHead className="text-center" style={{fontSize: "15px"}}>Goal</TableHead>
+      <TableHead className="text-center" style={{fontSize: "15px"}}>Last Systolic PAP</TableHead>
+      <TableHead className="text-center" style={{fontSize: "15px"}}>Last Diastolic PAP</TableHead>
+      <TableHead className="text-center" style={{fontSize: "15px"}}>Last Mean PAP</TableHead>
+      <TableHead className="text-center" style={{fontSize: "15px"}}>Pulse Pressure</TableHead>
+      <TableHead className="text-center" style={{fontSize: "15px"}}>PA Heart Rate</TableHead>
+      <TableHead className="text-center" style={{fontSize: "15px"}}>Waveform</TableHead>
+      <TableHead className="text-center" style={{fontSize: "15px"}}>Note</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
-    <TableRow className="h-[60px] hover:bg-transparent">
-      <TableCell className="text-center">19/11/2024</TableCell>
-      <TableCell className="text-center">15 mmHg</TableCell>
-      <TableCell className="text-center">25 mmHg</TableCell>
-      <TableCell className="text-center">30 mmHg</TableCell>
-      <TableCell className="text-center">19 mmHg</TableCell>
-      <TableCell className="text-center">5 mmHg</TableCell>
-      <TableCell className="text-center">80 bpm</TableCell>
+    <TableRow className="h-[66px] hover:bg-transparent">
+    <div className={`absolute left-0 top-0 bottom-0 w-[5px] bg-red-500 mt-[46px] mb-[6px] rounded-tr-[6px] rounded-br-[6px]`} />
+      <TableCell className="text-center" style={{fontSize: "16px"}}>21/11/2024</TableCell>
+      <TableCell className="text-center" style={{fontSize: "16px"}}>32(+22)</TableCell>
+      <TableCell className="text-center" style={{fontSize: "16px"}}>85 mmHg</TableCell>
+      <TableCell className="text-center" style={{fontSize: "16px"}}>32 mmHg</TableCell>
+      <TableCell className="text-center" style={{fontWeight: 700, fontSize: "16px"}}>54 mmHg (-22)</TableCell>
+      <TableCell className="text-center" style={{fontSize: "16px"}}>53 mmHg</TableCell>
+      <TableCell className="text-center" style={{fontSize: "16px"}}>86 bpm</TableCell>
       <TableCell>
       <Popover>
         <div
@@ -244,6 +235,18 @@ export default function Summary() {
   </TableBody>
 </Table>
 </div>
+      <div className="w-full max-w-[1600px]">
+      <div className="flex items-center justify-center">
+        <Button onClick={()=>setPb(!pb)} variant="ghost" size="icon" className="ml-1 h-5 w-10 p-0 m-0">
+          <ChevronDown className={`h-5 w-5 text-gray-500 transform transition-transform duration-200 ${pb ? 'rotate-180' : 'rotate-0'}`} />
+        </Button>            
+      </div>
+      <div className="flex items-center justify-center">
+      {pb ? <ProgressBars />:<></>}
+      </div>
+      </div>
+
+
 <div className="rounded-md border">
 <Table>
   <TableHeader>
@@ -386,58 +389,6 @@ export default function Summary() {
           </CardContent>
         </Card>
       </div>
-
-        <div>
-        <Card>
-          <CardHeader className="p-3 border-b" style={{backgroundColor: "#FAFBFB"}}>
-            <CardTitle className="text-center font-medium">Medication</CardTitle>
-          </CardHeader>
-          <CardContent className="p-0 m-0">
-            <Table>
-              <TableHeader>
-                <TableRow className="h-[60px]">
-                  <TableHead className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Name</TableHead>
-                  {/* <TableHead className="text-center" style={{backgroundColor: "white"}}>Beta Blockers</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Diuretics</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>ARNIs</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>ACEi / ARBs</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>SGLT2 Inhibitors</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Ivabradine</TableHead>
-                  <TableHead className="text-center" style={{backgroundColor: "white"}}>Other Drugs</TableHead> */}
-                  {medications.map((med, index) => (
-                    <TableHead className="text-center" style={{backgroundColor: "white"}}>{med.name}</TableHead>
-                ))}
-                </TableRow>
-                <TableRow className="h-[60px]">
-                  <TableCell className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Name</TableCell>
-                  {medications.map((med, index) => (
-                    <TableCell>
-                      <div className="flex justify-center items-center">
-                    <Select>
-                      <SelectTrigger className="w-32 mt-2">
-                        <SelectValue placeholder={med?.meds?.[0]} />
-                      </SelectTrigger>
-                      <SelectContent>
-                      {med?.meds?.map((e) => (
-                        <SelectItem value={e}>{e}</SelectItem>
-                      ))}
-                      </SelectContent>
-                    </Select>
-                    </div>
-                  </TableCell>
-                ))}
-                </TableRow>
-                <TableRow className="h-[60px]">
-                  <TableCell className="text-center border-r"  style={{backgroundColor: "#F9FAFB"}}>Dose</TableCell>
-                  {medications.map((med, index) => (
-                    <TableCell className="text-center">{med?.doses?.[0]}</TableCell>
-                  ))}
-                </TableRow>
-              </TableHeader>
-            </Table>
-          </CardContent>
-        </Card>
-        </div>
     </div>
     </div>
     </div>

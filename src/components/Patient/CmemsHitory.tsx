@@ -13,6 +13,7 @@ import {
 import React from 'react'
 import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
 import { WaveForm } from '../CIEDS/WaveForm'
+import { getPriorityColor } from '../CIEDS/Cieds'
 
 export default function CmemsHistory() {
   const data = [
@@ -28,6 +29,7 @@ export default function CmemsHistory() {
       hfIndex: "5",
       crossing: "+2",
       symptoms: "4",
+      priority: "High",
     },
     {
       status: "Disconnected",
@@ -41,32 +43,35 @@ export default function CmemsHistory() {
       hfIndex: "6",
       crossing: "+1",
       symptoms: "5",
+      priority: "Low",
     },
     {
       status: "Disconnected",
       date: "19/11/2024 06:00",
       goal: "18(+1)",
       systolicPap: "37 mmHg",
-      diastolicPap: "19 mmHg",
+      diastolicPap: "17 mmHg",
       meanPap: "26 mmHg",
       pulsPressure: "18 mmHg",
       paHeartRate: "68 bpm",
       hfIndex: "8",
       crossing: "-1",
       symptoms: "6",
+      priority: "Medium",
     },
     {
       status: "Connected",
       date: "18/11/2024 21:00",
       goal: "17(+2)",
       systolicPap: "35 mmHg",
-      diastolicPap: "19 mmHg",
+      diastolicPap: "18 mmHg",
       meanPap: "24 mmHg",
       pulsPressure: "16 mmHg",
       paHeartRate: "85 bpm",
       hfIndex: "12",
       crossing: "-4",
       symptoms: "10",
+      priority: "Medium",
     },
     {
       status: "Connected",
@@ -80,19 +85,21 @@ export default function CmemsHistory() {
       hfIndex: "10",
       crossing: "+1",
       symptoms: "11",
+      priority: "Low",
     },
     {
       status: "Disconnected",
       date: "14/11/2024 09:00",
       goal: "12(-2)",
       systolicPap: "27 mmHg",
-      diastolicPap: "11 mmHg",
+      diastolicPap: "17 mmHg",
       meanPap: "19 mmHg",
       pulsPressure: "16 mmHg",
       paHeartRate: "97 bpm",
       hfIndex: "15",
       crossing: "-5",
       symptoms: "12",
+      priority: "High",
     },
   ]
 
@@ -126,8 +133,9 @@ export default function CmemsHistory() {
       <div className="rounded-t-md border">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="relative">
               {/* <TableHead className="w-[120px] pl-[18px] text-center">Status</TableHead> */}
+              <div className={`absolute left-0 top-0 bottom-0 w-[0.4vh] mt-[1.2vh]  mb-[1.7vh] rounded-tr-[1vh] rounded-br-[1vh]`} />
               <TableHead className="text-center">Date</TableHead>
               <TableHead className="text-center">Goal (+/-)</TableHead>
               <TableHead className="text-center">Systolic PAP</TableHead>
@@ -143,7 +151,7 @@ export default function CmemsHistory() {
           </TableHeader>
           <TableBody>
             {data.map((row, index) => (
-              <TableRow key={index}>
+              <TableRow key={index} className="relative">
                 {/* <TableCell>
                   <div className="flex items-center justify-center">
                     <Badge
@@ -160,6 +168,7 @@ export default function CmemsHistory() {
                     </Badge>
                     </div>
                 </TableCell> */}
+                <div className={`absolute left-0 top-0 bottom-0 w-[4px] ${getPriorityColor(row?.priority)} mt-[7px]  mb-[5px] rounded-tr-[15px] rounded-br-[15px]`} />
                 <TableCell className="text-center">{row.date}</TableCell>
                 <TableCell className="text-center">{row.goal}</TableCell>
                 <TableCell className="text-center">{row.systolicPap}</TableCell>
